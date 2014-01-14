@@ -1,32 +1,32 @@
-###class Environment
+### class Environment
 + handle forces etc.
 + modifiers (parachute etc.)
 
-###class Player
+### class Player
 + handle controls 
 + moving position
 + states : moving, jumping, alive dead etc.
 + collision detection: walls obstacles
 
-###class BasePlattform
+### class BasePlattform
 + size
 + position
 +  extends to 3(?) kinds: solid, breakable, sticky
 
-###class BaseEnemy
+### class BaseEnemy
 + position
 + states: walking, attacking...
 +  "AI"
 +  maybe extends to different kinds of enemies (different speeds)
 +  you have to escape them or go around them. you can't kill them
 
-###class Screen
+### class Screen
 + change the viewport
 
-###class Soundmanager
+### class Soundmanager
 +  play backgroundmusic
 +  effectsounds on certain events
 
-###class LevelGoals
+### class LevelGoals
 + raise a flag etc. approach a position on top trigger something
 +  (timer?)
