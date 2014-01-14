@@ -33,6 +33,7 @@
 ### class Soundmanager
 +  play backgroundmusic
 +  effectsounds on certain events
+
 ---
 ## Graphics
 
