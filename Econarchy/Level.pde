@@ -1,17 +1,17 @@
 public class Level
 {
-  int levelWidth;
-  int levelHeight;
+  PGraphics renderedImage;
+//  int levelWidth;
+//  int levelHeight;
   Platform[] platforms;
   // gradient variables - TO BE DELETED
   int Y_AXIS = 1;
   int X_AXIS = 2;
   
-
-  public Level()
+  // define global level settings in xml driven data class
+  public Level()//LevelData data)
   {
-    this.levelWidth = width;
-    this.levelHeight = 2000;
+    renderedImage = createGraphics(width, 2000);
     
     platforms = new Platform[3];
     platforms[0] = new Platform(Type.Platform.REGULAR, 20, 1900, 120, 20);
@@ -20,22 +20,30 @@ public class Level
   }
 
 
-  public void update()
+  public void render()
   {
-    float startY = ((float) mouseY / height) * (height - levelHeight);
-    setGradient(0, (int) startY, levelWidth, levelHeight, color(30), color(220), Y_AXIS);
+    renderedImage.beginDraw();
+    renderedImage.clear();
+    
+    setGradient(0, 0, renderedImage.width, renderedImage.height, color(30), color(220), Y_AXIS);
     
     for(Platform platform : platforms)
     {
-      platform.draw((int) startY);
+      platform.render(renderedImage);//(int) startY);
     }
+    
+    renderedImage.colorMode(RGB);
+    renderedImage.fill(255, 0, 0);
+    renderedImage.rect(360, 1960, 40, 40);
+    
+    renderedImage.endDraw();
   }
 
   
   // gradient helper method - TO BE DELETED
   private void setGradient(int x, int y, float w, float h, color c1, color c2, int axis )
   {
-    noFill();
+    renderedImage.noFill();
 
     if (axis == Y_AXIS)  // Top to bottom gradient
     {
@@ -43,8 +51,8 @@ public class Level
       {
         float inter = map(i, y, y+h, 0, 1);
         color c = lerpColor(c1, c2, inter);
-        stroke(c);
-        line(x, i, x+w, i);
+        renderedImage.stroke(c);
+        renderedImage.line(x, i, x+w, i);
       }
     }  
     else if (axis == X_AXIS)  // Left to right gradient
@@ -53,8 +61,8 @@ public class Level
       {
         float inter = map(i, x, x+w, 0, 1);
         color c = lerpColor(c1, c2, inter);
-        stroke(c);
-        line(i, y, i, y+h);
+        renderedImage.stroke(c);
+        renderedImage.line(i, y, i, y+h);
       }
     }
   }

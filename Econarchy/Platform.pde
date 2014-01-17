@@ -1,41 +1,47 @@
 public class Platform
 {
   private Type.Platform type;
-  private int x;
-  private int y;
-  private int width;
-  private int height;
+  private PVector position;
+  private PVector size;
+//  private int x;
+//  private int y;
+//  private int width;
+//  private int height;
 
 
-  public Platform(Type.Platform type, int x, int y, int width, int height)
+  public Platform(Type.Platform type, int posX, int posY, int sizeW, int sizeH)
   {
     this.type = type;
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
+    this.position = new PVector(posX, posY);
+    this.size = new PVector(sizeW, sizeH);
+//    this.x = x;
+//    this.y = y;
+//    this.width = width;
+//    this.height = height;
   }
 
 
-  public void draw(int startY)
+  public void render(PGraphics output)//int startY)
   {
-    colorMode(HSB, 360, 1.0, 1.0, 1.0);
-    noStroke();
+    println("render! " + type + " " + position + " " + size);
+    
+    output.colorMode(RGB);
+    output.noStroke();
     
     if (type == Type.Platform.REGULAR)
     {
-      fill(color(0, 1.0, 0.0, 1.0));
-      rect(x, y + startY, width, height);
+      output.fill(30, 30, 30);
+      output.rect(position.x, position.y, size.x, size.y);
     }
     else if (type == Type.Platform.DISSOLVABLE)
     {
-      fill(color(0, 1.0, 1.0, 1.0));
-      rect(x, y + startY, width, height);
+      output.fill(255, 30, 30);
+      output.rect(position.x, position.y, size.x, size.y);
     }
     else if (type == Type.Platform.SLIPPERY)
     {
-      fill(color(180, 1.0, 1.0, 1.0));
-      rect(x, y + startY, width, height);
+      output.fill(30, 255, 30);
+      output.rect(position.x, position.y, size.x, size.y);
     }
     else
     {
