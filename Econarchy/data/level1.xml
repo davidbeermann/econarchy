@@ -4,7 +4,8 @@
 	<resources>
 		<images>
 			<!-- background images -->
-			<!-- TBD -->
+			<image id="layer1" url="resources/level1/background_layer1.png" />
+			<image id="layer2" url="resources/level1/background_layer2.png" />
 			<!-- platform images -->
 			<image id="regular" url="resources/level1/platform_regular.png" />
 			<image id="dissolvable" url="resources/level1/platform_dissolvable.png" />
@@ -12,6 +13,11 @@
 		</images>
 	</resources>
 	<specification>
+		<!-- background parallax images should be from back to front -->
+		<backgrounds>
+			<background id="layer2" />
+			<background id="layer1" />
+		</backgrounds>
 		<!-- platform types have to match the image ids above!!! -->
 		<platforms>
 			<platform type="regular" x="20" y="1900" />	
