@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<econarchy_level id="level1" width="400" height="2000">
+	<resources>
+		<platform_images>
+			<image id="regular" url="resources/level1/platform_regular.png" />
+			<image id="dissolvable" url="resources/level1/platform_dissolvable.png" />
+			<image id="slippery" url="resources/level1/platform_slippery.png" />
+		</platform_images>
+	</resources>
+	<specification>
+		<!-- platform types have to match the image ids above!!! -->
+		<platforms>
+			<platform type="regular" x="20" y="1900" />	
+			<platform type="dissolvable" x="140" y="1800" />	
+			<platform type="slippery" x="260" y="1700" />	
+		</platforms>
+	</specification>
+</econarchy_level>
