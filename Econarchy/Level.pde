@@ -1,17 +1,18 @@
 public class Level
 {
+  LevelData data;
   PGraphics renderedImage;
-//  int levelWidth;
-//  int levelHeight;
   Platform[] platforms;
   // gradient variables - TO BE DELETED
   int Y_AXIS = 1;
   int X_AXIS = 2;
   
   // define global level settings in xml driven data class
-  public Level()//LevelData data)
+  public Level(LevelData data)
   {
-    renderedImage = createGraphics(width, 2000);
+    this.data = data;
+    
+    renderedImage = createGraphics((int) data.size.x, (int) data.size.y);
     
     platforms = new Platform[3];
     platforms[0] = new Platform(Type.Platform.REGULAR, 20, 1900, 120, 20);

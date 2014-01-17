@@ -18,9 +18,11 @@ public class Game
   }
   
   
-  public void setupLevel()//String xmlPath)
+  public void setupLevel(String xmlPath)
   {
-    level = new Level();
+    XML levelXML = loadXML(xmlPath);
+    LevelData levelData = new LevelData(levelXML);
+    level = new Level(levelData);
   }
   
   

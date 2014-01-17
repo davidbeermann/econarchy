@@ -7,8 +7,8 @@ public void setup()
 {
   size(400, 640);
   
-  game = new Game(300, 400);
-  game.setupLevel();
+  game = new Game(400, 600);
+  game.setupLevel("level1.xml");
   
 //  hans = new Player();
 //  enemies = new Enemy[3];
