@@ -14,7 +14,7 @@ public class LevelData
   {
     id = data.getString("id");
     size = new PVector(data.getInt("width"), data.getInt("height"));
-    
+
     // ----- PARSE RESOURCES -----
     // ---------------------------
 
@@ -40,29 +40,67 @@ public class LevelData
     platformSpecs = new PlatformSpec[platformsXML.length];
 
     XML platformXML;
+    Type.Platform platformType = null;
     for (int i = 0; i < platformsXML.length; i++)
     {
       platformXML = platformsXML[i];
-      platformSpecs[i] = new PlatformSpec(platformXML.getString("id"), platformXML.getInt("x"), platformXML.getInt("y"));
+
+      // convert string value into enum type
+      // http://stackoverflow.com/questions/604424/java-convert-string-to-enum
+      try
+      {
+        platformType = Type.Platform.valueOf(platformXML.getString("type").toUpperCase());
+      }
+      catch(IllegalArgumentException e)
+      {
+      }
+
+      if (platformType == null)
+      {
+        println("ERROR: Unknown platform type defined in XML: " + platformXML.getString("type"));
+      }
+      else
+      {
+        platformSpecs[i] = new PlatformSpec(platformType, platformXML.getInt("x"), platformXML.getInt("y"));
+      }
     }
+  }
+
+
+  public PImage getImageResource(String id)
+  {
+    if (imageResources.containsKey(id))
+    {
+      return imageResources.get(id);
+    }
+    else
+    {
+      return null;
+    }
+  }
+
+
+  public PlatformSpec[] getPlatformSpecs()
+  {
+    return platformSpecs;
   }
 }
 
 
 public class PlatformSpec
 {
-  private String id;
+  private Type.Platform type;
   private PVector position;
 
-  public PlatformSpec(String id, int xPos, int yPos)
+  public PlatformSpec(Type.Platform type, int xPos, int yPos)
   {
-    this.id = id;
+    this.type = type;
     this.position = new PVector(xPos, yPos);
   }
 
-  public String getId()
+  public Type.Platform getType()
   {
-    return this.id;
+    return this.type;
   }
 
   public PVector getPosition()

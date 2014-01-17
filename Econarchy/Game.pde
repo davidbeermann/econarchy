@@ -35,7 +35,7 @@ public class Game
     float percent = max(0.0, min(1.0, (float) (mouseY - viewportPosition.y) / viewport.height));
     float posX = (viewport.width - level.renderedImage.width) / 2;
     float posY = (viewport.height - level.renderedImage.height) * percent;
-    println("percent: " + percent + " / posY: " + posY);
+//    println("percent: " + percent + " / posY: " + posY);
     
     viewport.beginDraw();
     viewport.clear();

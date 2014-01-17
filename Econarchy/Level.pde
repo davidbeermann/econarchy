@@ -12,12 +12,20 @@ public class Level
   {
     this.data = data;
     
+    // setup main level graphic
     renderedImage = createGraphics((int) data.size.x, (int) data.size.y);
     
-    platforms = new Platform[3];
-    platforms[0] = new Platform(Type.Platform.REGULAR, 20, 1900, 120, 20);
-    platforms[1] = new Platform(Type.Platform.DISSOLVABLE, 140, 1800, 120, 20);
-    platforms[2] = new Platform(Type.Platform.SLIPPERY, 260, 1700, 120, 20);
+    // setup platforms
+    platforms = new Platform[data.getPlatformSpecs().length];
+    PlatformSpec platformSpec;
+    for(int i = 0; i < data.getPlatformSpecs().length; i++)
+    {
+      platformSpec = data.getPlatformSpecs()[i];
+      if(platformSpec != null)
+      {
+        platforms[i] = new Platform(platformSpec.getType(), platformSpec.getPosition(), data.getImageResource(platformSpec.getType().toString()));
+      }
+    }
   }
 
 
@@ -30,7 +38,7 @@ public class Level
     
     for(Platform platform : platforms)
     {
-      platform.render(renderedImage);//(int) startY);
+      platform.render(renderedImage);
     }
     
     renderedImage.colorMode(RGB);
