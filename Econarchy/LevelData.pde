@@ -29,9 +29,6 @@ public class LevelData
       imageResources.put(xml.getString("id"), image);
     }
 
-    println(imageResources);
-    println(imageResources.values());
-
     // ----- PARSE SPECIFICATIONS -----
     // --------------------------------
 

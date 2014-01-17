@@ -41,10 +41,6 @@ public class Level
       platform.render(renderedImage);
     }
     
-    renderedImage.colorMode(RGB);
-    renderedImage.fill(255, 0, 0);
-    renderedImage.rect(360, 1960, 40, 40);
-    
     renderedImage.endDraw();
   }
 
