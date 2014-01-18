@@ -5,36 +5,36 @@ public class Level
   Platform[] platforms;
   Player hans;
   Enemy[] enemies;
-  
+
   // gradient variables - TO BE DELETED
   int Y_AXIS = 1;
   int X_AXIS = 2;
-  
+
   // define global level settings in xml driven data class
   public Level(LevelData data)
   {
     // setup main level graphic
     renderedImage = createGraphics((int) data.size.x, (int) data.size.y);
-    
+
     // setup platforms
     platforms = new Platform[data.getPlatformSpecs().length];
     PlatformSpec platformSpec;
-    for(int i = 0; i < data.getPlatformSpecs().length; i++)
+    for (int i = 0; i < data.getPlatformSpecs().length; i++)
     {
       platformSpec = data.getPlatformSpecs()[i];
-      if(platformSpec != null)
+      if (platformSpec != null)
       {
         platforms[i] = new Platform(platformSpec.getType(), platformSpec.getPosition(), data.getImageResource(platformSpec.getType().toString()));
       }
     }
 
     //playerAvatar size is currently 30 x 30 therefore x-15 and y-30
-    hans = new Player(new PVector(renderedImage.width/2 -15,renderedImage.height-30,0));
- 
+    hans = new Player(new PVector(renderedImage.width/2 -15, renderedImage.height-30, 0));
+
     enemies = new Enemy[3];
     for (int i=0; i < 3; i++)
     {
-      enemies[i] = new Enemy(new PVector(random(width),random(height),0));
+      enemies[i] = new Enemy(new PVector(random(width), random(height), 0));
     }
   }
 
@@ -42,28 +42,29 @@ public class Level
   public void render()
   {
     hans.controlPlayer();
+
     renderedImage.beginDraw();
     renderedImage.clear();
-    
-    setGradient(0, 0, renderedImage.width, renderedImage.height, color(30), color(220), Y_AXIS);
-    
-    for(Platform platform : platforms)
+
+    //    setGradient(0, 0, renderedImage.width, renderedImage.height, color(30), color(220), Y_AXIS);
+
+    for (Platform platform : platforms)
     {
       platform.render(renderedImage);//(int) startY);
     }
-    
-    renderedImage.image(hans.playerRender(),hans.position.x,hans.position.y);
- 
-// for (int i=0; i < enemies.length; i++)
-//  {
-//    enemies[i].drawEnemy();
-//    enemies[i].patroling();
-//  }
+
+    renderedImage.image(hans.playerRender(), hans.position.x, hans.position.y);
+
+    // for (int i=0; i < enemies.length; i++)
+    //  {
+    //    enemies[i].drawEnemy();
+    //    enemies[i].patroling();
+    //  }
 
     renderedImage.endDraw();
   }
 
-  
+
   // gradient helper method - TO BE DELETED
   private void setGradient(int x, int y, float w, float h, color c1, color c2, int axis )
   {
@@ -91,4 +92,6 @@ public class Level
     }
   }
 }
+
+
 

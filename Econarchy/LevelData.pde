@@ -9,6 +9,8 @@ public class LevelData
   int levelHeight;
   private HashMap<String, PImage> imageResources;
   private PlatformSpec[] platformSpecs;
+  private String[] backgroundIds;
+
 
   public LevelData(XML data)
   {
@@ -61,6 +63,15 @@ public class LevelData
         platformSpecs[i] = new PlatformSpec(platformType, platformXML.getInt("x"), platformXML.getInt("y"));
       }
     }
+    
+    // parse background ids
+    XML[] backgroundsXML = data.getChild("specification").getChild("backgrounds").getChildren("background");
+    backgroundIds = new String[backgroundsXML.length];
+    
+    for(int i = 0; i < backgroundsXML.length; i++)
+    {
+      backgroundIds[i] = backgroundsXML[i].getString("id");
+    }
   }
 
 
@@ -80,6 +91,12 @@ public class LevelData
   public PlatformSpec[] getPlatformSpecs()
   {
     return platformSpecs;
+  }
+  
+  
+  public String[] getBackgroundIds()
+  {
+    return backgroundIds;
   }
 }
 
