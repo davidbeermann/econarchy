@@ -1,32 +1,41 @@
 public class Level
 {
+  LevelData data;
   PGraphics renderedImage;
-//  int levelWidth;
-//  int levelHeight;
+  Platform[] platforms;
   Player hans;
   Enemy[] enemies;
-  Platform[] platforms;
+  
   // gradient variables - TO BE DELETED
   int Y_AXIS = 1;
   int X_AXIS = 2;
   
   // define global level settings in xml driven data class
-  public Level()//LevelData data)
+  public Level(LevelData data)
   {
-    renderedImage = createGraphics(width, 2000);
+    // setup main level graphic
+    renderedImage = createGraphics((int) data.size.x, (int) data.size.y);
     
-    platforms = new Platform[3];
-    platforms[0] = new Platform(Type.Platform.REGULAR, 20, 1900, 120, 20);
-    platforms[1] = new Platform(Type.Platform.DISSOLVABLE, 140, 1800, 120, 20);
-    platforms[2] = new Platform(Type.Platform.SLIPPERY, 260, 1700, 120, 20);
+    // setup platforms
+    platforms = new Platform[data.getPlatformSpecs().length];
+    PlatformSpec platformSpec;
+    for(int i = 0; i < data.getPlatformSpecs().length; i++)
+    {
+      platformSpec = data.getPlatformSpecs()[i];
+      if(platformSpec != null)
+      {
+        platforms[i] = new Platform(platformSpec.getType(), platformSpec.getPosition(), data.getImageResource(platformSpec.getType().toString()));
+      }
+    }
 
-      //playerAvatar size is currently 30 x 30 therefore x-15 and y-30
-     hans = new Player(new PVector(renderedImage.width/2 -15,renderedImage.height-30,0));
- enemies = new Enemy[3];
- for (int i=0; i < 3; i++)
- {
-   enemies[i] = new Enemy(new PVector(random(width),random(height),0));
- }
+    //playerAvatar size is currently 30 x 30 therefore x-15 and y-30
+    hans = new Player(new PVector(renderedImage.width/2 -15,renderedImage.height-30,0));
+ 
+    enemies = new Enemy[3];
+    for (int i=0; i < 3; i++)
+    {
+      enemies[i] = new Enemy(new PVector(random(width),random(height),0));
+    }
   }
 
 
@@ -53,8 +62,6 @@ public class Level
 
     renderedImage.endDraw();
   }
-
-
 
   
   // gradient helper method - TO BE DELETED

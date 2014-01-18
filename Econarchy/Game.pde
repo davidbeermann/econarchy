@@ -33,27 +33,24 @@ public class Game
     level.render();
     
     // draw rendered level onto viewport
-    //float percent = max(0.0, min(1.0, (float) (level.hans.position.y - viewportPosition.y) / viewport.height));
-    float percent = map(level.hans.position.y, 0, level.renderedImage.height, 0, 1);
     float posX = (viewport.width - level.renderedImage.width) / 2;
     float posY = (viewport.height - level.hans.position.y);
     // println("percent: " + percent + " / posY: " + posY);
     
     viewport.beginDraw();
     viewport.clear();
-    if (posY <(viewport.height - level.renderedImage.height)+viewport.height/2) {
+    if (posY < (viewport.height - level.renderedImage.height)+viewport.height/2)
+    {
       viewport.image(level.renderedImage, posX, viewport.height-level.renderedImage.height);  
-      
-    }else if (posY >viewport.height/2) {
+    }
+    else if (posY > viewport.height/2)
+    {
       viewport.image(level.renderedImage, posX, 0);  
     }
-
-    else {
+    else
+    {
       viewport.image(level.renderedImage, posX, posY-viewport.height/2+30);   
-      
     }
-      
-    
   
     viewport.endDraw();
     

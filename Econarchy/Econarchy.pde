@@ -1,7 +1,5 @@
-
-// Player hans;
-// Enemy[] enemies;
 Game game;
+
 
 public void setup()
 {
@@ -10,6 +8,7 @@ public void setup()
   game = new Game(400, 600);
   game.setupLevel("level1.xml");
 }
+
 
 public void draw()
 {	
