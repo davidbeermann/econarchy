@@ -23,7 +23,7 @@ public class Platform
 
   public void render(PGraphics output)//int startY)
   {
-    println("render! " + type + " " + position + " " + size);
+    // println("render! " + type + " " + position + " " + size);
     
     output.colorMode(RGB);
     output.noStroke();

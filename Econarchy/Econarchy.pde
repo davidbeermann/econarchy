@@ -1,6 +1,6 @@
 
-Player hans;
-Enemy[] enemies;
+// Player hans;
+// Enemy[] enemies;
 Game game;
 
 public void setup()
@@ -19,7 +19,8 @@ public void setup()
 }
 
 public void draw()
-{
+{	
+	background(0);
   game.render();
   
 //  hans.drawPlayer();

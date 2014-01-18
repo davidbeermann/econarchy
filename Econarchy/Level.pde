@@ -3,6 +3,8 @@ public class Level
   PGraphics renderedImage;
 //  int levelWidth;
 //  int levelHeight;
+  Player hans;
+  Enemy[] enemies;
   Platform[] platforms;
   // gradient variables - TO BE DELETED
   int Y_AXIS = 1;
@@ -17,11 +19,20 @@ public class Level
     platforms[0] = new Platform(Type.Platform.REGULAR, 20, 1900, 120, 20);
     platforms[1] = new Platform(Type.Platform.DISSOLVABLE, 140, 1800, 120, 20);
     platforms[2] = new Platform(Type.Platform.SLIPPERY, 260, 1700, 120, 20);
+
+      //playerAvatar size is currently 30 x 30 therefore x-15 and y-30
+     hans = new Player(new PVector(renderedImage.width/2 -15,renderedImage.height-30,0));
+ enemies = new Enemy[3];
+ for (int i=0; i < 3; i++)
+ {
+   enemies[i] = new Enemy(new PVector(random(width),random(height),0));
+ }
   }
 
 
   public void render()
   {
+    hans.controlPlayer();
     renderedImage.beginDraw();
     renderedImage.clear();
     
@@ -32,12 +43,18 @@ public class Level
       platform.render(renderedImage);//(int) startY);
     }
     
-    renderedImage.colorMode(RGB);
-    renderedImage.fill(255, 0, 0);
-    renderedImage.rect(360, 1960, 40, 40);
-    
+    renderedImage.image(hans.playerRender(),hans.position.x,hans.position.y);
+ 
+// for (int i=0; i < enemies.length; i++)
+//  {
+//    enemies[i].drawEnemy();
+//    enemies[i].patroling();
+//  }
+
     renderedImage.endDraw();
   }
+
+
 
   
   // gradient helper method - TO BE DELETED
