@@ -39,11 +39,11 @@ public class Game
     
     viewport.beginDraw();
     viewport.clear();
-    if (posY < (viewport.height - level.renderedImage.height)+viewport.height/2)
+    if (posY < (viewport.height - level.renderedImage.height) + viewport.height / 2 - level.hans.avatar.height)
     {
-      viewport.image(level.renderedImage, posX, viewport.height-level.renderedImage.height);  
+      viewport.image(level.renderedImage, posX, viewport.height - level.renderedImage.height);  
     }
-    else if (posY > viewport.height/2)
+    else if (posY > viewport.height / 2 - level.hans.avatar.height)
     {
       viewport.image(level.renderedImage, posX, 0);  
     }
