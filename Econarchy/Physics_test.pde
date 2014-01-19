@@ -50,6 +50,8 @@ public class Physical extends Actor {
       
       println("playerpos x: " + position.x + " y: " + position.y);
     }
+    else
+      currVelocity.x = 0.0;
     
     
     position.add(currVelocity); //apply velocity to player
