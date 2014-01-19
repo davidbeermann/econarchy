@@ -1,5 +1,4 @@
 public class Physical extends Actor {
-  
   boolean upPressed = false;
   boolean downPressed = false;
   boolean leftPressed = false;
@@ -33,12 +32,18 @@ public class Physical extends Actor {
   }
   
   public void jump() {
-     if ( currVelocity.y == 0.0 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
+     if ( currVelocity.y <= 0.5 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
           currVelocity.y = -10;
   }
+  
+  public void move(float x, float y) {
+    currVelocity.x = x*10;
+    println(x);
+  }
+    
 
   public void controlPlayer() {
-    
+      
     if (keyPressed && key == CODED) {
       switch(keyCode) {
       case LEFT: 
@@ -53,23 +58,23 @@ public class Physical extends Actor {
         break;
       }
       
-      println("playerpos x: " + position.x + " y: " + position.y);
+     // println("playerpos x: " + position.x + " y: " + position.y);
     }
-    else
-      currVelocity.x = 0.0;
+   // else
+     // currVelocity.x = 0.0;
     
     
     position.add(currVelocity); //apply velocity to player
     
     PVector tmpAccel = PVector.mult(gravityAcc, 1.0/30.0); //calculate gravitational Acceleration, assuming 30fps/can later be adjusted to use realtime for better simulation
-    println("TMPACCEL IS " +  tmpAccel.x + "     " + tmpAccel.y);
+   // println("TMPACCEL IS " +  tmpAccel.x + "     " + tmpAccel.y);
     
     
     if( position.y < lowerBoundary) //only apply gravity if player is inside of level bounds
        currVelocity.add(tmpAccel);  
     else
        currVelocity.y = 0.0; //reset vertical velocity if player hits rock bottom
-   println("CURRVELOCITY: " + currVelocity.x + "   " + currVelocity.y);
+  // println("CURRVELOCITY: " + currVelocity.x + "   " + currVelocity.y);
 
   }
 }
