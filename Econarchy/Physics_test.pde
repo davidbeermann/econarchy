@@ -31,6 +31,11 @@ public class Physical extends Actor {
     avatar.endDraw();
     return avatar;
   }
+  
+  public void jump() {
+     if ( currVelocity.y == 0.0 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
+          currVelocity.y = -10;
+  }
 
   public void controlPlayer() {
     
