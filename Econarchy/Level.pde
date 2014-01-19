@@ -3,7 +3,7 @@ public class Level
   LevelData data;
   PGraphics renderedImage;
   Platform[] platforms;
-  Player hans;
+  Physical hans;
   Enemy[] enemies;
 
   // gradient variables - TO BE DELETED
@@ -29,7 +29,7 @@ public class Level
     }
 
     //playerAvatar size is currently 30 x 30 therefore x-15 and y-30
-    hans = new Player(new PVector(renderedImage.width/2 -15, renderedImage.height-30, 0));
+    hans = new Physical(new PVector(renderedImage.width/2 -15, renderedImage.height-30, 0));
 
     enemies = new Enemy[3];
     for (int i=0; i < 3; i++)
