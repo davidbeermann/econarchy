@@ -14,8 +14,7 @@ public void setup()
   size(400, 640);
   
   game = new Game(400, 600);
-  game.setupLevel("level1.xml");
-  
+  game.setupLevel("level1.xml"); 
  /*  if(gamePadEnabled) {
     //setup awesome feature - only xbox currently
     controll = ControllIO.getInstance(this);
@@ -27,6 +26,13 @@ public void setup()
   }*/
 }
 
+public void keyPressed(KeyEvent e) {
+  game.level.hans.keyPressed(e);
+}
+
+public void keyReleased(KeyEvent e) {
+  game.level.hans.keyReleased(e);
+}
 
 public void draw()
 {	
@@ -34,3 +40,4 @@ public void draw()
  // if (gamePadEnabled) game.level.hans.move(pad.getSlider(1).getValue(),0);
   game.render();
 }
+
