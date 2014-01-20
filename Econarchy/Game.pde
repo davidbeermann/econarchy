@@ -57,7 +57,7 @@ public class Game
     }
     else
     {
-      viewport.image(level.renderedImage, posX, posY-viewport.height/2+30);   
+      viewport.image(level.renderedImage, posX, posY-viewport.height/2+level.hans.avatar.height);   
     }
   
     viewport.endDraw();

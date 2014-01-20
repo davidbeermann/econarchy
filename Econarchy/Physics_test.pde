@@ -17,11 +17,6 @@ public class Physical extends Actor {
 
   }
 
-  public void drawPlayer()
-  {
-    fill(255);
-    ellipse(position.x, position.y, 20, 20);
-  }
 
   public PImage playerRender()
   {
@@ -60,8 +55,8 @@ public class Physical extends Actor {
       
      // println("playerpos x: " + position.x + " y: " + position.y);
     }
-   // else
-     // currVelocity.x = 0.0;
+   else
+     currVelocity.x = 0.0;
     
     
     position.add(currVelocity); //apply velocity to player

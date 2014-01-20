@@ -7,7 +7,7 @@ public class Actor
   PImage stateGraphic;
   public Actor()
   {
-    walkingSpeed=2;
+    walkingSpeed=1;
     runningSpeed=5;
     avatar = createGraphics(30, 30);
 
@@ -28,10 +28,7 @@ public class Actor
 public class Player extends Actor
 {
   float jumpHeight;
-  boolean upPressed = false;
-boolean downPressed = false;
-boolean leftPressed = false;
-boolean rightPressed = false;
+
   public Player(PVector pos)
   {
     walkingSpeed = 10;
@@ -56,50 +53,28 @@ boolean rightPressed = false;
     return avatar;
   }
 
-  public void controlPlayer2() 
-  {
-      if (keyPressed && key == CODED) {
-      switch(keyCode) {
-      case LEFT: 
-        leftPressed = true;
-        break;
-      case RIGHT: 
-        rightPressed = true;
-        break;
-      case UP: 
-        upPressed = true;
-        break;
-      //only for testing purposes
-      case DOWN: 
-        downPressed = true;
-        break;
-      }
-    }
-
-
-  }
-
+  
   public void controlPlayer() {
     if (keyPressed && key == CODED) {
       switch(keyCode) {
-      case LEFT: 
+        case LEFT: 
         position.sub(walkingSpeed, 0, 0);
         break;
-      case RIGHT: 
+        case RIGHT: 
         position.add(walkingSpeed, 0, 0);
         break;
-      case UP: 
+        case UP: 
         position.sub(0, jumpHeight, 0);
         break;
       //only for testing purposes
       case DOWN: 
-        position.add(0, jumpHeight, 0);
-        break;
-      }
-      println("playerpos x: " + position.x + " y: " + position.y);
+      position.add(0, jumpHeight, 0);
+      break;
     }
-
+    println("playerpos x: " + position.x + " y: " + position.y);
   }
+
+}
 }
 
 
@@ -108,30 +83,40 @@ public class Enemy extends Actor
   public Enemy(PVector pos)
   {
     position = pos;
+    stateGraphic = loadImage("devEnemy.png");
   }
 
-  public void drawEnemy()
+  
+
+  public PImage enemyRender()
   {
-    fill(255, 0, 0);
-    stroke(255);
-    //draw a direction indicator
+    
+      
+    
+    avatar.beginDraw();
     if (walkingSpeed>0) {
-      line(position.x, position.y, position.x+20, position.y);
-    } 
-    else if (walkingSpeed<0) {
-      line(position.x, position.y, position.x-20, position.y);
-    }
-    ellipse(position.x, position.y, 20, 20);
+     avatar.pushMatrix();
+     avatar.scale(-1,1);
+     avatar.image(stateGraphic,-stateGraphic.width, 0);
+     avatar.popMatrix();
+   } 
+   else if (walkingSpeed<0) {
+    avatar.image(stateGraphic,0, 0);
   }
+  avatar.endDraw();
+  return avatar;
 
-  public void patroling()
-  {
-    // if (spottedThePlayer()) 
-    // {
-    //   run();
-    // } 
-    // else
-    // {
+
+}
+
+public void patroling(Physical player)
+{
+    if (spottedThePlayer(player)) 
+    {
+      run();
+    } 
+    else
+    {
       if (reachedEndOfPlattform()) {
         walkingSpeed = walkingSpeed*-1;
         runningSpeed = runningSpeed*-1;
@@ -141,22 +126,22 @@ public class Enemy extends Actor
         //extendable random behaviour
         int r = int(random(30));
         switch(r) {
-        case 0:
+          case 0:
           //with chance of 1/30 the enemy will turn around and walk in the other direction before reaching the end of the plattform
           walkingSpeed = walkingSpeed*-1;
           runningSpeed = runningSpeed*-1;
           walk();
           break;
-        case 1: 
+          case 1: 
           //with chance of 1/30 the enemy will stand still
           break;
-        default :
+          default :
           //with chance of 28/10 the enemy will continue walking in the same direction he was walking before.
           walk();
           break;
         }
       }
-    //}
+    }
   }
 
   public boolean reachedEndOfPlattform()
@@ -168,15 +153,19 @@ public class Enemy extends Actor
     return false;
   }
 
-  public boolean isInViewport()
+  public boolean isInViewport(PVector playerpos)
   {
-    //has to be when the viewportparallax works
+    if (dist(playerpos.x, playerpos.y, position.x, position.y)<height ) {
     return true;
   }
+  else {
+    return false;
+  }
+  }
 
-  public boolean spottedThePlayer(Player p)
+  public boolean spottedThePlayer(Physical player)
   {
-    if (walkingSpeed>0 && position.x< p.position.x && abs(p.position.y-position.y)<p.jumpHeight|| walkingSpeed<0 && position.x> p.position.x && abs(p.position.y-position.y)<p.jumpHeight) 
+    if (walkingSpeed>0 && position.x< player.position.x && abs(player.position.y-position.y)<player.avatar.height|| walkingSpeed<0 && position.x> player.position.x && abs(player.position.y-position.y)<player.avatar.height) 
     {
       return true;
     }
@@ -229,6 +218,6 @@ public boolean standOnPlattform()
 //    //      
 //    //    }
 //  }
-  return false;
+return false;
 }
 

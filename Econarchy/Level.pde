@@ -34,7 +34,7 @@ public class Level
     enemies = new Enemy[3];
     for (int i=0; i < 3; i++)
     {
-      enemies[i] = new Enemy(new PVector(random(width), random(height), 0));
+      enemies[i] = new Enemy(new PVector(random(renderedImage.width), random(renderedImage.height-30, renderedImage.height-300), 0));
     }
   }
 
@@ -55,11 +55,18 @@ public class Level
 
     renderedImage.image(hans.playerRender(), hans.position.x, hans.position.y);
 
-    // for (int i=0; i < enemies.length; i++)
-    //  {
-    //    enemies[i].drawEnemy();
-    //    enemies[i].patroling();
-    //  }
+    for (int i=0; i < enemies.length; i++)
+     {
+        
+       if (enemies[i].isInViewport(hans.position)) {
+        //handing over hans position to determine if the enemy is seeing hans
+         enemies[i].patroling(hans);
+       
+       renderedImage.image( enemies[i].enemyRender(), enemies[i].position.x, enemies[i].position.y);
+       }
+       
+       
+     }
 
     renderedImage.endDraw();
   }
