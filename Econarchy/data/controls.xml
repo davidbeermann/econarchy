@@ -4,7 +4,7 @@
 		<!-- buttons defined here -->
 		<buttons>
 			<button id="1" map_to="jump"/>
-			<button id="2" map_to="use"/>
+			<!-- button id="2" map_to="use"/ -->
 		</buttons>
 		<!-- analog sticks defined here -->
 		<sliders> 
@@ -16,6 +16,6 @@
 		</sliders>
 	</inputs>
 	<meta-data>
-		<rumble_enabled value="true"/>
+		<meta-entry type="rumble_enabled" value="true"/>
 	</meta-data>
 </econarchy_controller>
