@@ -27,16 +27,54 @@ public class Actor
 
 public class Player extends Actor
 {
+  PVector currVelocity;
+  PVector gravityAcc;
   float jumpHeight;
-
+  float speedMax = 10.0;
+  float lowerBoundary; //lower end of level
+  // keypress storage
+  boolean upPressed;
+  boolean downPressed;
+  boolean leftPressed;
+  boolean rightPressed;
+  
   public Player(PVector pos)
   {
+    currVelocity = new PVector(0.0,0.0);
+    gravityAcc = new PVector(0.0,10.0);
     walkingSpeed = 10;
     jumpHeight = 10;
     // position = new PVector(width/2, height-20, 0);
+    lowerBoundary = pos.y;
     position = pos;
     stateGraphic = loadImage("devAvatar.png");
 
+  }
+  
+  public void keyPressed(KeyEvent e) {
+    if ( key == CODED ){
+      if (keyCode == UP)
+        upPressed = true;
+      else if (keyCode == DOWN)
+        downPressed = true;
+      else if (keyCode == LEFT)
+        leftPressed = true;
+      else if (keyCode == RIGHT)
+        rightPressed = true;
+    }
+  }
+  
+  public void keyReleased(KeyEvent e) {
+    if ( key == CODED ) {
+      if ( keyCode == UP )
+        upPressed = false;
+      else if ( keyCode == DOWN )
+        downPressed = false;
+      else if ( keyCode == LEFT )
+        leftPressed = false;
+      else if ( keyCode == RIGHT )
+        rightPressed = false;
+    }
   }
 
   public void drawPlayer()
@@ -53,29 +91,51 @@ public class Player extends Actor
     return avatar;
   }
 
+  public void jump() {
+     if ( currVelocity.y <= 0.5 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
+          currVelocity.y = -jumpHeight;
+  }
+  
+  public void move(float x, float y) {
+    currVelocity.x = x*10;
+    println(x);
+  }
   
   public void controlPlayer() {
-    if (keyPressed && key == CODED) {
-      switch(keyCode) {
-        case LEFT: 
-        position.sub(walkingSpeed, 0, 0);
-        break;
-        case RIGHT: 
-        position.add(walkingSpeed, 0, 0);
-        break;
-        case UP: 
-        position.sub(0, jumpHeight, 0);
-        break;
-      //only for testing purposes
-      case DOWN: 
-      position.add(0, jumpHeight, 0);
-      break;
-    }
-    println("playerpos x: " + position.x + " y: " + position.y);
+      // check if any keypresses happened and actions need to be performed
+     if ( leftPressed||rightPressed||upPressed||downPressed ) {
+     if ( leftPressed ) {
+      currVelocity.x += -0.1; }
+     if ( rightPressed ) {
+      currVelocity.x += 0.1; }
+     if ( upPressed && currVelocity.y <= 0.1 )
+       currVelocity.y = -jumpHeight;
+     if ( downPressed )
+       currVelocity.y = 0;
+     }
+     else // if not slowly stop player movement
+       currVelocity.x *= 0.8;
+    
+    //limit speed
+    if ( currVelocity.mag() >= speedMax ) 
+       currVelocity.setMag(speedMax);
+    
+    position.add(currVelocity); //apply velocity to player
+    
+    PVector tmpAccel = PVector.mult(gravityAcc, 1.0/30.0); //calculate gravitational Acceleration, assuming 30fps/can later be adjusted to use realtime for better simulation
+    println("TMPACCEL IS " +  tmpAccel.x + "     " + tmpAccel.y);
+    
+    
+    if( position.y < lowerBoundary) //only apply gravity if player is inside of level bounds
+       currVelocity.add(tmpAccel);  
+    else
+       currVelocity.y = 0.0; //reset vertical velocity if player hits rock bottom
+   println("CURRVELOCITY: " + currVelocity.x + "   " + currVelocity.y);
+   println("playerpos x: " + position.x + " y: " + position.y);
   }
 
 }
-}
+
 
 
 public class Enemy extends Actor
@@ -109,7 +169,7 @@ public class Enemy extends Actor
 
 }
 
-public void patroling(Physical player)
+public void patroling(Player player)
 {
     if (spottedThePlayer(player)) 
     {
@@ -163,7 +223,7 @@ public void patroling(Physical player)
   }
   }
 
-  public boolean spottedThePlayer(Physical player)
+  public boolean spottedThePlayer(Player player)
   {
     if (walkingSpeed>0 && position.x< player.position.x && abs(player.position.y-position.y)<player.avatar.height|| walkingSpeed<0 && position.x> player.position.x && abs(player.position.y-position.y)<player.avatar.height) 
     {

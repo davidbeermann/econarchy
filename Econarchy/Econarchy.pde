@@ -1,4 +1,4 @@
-boolean gamepadEnabled = false;
+boolean gamepadEnabled = true;
 Game game;
 FancyInput gamepad;
   
@@ -15,11 +15,11 @@ public void setup()
 }
 
 public void keyPressed(KeyEvent e) {
-  game.level.hans.keyPressed(e);
+  game.level.hans.keyPressed(e); //forward keypress events to player object
 }
 
 public void keyReleased(KeyEvent e) {
-  game.level.hans.keyReleased(e);
+  game.level.hans.keyReleased(e); //forward keyrelease events to player object
 }
 
 public void draw()
