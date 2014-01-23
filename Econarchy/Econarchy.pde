@@ -23,8 +23,8 @@ public void keyReleased(KeyEvent e) {
 }
 
 public void draw()
-{	
-	background(0);
+{ 
+  background(0);
  if (gamepadEnabled) gamepad.update();
  game.render();
 }
