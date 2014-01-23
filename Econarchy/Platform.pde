@@ -4,7 +4,7 @@ public class Platform
   private Type.Platform type;
   private PVector position;
   private PImage image;
-
+ 
 
   public Platform(String id, Type.Platform type, PVector position, PImage image)
   {

@@ -5,6 +5,8 @@ public class Level
   Platform[] platforms;
   Player hans;
   Enemy[] enemies;
+  CollisionDetector collider;
+  
 
   // gradient variables - TO BE DELETED
   int Y_AXIS = 1;
@@ -13,6 +15,7 @@ public class Level
   // define global level settings in xml driven data class
   public Level(LevelData data)
   {
+    
     // setup main level graphic
     renderedImage = createGraphics((int) data.size.x, (int) data.size.y);
 
@@ -27,6 +30,7 @@ public class Level
         platforms[i] = new Platform(platformSpec.getId(), platformSpec.getType(), platformSpec.getPosition(), data.getImageResource(platformSpec.getType().toString()));
       }
     }
+    collider = new CollisionDetector(platforms);
       
     // setup enemies
     PImage enemyImage = loadImage("devEnemy.png");
@@ -62,6 +66,9 @@ public class Level
   public void render()
   {
     hans.controlPlayer();
+    
+    //do collision detection for this frame
+    collider.checkCollisions(hans);
 
     renderedImage.beginDraw();
     renderedImage.clear();

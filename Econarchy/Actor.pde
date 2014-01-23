@@ -22,7 +22,16 @@ public class Actor
   {
     position.add(runningSpeed, 0, 0);
   }
+  
+  public BoundingBox getBounds() {
+    return new BoundingBox(position, new PVector(avatar.width, avatar.height));
+  }
+  
+  public void handleCollision(Collision c) {
+    return;
+  }
 }
+
 
 
 public class Player extends Actor
@@ -133,6 +142,13 @@ public class Player extends Actor
    println("CURRVELOCITY: " + currVelocity.x + "   " + currVelocity.y);
    println("playerpos x: " + position.x + " y: " + position.y);
   }
+  
+  public void handleCollision(Collision c) {
+    println("TEST");
+    if ( currVelocity.y > 0)
+        currVelocity.y = 0f;
+        position.y = c.getCollider().y + c.getCollider().height; 
+ }  
 
 }
 
