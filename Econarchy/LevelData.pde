@@ -9,6 +9,7 @@ public class LevelData
   int levelHeight;
   private HashMap<String, PImage> imageResources;
   private PlatformSpec[] platformSpecs;
+  private EnemySpec[] enemySpecs;
   private String[] backgroundIds;
 
 
@@ -33,6 +34,15 @@ public class LevelData
 
     // ----- PARSE SPECIFICATIONS -----
     // --------------------------------
+    
+    // parse background ids
+    XML[] backgroundsXML = data.getChild("specification").getChild("backgrounds").getChildren("background");
+    backgroundIds = new String[backgroundsXML.length];
+    
+    for(int i = 0; i < backgroundsXML.length; i++)
+    {
+      backgroundIds[i] = backgroundsXML[i].getString("id");
+    }
 
     // parse platforms
     XML[] platformsXML = data.getChild("specification").getChild("platforms").getChildren("platform");
@@ -60,17 +70,19 @@ public class LevelData
       }
       else
       {
-        platformSpecs[i] = new PlatformSpec(platformType, platformXML.getInt("x"), platformXML.getInt("y"));
+        platformSpecs[i] = new PlatformSpec(platformXML.getString("id"), platformType, platformXML.getInt("x"), platformXML.getInt("y"));
       }
     }
     
-    // parse background ids
-    XML[] backgroundsXML = data.getChild("specification").getChild("backgrounds").getChildren("background");
-    backgroundIds = new String[backgroundsXML.length];
+    // parse enemies
+    XML[] enemiesXML = data.getChild("specification").getChild("enemies").getChildren("enemy");
+    enemySpecs = new EnemySpec[enemiesXML.length];
     
-    for(int i = 0; i < backgroundsXML.length; i++)
+    XML enemyXML;
+    for(int i = 0; i < enemiesXML.length; i++)
     {
-      backgroundIds[i] = backgroundsXML[i].getString("id");
+      enemyXML = enemiesXML[i];
+      enemySpecs[i] = new EnemySpec(enemyXML.getString("platformId"), enemyXML.getFloat("walkingSpeed"), enemyXML.getFloat("runningSpeed"), enemyXML.getFloat("startPosition"));
     }
   }
 
@@ -86,30 +98,58 @@ public class LevelData
       return null;
     }
   }
-
-
-  public PlatformSpec[] getPlatformSpecs()
-  {
-    return platformSpecs;
-  }
   
   
   public String[] getBackgroundIds()
   {
     return backgroundIds;
   }
+
+
+  public PlatformSpec[] getPlatformSpecs()
+  {
+    return platformSpecs;
+  }
+
+
+  public PlatformSpec getPlatformSpecById(String id)
+  {
+    PlatformSpec platformSpec = null;
+    for(PlatformSpec spec : platformSpecs)
+    {
+      if(spec.getId() == id)
+      {
+        platformSpec = spec;
+        break;
+      }
+    }
+    return platformSpec;
+  }
+
+
+  public EnemySpec[] getEnemySpecs()
+  {
+    return enemySpecs;
+  }
 }
 
 
 public class PlatformSpec
 {
+  private String id;
   private Type.Platform type;
   private PVector position;
 
-  public PlatformSpec(Type.Platform type, int xPos, int yPos)
+  public PlatformSpec(String id, Type.Platform type, int xPos, int yPos)
   {
+    this.id = id;
     this.type = type;
     this.position = new PVector(xPos, yPos);
+  }
+  
+  public String getId()
+  {
+    return this.id;
   }
 
   public Type.Platform getType()
@@ -120,6 +160,42 @@ public class PlatformSpec
   public PVector getPosition()
   {
     return this.position;
+  }
+}
+
+public class EnemySpec
+{
+  private String platformId;
+  private float walkingSpeed;
+  private float runningSpeed;
+  private float startPosition;
+  
+  public EnemySpec(String platformId, float walkingSpeed, float runningSpeed, float startPosition)
+  {
+    this.platformId = platformId;
+    this.walkingSpeed = walkingSpeed;
+    this.runningSpeed = runningSpeed;
+    this.startPosition = startPosition;
+  }
+  
+  public String getPlatformId()
+  {
+    return this.platformId;
+  }
+  
+  public float getWalkingSpeed()
+  {
+    return this.walkingSpeed;
+  }
+  
+  public float getRunningSpeed()
+  {
+    return this.runningSpeed;
+  }
+  
+  public float getStartPosition()
+  {
+    return this.startPosition;
   }
 }
 

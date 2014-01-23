@@ -140,19 +140,30 @@ public class Player extends Actor
 
 public class Enemy extends Actor
 {
+  float leftBoundary;
+  float rightBoundary;
+  
+  
   public Enemy(PVector pos)
   {
     position = pos;
     stateGraphic = loadImage("devEnemy.png");
   }
-
+  
+  
+  public Enemy(PVector position, float leftBoundary, float rightBoundary, float walkingSpeed, float runningSpeed, PImage stateGraphic)
+  {
+    this.position = position;
+    this.leftBoundary = leftBoundary;
+    this.rightBoundary = rightBoundary;
+    this.walkingSpeed = walkingSpeed;
+    this.runningSpeed = runningSpeed;
+    this.stateGraphic = stateGraphic; 
+  }
   
 
   public PImage enemyRender()
   {
-    
-      
-    
     avatar.beginDraw();
     if (walkingSpeed>0) {
      avatar.pushMatrix();

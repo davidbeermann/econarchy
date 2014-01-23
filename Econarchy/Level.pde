@@ -24,18 +24,38 @@ public class Level
       platformSpec = data.getPlatformSpecs()[i];
       if (platformSpec != null)
       {
-        platforms[i] = new Platform(platformSpec.getType(), platformSpec.getPosition(), data.getImageResource(platformSpec.getType().toString()));
+        platforms[i] = new Platform(platformSpec.getId(), platformSpec.getType(), platformSpec.getPosition(), data.getImageResource(platformSpec.getType().toString()));
       }
     }
+      
+    // setup enemies
+    PImage enemyImage = loadImage("devEnemy.png");
+    enemies = new Enemy[data.getEnemySpecs().length];
+    for(int i = 0; i < data.getEnemySpecs().length; i++)
+    {
+      EnemySpec enemySpec = data.getEnemySpecs()[i];
+      Platform platform = getPlatformById(enemySpec.getPlatformId());
+      println(enemySpec);
+      println(platform);
+      
+      float leftBoundary = platform.getPosition().x;
+      float rightBoundary = platform.getPosition().x + platform.getSize().x - enemyImage.width;
+      PVector position = new PVector(leftBoundary + rightBoundary * enemySpec.getStartPosition(), platform.getPosition().y - enemyImage.height);
+      
+      enemies[i] = new Enemy(position, leftBoundary, rightBoundary, enemySpec.getWalkingSpeed(), enemySpec.getRunningSpeed(), enemyImage);
+    }
+    
 
     //playerAvatar size is currently 30 x 30 therefore x-15 and y-30
     hans = new Player(new PVector(renderedImage.width/2 -15, renderedImage.height-30, 0));
-
+    
+    /*
     enemies = new Enemy[3];
     for (int i=0; i < 3; i++)
     {
       enemies[i] = new Enemy(new PVector(random(renderedImage.width), random(renderedImage.height-30, renderedImage.height-300), 0));
     }
+    */
   }
 
 
@@ -45,8 +65,6 @@ public class Level
 
     renderedImage.beginDraw();
     renderedImage.clear();
-
-    //    setGradient(0, 0, renderedImage.width, renderedImage.height, color(30), color(220), Y_AXIS);
 
     for (Platform platform : platforms)
     {
@@ -70,33 +88,20 @@ public class Level
 
     renderedImage.endDraw();
   }
-
-
-  // gradient helper method - TO BE DELETED
-  private void setGradient(int x, int y, float w, float h, color c1, color c2, int axis )
+  
+  
+  private Platform getPlatformById(String id)
   {
-    renderedImage.noFill();
-
-    if (axis == Y_AXIS)  // Top to bottom gradient
+    Platform platform = null;
+    for(Platform p : platforms)
     {
-      for (int i = y; i <= y+h; i++)
+      if(p.getId().equals(id))
       {
-        float inter = map(i, y, y+h, 0, 1);
-        color c = lerpColor(c1, c2, inter);
-        renderedImage.stroke(c);
-        renderedImage.line(x, i, x+w, i);
-      }
-    }  
-    else if (axis == X_AXIS)  // Left to right gradient
-    {
-      for (int i = x; i <= x+w; i++)
-      {
-        float inter = map(i, x, x+w, 0, 1);
-        color c = lerpColor(c1, c2, inter);
-        renderedImage.stroke(c);
-        renderedImage.line(i, y, i, y+h);
+        platform = p;
+        break;
       }
     }
+    return platform;
   }
 }
 

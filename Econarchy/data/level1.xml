@@ -20,9 +20,13 @@
 		</backgrounds>
 		<!-- platform types have to match the image ids above!!! -->
 		<platforms>
-			<platform type="regular" x="20" y="1900" />	
-			<platform type="dissolvable" x="140" y="1800" />	
-			<platform type="slippery" x="260" y="1700" />	
+			<platform id="p1" type="regular" x="20" y="1900" />	
+			<platform id="p2" type="dissolvable" x="140" y="1800" />	
+			<platform id="p3" type="slippery" x="260" y="1700" />	
 		</platforms>
+		<!-- enemy definitions -->	
+		<enemies>
+			<enemy platformId="p1" walkingSpeed="1" runningSpeed="5" startPosition="0.5" />
+		</enemies>
 	</specification>
 </econarchy_level>
