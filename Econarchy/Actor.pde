@@ -132,15 +132,15 @@ public class Player extends Actor
     position.add(currVelocity); //apply velocity to player
     
     PVector tmpAccel = PVector.mult(gravityAcc, 1.0/30.0); //calculate gravitational Acceleration, assuming 30fps/can later be adjusted to use realtime for better simulation
-    println("TMPACCEL IS " +  tmpAccel.x + "     " + tmpAccel.y);
+    //println("TMPACCEL IS " +  tmpAccel.x + "     " + tmpAccel.y);
     
     
     if( position.y < lowerBoundary) //only apply gravity if player is inside of level bounds
        currVelocity.add(tmpAccel);  
     else
        currVelocity.y = 0.0; //reset vertical velocity if player hits rock bottom
-   println("CURRVELOCITY: " + currVelocity.x + "   " + currVelocity.y);
-   println("playerpos x: " + position.x + " y: " + position.y);
+   //println("CURRVELOCITY: " + currVelocity.x + "   " + currVelocity.y);
+   //println("playerpos x: " + position.x + " y: " + position.y);
   }
   
   public void handleCollision(Collision c) {
@@ -198,9 +198,12 @@ public class Enemy extends Actor
 
 public void patroling(Player player)
 {
-    if (spottedThePlayer(player)) 
+    if (spottedThePlayer(player)&&!reachedEndOfPlattform()) 
     {
-      run();
+     
+        run();
+      
+      
     } 
     else
     {
@@ -211,19 +214,19 @@ public void patroling(Player player)
       }
       else {
         //extendable random behaviour
-        int r = int(random(30));
+        int r = int(random(60));
         switch(r) {
           case 0:
-          //with chance of 1/30 the enemy will turn around and walk in the other direction before reaching the end of the plattform
+          //with chance of 1/60 the enemy will turn around and walk in the other direction before reaching the end of the plattform
           walkingSpeed = walkingSpeed*-1;
           runningSpeed = runningSpeed*-1;
           walk();
           break;
           case 1: 
-          //with chance of 1/30 the enemy will stand still
+          //with chance of 1/60 the enemy will stand still
           break;
           default :
-          //with chance of 28/10 the enemy will continue walking in the same direction he was walking before.
+          //with chance of 58/60 the enemy will continue walking in the same direction he was walking before.
           walk();
           break;
         }
@@ -234,8 +237,11 @@ public void patroling(Player player)
   public boolean reachedEndOfPlattform()
   {
     //has to be changed to platform size instead of windowsize
-    if (position.x<= 0 || position.x>= width) {
+    if (position.x<= leftBoundary && walkingSpeed < 0|| position.x>= rightBoundary && walkingSpeed > 0) {
+      
+      println("reachedEndOfPlattform");
       return true;
+
     }
     return false;
   }
@@ -254,7 +260,9 @@ public void patroling(Player player)
   {
     if (walkingSpeed>0 && position.x< player.position.x && abs(player.position.y-position.y)<player.avatar.height|| walkingSpeed<0 && position.x> player.position.x && abs(player.position.y-position.y)<player.avatar.height) 
     {
+      println("spottedThePlayer");
       return true;
+
     }
     else {
       return false;
