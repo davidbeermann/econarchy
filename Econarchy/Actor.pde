@@ -24,7 +24,7 @@ public class Actor
   }
   
   public BoundingBox getBounds() {
-    return new BoundingBox(position, new PVector(avatar.width, avatar.height));
+    return null;
   }
   
   public void handleCollision(Collision c) {
@@ -99,6 +99,11 @@ public class Player extends Actor
     avatar.endDraw();
     return avatar;
   }
+  
+  @Override
+  public BoundingBox getBounds() {
+    return new BoundingBox(position, new PVector(avatar.width, avatar.height));
+  }
 
   public void jump() {
      if ( currVelocity.y <= 0.5 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
@@ -107,7 +112,6 @@ public class Player extends Actor
   
   public void move(float x, float y) {
     currVelocity.x = x*10;
-    println(x);
   }
   
   public void controlPlayer() {
@@ -139,15 +143,18 @@ public class Player extends Actor
        currVelocity.add(tmpAccel);  
     else
        currVelocity.y = 0.0; //reset vertical velocity if player hits rock bottom
-   //println("CURRVELOCITY: " + currVelocity.x + "   " + currVelocity.y);
+  // println("CURRVELOCITY: " + currVelocity.x + "   " + currVelocity.y);
    //println("playerpos x: " + position.x + " y: " + position.y);
+   println("PlayerVelocity.y: " + currVelocity.y);
   }
   
   public void handleCollision(Collision c) {
-    println("TEST");
-    if ( currVelocity.y > 0)
+    //println("TEST");
+    if ( currVelocity.y > 0) {
+        println("player Velocity: " + currVelocity.y);
         currVelocity.y = 0f;
-        position.y = c.getCollider().y + c.getCollider().height; 
+        position.y = c.getCollider().top - avatar.height;
+    } 
  }  
 
 }
@@ -198,12 +205,9 @@ public class Enemy extends Actor
 
 public void patroling(Player player)
 {
-    if (spottedThePlayer(player)&&!reachedEndOfPlattform()) 
+    if (spottedThePlayer(player)) 
     {
-     
-        run();
-      
-      
+      run();
     } 
     else
     {
@@ -214,19 +218,19 @@ public void patroling(Player player)
       }
       else {
         //extendable random behaviour
-        int r = int(random(60));
+        int r = int(random(30));
         switch(r) {
           case 0:
-          //with chance of 1/60 the enemy will turn around and walk in the other direction before reaching the end of the plattform
+          //with chance of 1/30 the enemy will turn around and walk in the other direction before reaching the end of the plattform
           walkingSpeed = walkingSpeed*-1;
           runningSpeed = runningSpeed*-1;
           walk();
           break;
           case 1: 
-          //with chance of 1/60 the enemy will stand still
+          //with chance of 1/30 the enemy will stand still
           break;
           default :
-          //with chance of 58/60 the enemy will continue walking in the same direction he was walking before.
+          //with chance of 28/10 the enemy will continue walking in the same direction he was walking before.
           walk();
           break;
         }
@@ -237,11 +241,8 @@ public void patroling(Player player)
   public boolean reachedEndOfPlattform()
   {
     //has to be changed to platform size instead of windowsize
-    if (position.x<= leftBoundary && walkingSpeed < 0|| position.x>= rightBoundary && walkingSpeed > 0) {
-      
-      println("reachedEndOfPlattform");
+    if (position.x<= 0 || position.x>= width) {
       return true;
-
     }
     return false;
   }
@@ -260,9 +261,7 @@ public void patroling(Player player)
   {
     if (walkingSpeed>0 && position.x< player.position.x && abs(player.position.y-position.y)<player.avatar.height|| walkingSpeed<0 && position.x> player.position.x && abs(player.position.y-position.y)<player.avatar.height) 
     {
-      println("spottedThePlayer");
       return true;
-
     }
     else {
       return false;

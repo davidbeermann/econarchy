@@ -7,26 +7,30 @@ public class CollisionDetector{
     //fill checklist with bounding boxes of platforms
     for (int i = 0; i < platforms.length; i++) {
       static_colliders[i] = new BoundingBox(platforms[i].getPosition(), platforms[i].getSize());
-      println(static_colliders[i].width);
+//      println("x:" + static_colliders[i].x + "    y:" + static_colliders[i].y + "      w:" + static_colliders[i].width + "     h:" + static_colliders[i].height);
     }
   }
   
   // inspired by http://stackoverflow.com/questions/4354591/intersection-algorithm
   private boolean intersects(BoundingBox a, BoundingBox b) {
     BoundingBox tempBox = BoundingBox.getBoundingBox(a,b);
-    if ( (tempBox.width < a.width+b.width) && (tempBox.height < a.height+b.height))
-      return true;
+//     println("tmpBox.x: " + tempBox.x + "a.x: " + a.x + "b.x: " + b.x);
+//     println("tmpBox.y: " + tempBox.y + "a.y: " + a.y + "b.y: " + b.y);
+//     println("tmpBox.w: " + tempBox.width + "a.w: " + a.width + "b.w: " + b.width);
+    if ( (tempBox.width < a.width+b.width) && (tempBox.height < a.height+b.height)) {
+      return true;}
     else
       return false;
   }
   
   public void checkCollisions(Actor a) {
-    println("COLLISION DETECTION IN PROGRESS");
+//    println("COLLISION DETECTION IN PROGRESS");
     BoundingBox commonBound;
     BoundingBox tmpBounding = a.getBounds();
+    //println("x:" + tmpBounding.x + "    y:" + tmpBounding.y + "      w:" + tmpBounding.width + "     h:" + tmpBounding.height);
     for (int i=0; i<static_colliders.length; i++){
-      if ( intersects(a.getBounds(), static_colliders[i])) { 
-        println("COLLISION DETECTED");
+      if ( intersects(tmpBounding, static_colliders[i])) { 
+//        println("COLLISION DETECTED");
        a.handleCollision(new Collision(static_colliders[i]));}
     }
   }
@@ -49,28 +53,36 @@ public class Collision {
   
 // boundingbox of object 
 public static class BoundingBox {
-  float x, y;
-  float width;
-  float height;
+  float left=0, top=0, bottom=0, right=0,x,y;
+  float width=0;
+  float height=0;
   
-  public BoundingBox(float x, float y, float w, float h) {
-    x = x;
-    y = y;
-    width = w;
-    height = h;
+  public BoundingBox(float lcor, float tcor, float rcor, float bcor) {
+    x = left = lcor;
+    right = rcor;
+    y = top = tcor;
+    bottom = bcor;
+    width = right-left;
+    height = bottom-top;
   }
   
  
   // wrapper constructor for direct support of sizes supplied as vectors
   public BoundingBox(PVector xy, PVector wh) {
-    x = xy.x;
-    y = xy.y;
+    x = left = xy.x;
+    y = top = xy.y;
     width = wh.x;
     height = wh.y;
+    right = left+width;
+    bottom = top+height;
   }
   
   // get the resulting bounding box of the supplied boxes
   public static BoundingBox getBoundingBox(BoundingBox box1, BoundingBox box2) {
-    return new BoundingBox(min(box1.x, box2.x), min(box1.y, box2.y), max(box1.x+box1.width, box2.x+box2.width), max(box1.y+box1.height, box2.y+box2.height));
+//    println("Box1.x: " + box1.x + " Box1.y: " + box1.y + " box1.width: " + box1.width + " box1.height: " + box1.height); 
+//    println("Box2.x: " + box2.x + " Box2.y: " + box2.y + " box2.width: " + box2.width + " box2.height: " + box2.height); 
+//    println("MIN.x: " + min(box1.x, box2.x) + " MIN.y: " + min(box1.y, box2.y));
+    return new BoundingBox(min(box1.left, box2.left), min(box1.top, box2.top), max(box1.width+box1.left, box2.left+box2.width), max(box1.height+box1.top, box2.height+box2.top));
   }
+  
 }
