@@ -43,10 +43,6 @@ public class Actor extends Collidable
     position.add(runningSpeed, 0, 0);
   }
   
-  public BoundingBox getBounds() {
-    return null;
-  }
-  
   public void handleCollision(Collision c) {
     return;
   }
@@ -59,7 +55,7 @@ public class Player extends Actor
   PVector currVelocity;
   PVector gravityAcc;
   float jumpHeight;
-  float speedMax = 10.0;
+  float speedMax = 50;
   float lowerBoundary; //lower end of level
   // keypress storage
   boolean upPressed;
@@ -171,9 +167,9 @@ public class Player extends Actor
   public void handleCollision(Collision c) {
     //println("TEST");
     if ( currVelocity.y > 0) {
-        println("player Velocity: " + currVelocity.y);
+        //println("player Velocity: " + currVelocity.y);
         currVelocity.y = 0f;
-        position.y = c.getCollider().top - avatar.height;
+        position.y = c.getCollider().getBounds().top - avatar.height;
     } 
  }  
 
@@ -204,6 +200,15 @@ public class Enemy extends Actor
     this.stateGraphic = stateGraphic; 
   }
   
+  @Override
+  public BoundingBox getBounds() {
+    return new BoundingBox(position, new PVector(avatar.width, avatar.height));
+  }
+    
+    
+  public boolean isEnemy() {
+    return true;
+  }
 
   public PImage enemyRender()
   {

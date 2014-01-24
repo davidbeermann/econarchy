@@ -1,4 +1,4 @@
-public class Platform
+public class Platform extends Collidable
 {
   private String id;
   private Type.Platform type;
@@ -36,6 +36,11 @@ public class Platform
   public PVector getSize()
   {
     return new PVector(image.width, image.height);
+  }
+  
+  @Override
+  public BoundingBox getBounds() {
+    return new BoundingBox(this.position.x, this.position.y, image.width+this.position.x, this.position.y+image.height);
   }
 }
 

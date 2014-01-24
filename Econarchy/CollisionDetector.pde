@@ -1,37 +1,39 @@
 public class CollisionDetector{
-  BoundingBox[] static_colliders;
+ ArrayList<Collidable> static_colliders;
   
-  public CollisionDetector(Platform[] platforms) {
-    static_colliders = new BoundingBox[platforms.length];
-    
-    //fill checklist with bounding boxes of platforms
-    for (int i = 0; i < platforms.length; i++) {
-      static_colliders[i] = new BoundingBox(platforms[i].getPosition(), platforms[i].getSize());
-//      println("x:" + static_colliders[i].x + "    y:" + static_colliders[i].y + "      w:" + static_colliders[i].width + "     h:" + static_colliders[i].height);
+  public CollisionDetector(Collidable[] collidables) {
+    static_colliders = new ArrayList<Collidable>();
+    for (int i=0; i < collidables.length; i++) {
+      static_colliders.add(collidables[i]);
     }
   }
+  
+  public void addCollidables(Collidable[] coll) {
+    for (int i=0; i < coll.length; i++) 
+      static_colliders.add(coll[i]);
+  }
+    
   
   // inspired by http://stackoverflow.com/questions/4354591/intersection-algorithm
   private boolean intersects(BoundingBox a, BoundingBox b) {
     BoundingBox tempBox = BoundingBox.getBoundingBox(a,b);
-//     println("tmpBox.x: " + tempBox.x + "a.x: " + a.x + "b.x: " + b.x);
-//     println("tmpBox.y: " + tempBox.y + "a.y: " + a.y + "b.y: " + b.y);
-//     println("tmpBox.w: " + tempBox.width + "a.w: " + a.width + "b.w: " + b.width);
+    println("BOX B:" + a);
     if ( (tempBox.width < a.width+b.width) && (tempBox.height < a.height+b.height)) {
+      println("TEST");
       return true;}
     else
       return false;
   }
   
-  public void checkCollisions(Actor a) {
-//    println("COLLISION DETECTION IN PROGRESS");
+  public void checkCollisions(Collidable a) {
     BoundingBox commonBound;
     BoundingBox tmpBounding = a.getBounds();
-    //println("x:" + tmpBounding.x + "    y:" + tmpBounding.y + "      w:" + tmpBounding.width + "     h:" + tmpBounding.height);
-    for (int i=0; i<static_colliders.length; i++){
-      if ( intersects(tmpBounding, static_colliders[i])) { 
-//        println("COLLISION DETECTED");
-       a.handleCollision(new Collision(static_colliders[i]));}
+    for (int i=0; i<static_colliders.size(); i++){
+      println("ITERATING");
+      if ( intersects(tmpBounding, static_colliders.get(i).getBounds())) {
+       println("COLLISION DETECTED"); 
+       a.handleCollision(new Collision(static_colliders.get(i)));
+     }
     }
   }
 }
@@ -39,13 +41,13 @@ public class CollisionDetector{
 
 //preliminary Collision class, needs to be enhanced and extended
 public class Collision {
-  BoundingBox collidedWith;
+  Collidable collidedWith;
   
-  public Collision(BoundingBox b) {
+  public Collision(Collidable b) {
       collidedWith = b;
   }
 
-  public BoundingBox getCollider() {
+  public Collidable getCollider() {
     return collidedWith;
   }
 }
