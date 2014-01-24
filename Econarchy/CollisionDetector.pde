@@ -17,9 +17,9 @@ public class CollisionDetector{
   // inspired by http://stackoverflow.com/questions/4354591/intersection-algorithm
   private boolean intersects(BoundingBox a, BoundingBox b) {
     BoundingBox tempBox = BoundingBox.getBoundingBox(a,b);
-    println("BOX B:" + a);
+    //println("BOX B:" + a);
     if ( (tempBox.width < a.width+b.width) && (tempBox.height < a.height+b.height)) {
-      println("TEST");
+      //println("TEST");
       return true;}
     else
       return false;
@@ -29,9 +29,9 @@ public class CollisionDetector{
     BoundingBox commonBound;
     BoundingBox tmpBounding = a.getBounds();
     for (int i=0; i<static_colliders.size(); i++){
-      println("ITERATING");
+      //println("ITERATING");
       if ( intersects(tmpBounding, static_colliders.get(i).getBounds())) {
-       println("COLLISION DETECTED"); 
+      // println("COLLISION DETECTED"); 
        a.handleCollision(new Collision(static_colliders.get(i)));
      }
     }

@@ -1,5 +1,5 @@
 //super uber class to enable collision detection
-public class Collidable{
+public class Collidable {
   
   public Collidable() {
   }
@@ -52,6 +52,7 @@ public class Actor extends Collidable
 
 public class Player extends Actor
 {
+  boolean alive = true;
   PVector currVelocity;
   PVector gravityAcc;
   float jumpHeight;
@@ -131,6 +132,7 @@ public class Player extends Actor
   }
   
   public void controlPlayer() {
+    if (alive) {
       // check if any keypresses happened and actions need to be performed
      if ( leftPressed||rightPressed||upPressed||downPressed ) {
      if ( leftPressed ) {
@@ -162,17 +164,25 @@ public class Player extends Actor
   // println("CURRVELOCITY: " + currVelocity.x + "   " + currVelocity.y);
    //println("playerpos x: " + position.x + " y: " + position.y);
    println("PlayerVelocity.y: " + currVelocity.y);
+    }
   }
   
   public void handleCollision(Collision c) {
     //println("TEST");
-    if ( currVelocity.y > 0) {
+    if ( currVelocity.y > 0 && !c.getCollider().isEnemy()) {
         //println("player Velocity: " + currVelocity.y);
         currVelocity.y = 0f;
         position.y = c.getCollider().getBounds().top - avatar.height;
-    } 
- }  
-
+    }
+    
+    if (c.getCollider().isEnemy()) {
+       println("ENEMY COLLISION _ YOU'RE DEAD");
+       alive = false;
+       stateGraphic = loadImage("devAvatar_dead.png");
+    }
+     
+ }
+ 
 }
 
 
