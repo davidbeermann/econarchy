@@ -1,4 +1,24 @@
-public class Actor
+//super uber class to enable collision detection
+public class Collidable{
+  
+  public Collidable() {
+  }
+  
+  public boolean isEnemy() {
+    return false;
+  }
+  
+  //return empty bounding box
+  public BoundingBox getBounds() {
+    return new BoundingBox(0,0,0,0);
+  }
+  
+  public void handleCollision(Collision c) {}
+}
+  
+
+
+public class Actor extends Collidable
 {
   PVector position;
   float walkingSpeed;
