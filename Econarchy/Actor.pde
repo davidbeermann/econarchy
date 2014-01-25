@@ -53,6 +53,7 @@ public class Actor extends Collidable
 public class Player extends Actor
 {
   boolean alive = true;
+  float acceleration = 0.1;
   PVector currVelocity;
   PVector gravityAcc;
   float jumpHeight;
@@ -123,54 +124,71 @@ public class Player extends Actor
   }
 
   public void jump() {
-     if ( currVelocity.y <= 0.5 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
+     
+     if ( currVelocity.y <= 0.7 ) { //enable jumping only if player is not moving in y direction(already jumping or falling)
           currVelocity.y = -jumpHeight;
+     println("JUMP");}
   }
   
-  public void move(float x, float y) {
-    currVelocity.x = x*10;
+  public void updatePosition() {
+    if (alive)
+      position.add(currVelocity);
+      //println ("UPWARD FORCE: " + currVelocity.y);
+  }
+  public void updateVelocity() {
+    updateVelocity(0,0);
   }
   
-  public void controlPlayer() {
-    if (alive) {
-      // check if any keypresses happened and actions need to be performed
-     if ( leftPressed||rightPressed||upPressed||downPressed ) {
-     if ( leftPressed ) {
-      currVelocity.x += -0.1; }
-     if ( rightPressed ) {
-      currVelocity.x += 0.1; }
-     if ( upPressed && currVelocity.y <= 0.1 )
+  public void updateVelocity(float x, float y) {
+    // gamepad is enabled if this happens
+    if ( x != 0 || y != 0) {
+      if ( x != 0 )
+        currVelocity.x = x*10;
+      if ( y != 0 )
+        currVelocity.y = y*10;
+    } //this should only happen if keyboard input is enabled - ensure this by removing the keypress events if gamepad is true
+    else if ( leftPressed||rightPressed||upPressed||downPressed ) {
+     if ( leftPressed ) 
+      currVelocity.x += -acceleration; 
+     if ( rightPressed ) 
+      currVelocity.x += acceleration; 
+     if ( upPressed && currVelocity.y <= 0.1 ) { //enable double jump here, to disable set to 0
        currVelocity.y = -jumpHeight;
+       upPressed = false; }
      if ( downPressed )
        currVelocity.y = 0;
      }
-     else // if not slowly stop player movement
+     else // if neither gamepad is moved nor keypresses are detected - slow down player
        currVelocity.x *= 0.8;
-    
-    //limit speed
-    if ( currVelocity.mag() >= speedMax ) 
-       currVelocity.setMag(speedMax);
-    
-    position.add(currVelocity); //apply velocity to player
-    
-    PVector tmpAccel = PVector.mult(gravityAcc, 1.0/30.0); //calculate gravitational Acceleration, assuming 30fps/can later be adjusted to use realtime for better simulation
-    //println("TMPACCEL IS " +  tmpAccel.x + "     " + tmpAccel.y);
-    
-    
-    if( position.y < lowerBoundary) //only apply gravity if player is inside of level bounds
+       
+     //calculate gravity vector
+     PVector tmpAccel = PVector.mult(gravityAcc, 1.0/30.0); //calculate gravitational Acceleration, assuming 30fps/can later be adjusted to use realtime for better simulation
+       
+     //apply gravity if player is inside level bounds - could later be removed when physics completely takes over calculation
+     // TODO: replace with level bounding boxes 
+     if( position.y < lowerBoundary )
        currVelocity.add(tmpAccel);  
-    else
+     else if (currVelocity.y > 1)
        currVelocity.y = 0.0; //reset vertical velocity if player hits rock bottom
-  // println("CURRVELOCITY: " + currVelocity.x + "   " + currVelocity.y);
-   //println("playerpos x: " + position.x + " y: " + position.y);
-   println("PlayerVelocity.y: " + currVelocity.y);
+       
+    // rest of calculations
+    // reflect player if he hits a wall //replace with collision system, as soon as physics can distinguish between ver and hor collisions
+    if ( currVelocity.x != 0 && (position.x > 400-avatar.width || position.x < 0 )) {
+      currVelocity.x *= -1;
+       
+    //limit player speed
+    if ( currVelocity.mag() >= speedMax ) 
+         currVelocity.setMag(speedMax);
     }
   }
   
   public void handleCollision(Collision c) {
     //println("TEST");
-    if ( currVelocity.y > 0 && !c.getCollider().isEnemy()) {
-        //println("player Velocity: " + currVelocity.y);
+    if ( (c.direction == 1 || c.direction == 8)  && !c.getCollider().isEnemy()) {
+        currVelocity.x *= -1;
+    }
+    
+    if ( (c.direction == 2 || c.direction == 3 || c.direction == 10) && !c.getCollider().isEnemy()) {
         currVelocity.y = 0f;
         position.y = c.getCollider().getBounds().top - avatar.height;
     }

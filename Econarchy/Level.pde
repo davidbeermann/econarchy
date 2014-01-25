@@ -65,9 +65,12 @@ public class Level
 
   public void render()
   {
-    hans.controlPlayer();
-    
+    //calculate new velocity for player
+    hans.updateVelocity();
     //do collision detection for this frame
+    
+    //update player position
+    hans.updatePosition();
     collider.checkCollisions(hans);
 
     renderedImage.beginDraw();

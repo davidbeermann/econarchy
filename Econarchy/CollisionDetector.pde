@@ -25,15 +25,41 @@ public class CollisionDetector{
       return false;
   }
   
+  // inspired by http://stackoverflow.com/questions/4354591/intersection-algorithm
+  /* Returns directions as follows:
+     coll from left - 1;
+     coll from top  - 2;
+     coll from bottom - 4;
+     coll from right - 8;
+     other directions sum of directions */
+  private int intersectsDirectional(BoundingBox source, BoundingBox target) {
+    int direction = 0;
+    BoundingBox tempBox = BoundingBox.getBoundingBox(source,target);
+    //println("BOX B:" + a);
+    if ( (tempBox.width < source.width+target.width) && (tempBox.height < source.height+target.height)) {
+      //determine direction
+      if ( source.left < target.right && source.right > target.right ) //left
+        direction += 1;
+      if ( source.top < target.top && source.bottom > target.top ) //top
+        direction += 2;
+      if ( source.top > target.bottom && source.bottom > target.bottom ) // bottom
+        direction += 4;
+      if ( source.left < target.left && source.right > target.left ) //right
+        direction += 8;
+      }
+      return direction;
+  }
+  
   public void checkCollisions(Collidable a) {
     BoundingBox commonBound;
     BoundingBox tmpBounding = a.getBounds();
     for (int i=0; i<static_colliders.size(); i++){
       //println("ITERATING");
-      if ( intersects(tmpBounding, static_colliders.get(i).getBounds())) {
-      // println("COLLISION DETECTED"); 
-       a.handleCollision(new Collision(static_colliders.get(i)));
-     }
+      //if ( intersects(tmpBounding, static_colliders.get(i).getBounds())) {
+      int dir = intersectsDirectional(tmpBounding, static_colliders.get(i).getBounds());
+      if ( dir != 0 ) 
+         a.handleCollision(new Collision(static_colliders.get(i), dir));
+     //}
     }
   }
 }
@@ -42,10 +68,16 @@ public class CollisionDetector{
 //preliminary Collision class, needs to be enhanced and extended
 public class Collision {
   Collidable collidedWith;
+  int direction;
   
   public Collision(Collidable b) {
       collidedWith = b;
   }
+  
+  public Collision(Collidable b, int dir) {
+     collidedWith = b;
+     direction = dir;
+  } 
 
   public Collidable getCollider() {
     return collidedWith;

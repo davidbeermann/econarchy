@@ -50,6 +50,6 @@ public FancyInput(String path, Econarchy that) {
   //update everything not caught with button presses here(analoq sticks etc)
   public void update() {
   //   for x in y do stuff;
-    game.level.hans.move(horizontalSlider.getValue(),0);
+    game.level.hans.updateVelocity(horizontalSlider.getValue(),0);
   }
 }
