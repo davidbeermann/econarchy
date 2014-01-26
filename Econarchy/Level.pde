@@ -81,20 +81,19 @@ public class Level
       platform.render(renderedImage);//(int) startY);
     }
 
-    renderedImage.image(hans.playerRender(), hans.position.x, hans.position.y);
-
     for (int i=0; i < enemies.length; i++)
-     {
-        
-       if (enemies[i].isInViewport(hans.position)) {
+    {
+      if (enemies[i].isInViewport(hans.position))
+      {
         //handing over hans position to determine if the enemy is seeing hans
-         enemies[i].patroling(hans);
+        enemies[i].patroling(hans);
        
-       renderedImage.image( enemies[i].enemyRender(), enemies[i].position.x, enemies[i].position.y);
-       }
-       
-       
-     }
+        renderedImage.image( enemies[i].enemyRender(), enemies[i].position.x, enemies[i].position.y);
+      } 
+    }
+    
+    // render player last to be on top of everything else
+    renderedImage.image(hans.playerRender(), hans.position.x, hans.position.y);
 
     renderedImage.endDraw();
   }

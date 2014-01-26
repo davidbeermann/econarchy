@@ -1,4 +1,4 @@
-boolean gamepadEnabled = true;
+boolean gamepadEnabled = false;
 Game game;
 FancyInput gamepad;
   
@@ -8,26 +8,43 @@ public void setup()
   
   game = new Game(400, 600);
   game.setupLevel("level1.xml");
+  
   //setup gamepad if needed
-  if (gamepadEnabled) {
+  if (gamepadEnabled)
+  {
     gamepad = new FancyInput("controls.xml", this);
   }
 }
 
-public void keyPressed(KeyEvent e) {
-  if (!gamepadEnabled)
-  game.level.hans.keyPressed(e); //forward keypress events to player object
-}
-
-public void keyReleased(KeyEvent e) {
-  if (!gamepadEnabled)
-  game.level.hans.keyReleased(e); //forward keyrelease events to player object
-}
 
 public void draw()
 { 
   background(0);
- if (gamepadEnabled) gamepad.update();
- game.render();
+  
+  if (gamepadEnabled)
+  {
+    gamepad.update();
+  }
+   
+  game.render();
 }
 
+
+public void keyPressed(KeyEvent e)
+{
+  if (!gamepadEnabled)
+  {
+    //forward keypress events to player object
+    game.level.hans.keyPressed(e); 
+  }
+}
+
+
+public void keyReleased(KeyEvent e)
+{
+  if (!gamepadEnabled)
+  {
+    //forward keyrelease events to player object
+    game.level.hans.keyReleased(e); 
+  }  
+}
