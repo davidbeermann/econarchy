@@ -15,9 +15,9 @@ public class SoundEvent {
 		fxSounds = new HashMap<String, AudioSample>();	
 		
 		// Put some fancy theme music here
-		//theme = minim.loadFile("fancyTheme.mp3");
-		//theme.loop();
-		//theme.play();
+  //theme = minim.loadFile("fancyTheme.mp3");
+  //theme.loop();
+  //theme.play();
 		
 	}
 	public void sound(String event)

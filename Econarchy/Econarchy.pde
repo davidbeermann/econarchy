@@ -3,6 +3,7 @@ Game game;
 KeyTracker keyTracker;
 FancyInput gamepad;
 SoundEvent music;
+  
 
 public void setup()
 {
@@ -10,7 +11,9 @@ public void setup()
   
   game = new Game(400, 600);
   game.setupLevel("level1.xml");
+  
   music = new SoundEvent(this);
+  
   //setup gamepad if needed
   if (gamepadEnabled)
   {
@@ -36,6 +39,12 @@ public void draw()
 }
 
 
+public void stop()
+{
+  music.minim.stop();
+}
+
+
 public void keyPressed(KeyEvent e)
 {
   if (!gamepadEnabled)
@@ -52,8 +61,3 @@ public void keyReleased(KeyEvent e)
     keyTracker.removeKey(keyCode); 
   }  
 }
-
-public void stop() {
-  music.minim.stop();
-}
-
