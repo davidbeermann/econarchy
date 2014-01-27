@@ -15,7 +15,6 @@ public class Collidable {
   
   public void handleCollision(Collision c) {}
 }
-  
 
 
 public class Actor extends Collidable
@@ -25,12 +24,12 @@ public class Actor extends Collidable
   float runningSpeed;
   PGraphics avatar;
   PImage stateGraphic;
+  
+  
   public Actor()
   {
     walkingSpeed=1;
     runningSpeed=5;
-    avatar = createGraphics(30, 30);
-
   }
 
   public void walk()
@@ -42,8 +41,9 @@ public class Actor extends Collidable
   {
     position.add(runningSpeed, 0, 0);
   }
-  
-  public void handleCollision(Collision c) {
+
+  public void handleCollision(Collision c)
+  {
     return;
   }
 }
@@ -59,35 +59,91 @@ public class Player extends Actor
   float jumpHeight;
   float speedMax = 50;
   float lowerBoundary; //lower end of level
+  
   KeyTracker keyTracker; // keypress storage
+  
+  //TODO image loading needs optimization : one sprite sheet? global image cache?
+  String[] jumpLeftImages = new String[]{"resources/player/jump_left.gif"};
+  String[] jumpRightImages = new String[]{"resources/player/jump_right.gif"};
+  String[] walkLeftImages = new String[]{"resources/player/walk_left_1.gif","resources/player/walk_left_2.gif"};
+  String[] walkRightImages = new String[]{"resources/player/walk_right_1.gif","resources/player/walk_right_2.gif"};
+  String[] deadImages = new String[]{"resources/player/dead.gif"};
+  PImage[] jumpLeft, jumpRight, walkLeft, walkRight, dead;
+  Sprite sprite;
   
   
   public Player(PVector pos)
   {
+    super();
+    
     currVelocity = new PVector(0.0, 0.0);
     gravityAcc = new PVector(0.0, 10.0);
     walkingSpeed = 10;
     jumpHeight = 10;
     lowerBoundary = pos.y;
     position = pos;
-    stateGraphic = loadImage("devAvatar.png");
+    //stateGraphic = loadImage("devAvatar.png");
     
     keyTracker = KeyTracker.getInstance();
-  }
-
-
-  public void drawPlayer()
-  {
-    fill(255);
-    ellipse(position.x, position.y, 20, 20);
+  
+    jumpLeft = loadImagesIntoArray(jumpLeftImages);
+    jumpRight = loadImagesIntoArray(jumpRightImages);
+    walkLeft = loadImagesIntoArray(walkLeftImages);
+    walkRight = loadImagesIntoArray(walkRightImages);
+    dead = loadImagesIntoArray(deadImages);
+    
+    avatar = createGraphics(32, 32);
+    sprite = new Sprite(avatar);
+    // set initial state of avatar
+    sprite.setImages(Sprite.STATE_WALK_LEFT, walkLeft);
   }
 
 
   public PImage playerRender()
   {
-    avatar.beginDraw();
-    avatar.image(stateGraphic,0, 0);
-    avatar.endDraw();
+    if(alive)
+    {
+      if(keyTracker.upPressed() && (keyTracker.leftPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID))
+      {
+        sprite.setImages(Sprite.STATE_JUMP_LEFT, jumpLeft);
+      }
+      else if(keyTracker.upPressed() && (keyTracker.rightPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.RIGHT_ID))
+      {
+        sprite.setImages(Sprite.STATE_JUMP_RIGHT, jumpRight);
+      }
+      else if(keyTracker.leftPressed() && !keyTracker.rightPressed())
+      {
+        sprite.setImages(Sprite.STATE_WALK_LEFT, walkLeft);
+      }
+      else if(keyTracker.rightPressed() && !keyTracker.leftPressed())
+      {
+        sprite.setImages(Sprite.STATE_WALK_RIGHT, walkRight);
+      }
+      
+      if(keyTracker.noKeyPressed())
+      {
+        if(keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID)
+        {
+          sprite.setImages(Sprite.STATE_WALK_LEFT, walkLeft);
+        }
+        else if(keyTracker.recentHorizontalKeyId() == KeyTracker.RIGHT_ID)
+        {
+          sprite.setImages(Sprite.STATE_WALK_RIGHT, walkRight);
+        }
+        
+        sprite.render(true);
+      }
+      else
+      {
+        sprite.render();
+      }
+    }
+    else
+    {
+      sprite.setImages(Sprite.STATE_DEAD, dead);
+      sprite.render(true);
+    }
+    
     return avatar;
   }
   
@@ -186,24 +242,37 @@ public class Player extends Actor
     }
   }
   
-  public void handleCollision(Collision c) {
-    //println("TEST");
-    if ( (c.direction == 1 || c.direction == 8)  && !c.getCollider().isEnemy()) {
+  
+  public void handleCollision(Collision c)
+  {
+    if ( (c.direction == 1 || c.direction == 8)  && !c.getCollider().isEnemy())
+    {
         currVelocity.x *= -1;
     }
     
-    if ( (c.direction == 2 || c.direction == 3 || c.direction == 10) && !c.getCollider().isEnemy()) {
+    if ( (c.direction == 2 || c.direction == 3 || c.direction == 10) && !c.getCollider().isEnemy())
+    {
         currVelocity.y = 0f;
         position.y = c.getCollider().getBounds().top - avatar.height;
     }
     
-    if (c.getCollider().isEnemy()) {
-       println("ENEMY COLLISION _ YOU'RE DEAD");
-       alive = false;
-       stateGraphic = loadImage("devAvatar_dead.png");
+    if (c.getCollider().isEnemy())
+    {
+      println("ENEMY COLLISION _ YOU'RE DEAD");
+      alive = false;
     }
-     
- }
+  }
+
+
+  private PImage[] loadImagesIntoArray(String[] images)
+  {
+    PImage[] output = new PImage[images.length];
+    for(int i = 0; i < images.length; i++)
+    {
+      output[i] = loadImage(images[i]);
+    }
+    return output;
+  }
 }
 
 
@@ -214,13 +283,6 @@ public class Enemy extends Actor
   float rightBoundary;
   
   
-  public Enemy(PVector pos)
-  {
-    position = pos;
-    stateGraphic = loadImage("devEnemy.png");
-  }
-  
-  
   public Enemy(PVector position, float leftBoundary, float rightBoundary, float walkingSpeed, float runningSpeed, PImage stateGraphic)
   {
     this.position = position;
@@ -228,39 +290,50 @@ public class Enemy extends Actor
     this.rightBoundary = rightBoundary;
     this.walkingSpeed = walkingSpeed;
     this.runningSpeed = runningSpeed;
-    this.stateGraphic = stateGraphic; 
+    this.stateGraphic = stateGraphic;
+    
+    //TODO rework to use sprite class instead
+    avatar = createGraphics(30, 30);
+    stateGraphic = loadImage("devEnemy.png");
   }
   
+  
   @Override
-  public BoundingBox getBounds() {
+  public BoundingBox getBounds()
+  {
     return new BoundingBox(position, new PVector(avatar.width, avatar.height));
   }
     
     
-  public boolean isEnemy() {
+  public boolean isEnemy()
+  {
     return true;
   }
+
 
   public PImage enemyRender()
   {
     avatar.beginDraw();
-    if (walkingSpeed>0) {
-     avatar.pushMatrix();
-     avatar.scale(-1,1);
-     avatar.image(stateGraphic,-stateGraphic.width, 0);
-     avatar.popMatrix();
-   } 
-   else if (walkingSpeed<0) {
-    avatar.image(stateGraphic,0, 0);
+    
+    if (walkingSpeed>0)
+    {
+      avatar.pushMatrix();
+      avatar.scale(-1,1);
+      avatar.image(stateGraphic,-stateGraphic.width, 0);
+      avatar.popMatrix();
+    } 
+    else if (walkingSpeed < 0)
+    {
+      avatar.image(stateGraphic,0, 0);
+    }
+
+    avatar.endDraw();  
+    return avatar;
   }
-  avatar.endDraw();
-  return avatar;
 
 
-}
-
-public void patroling(Player player)
-{
+  public void patroling(Player player)
+  {
     if (spottedThePlayer(player)) 
     {
       run();
@@ -305,12 +378,14 @@ public void patroling(Player player)
 
   public boolean isInViewport(PVector playerpos)
   {
-    if (dist(playerpos.x, playerpos.y, position.x, position.y)<height ) {
-    return true;
-  }
-  else {
-    return false;
-  }
+    if (dist(playerpos.x, playerpos.y, position.x, position.y) < height )
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
 
   public boolean spottedThePlayer(Player player)
@@ -324,3 +399,4 @@ public void patroling(Player player)
     }
   }
 }
+
