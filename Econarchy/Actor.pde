@@ -104,11 +104,7 @@ public class Player extends Actor
     }
   }
 
-  public void drawPlayer()
-  {
-    fill(255);
-    ellipse(position.x, position.y, 20, 20);
-  }
+  
 
   public PImage playerRender()
   {
@@ -128,6 +124,7 @@ public class Player extends Actor
      if ( currVelocity.y <= 0.7 ) { //enable jumping only if player is not moving in y direction(already jumping or falling)
           currVelocity.y = -jumpHeight;
      println("JUMP");}
+
   }
   
   public void updatePosition() {
@@ -154,6 +151,7 @@ public class Player extends Actor
       currVelocity.x += acceleration; 
      if ( upPressed && currVelocity.y <= 0.1 ) { //enable double jump here, to disable set to 0
        currVelocity.y = -jumpHeight;
+       music.sound("jump");
        upPressed = false; }
      if ( downPressed )
        currVelocity.y = 0;
@@ -195,6 +193,10 @@ public class Player extends Actor
     
     if (c.getCollider().isEnemy()) {
        println("ENEMY COLLISION _ YOU'RE DEAD");
+       if (alive) {
+        music.sound("dead");  
+       }
+       
        alive = false;
        stateGraphic = loadImage("devAvatar_dead.png");
     }
@@ -250,6 +252,8 @@ public class Enemy extends Actor
    else if (walkingSpeed<0) {
     avatar.image(stateGraphic,0, 0);
   }
+
+
   avatar.endDraw();
   return avatar;
 
@@ -314,6 +318,7 @@ public void patroling(Player player)
   {
     if (walkingSpeed>0 && position.x< player.position.x && abs(player.position.y-position.y)<player.avatar.height|| walkingSpeed<0 && position.x> player.position.x && abs(player.position.y-position.y)<player.avatar.height) 
     {
+      
       return true;
     }
     else {

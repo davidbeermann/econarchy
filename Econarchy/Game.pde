@@ -6,6 +6,7 @@ public class Game
   private Level level;
   
   
+  
   public Game(int viewportWidth, int viewportHeight)
   {
     viewport = createGraphics(viewportWidth, viewportHeight);
@@ -16,6 +17,7 @@ public class Game
     viewport.endDraw();
     
     viewportPosition = new PVector((width - viewport.width) / 2, (height - viewport.height) / 2);
+   
   }
   
   
