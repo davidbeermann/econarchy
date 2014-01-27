@@ -265,6 +265,7 @@ public void patroling(Player player)
     if (spottedThePlayer(player) && !reachedEndOfPlattform()) 
     {
       run();
+
     } 
     else
     {
