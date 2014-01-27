@@ -1,5 +1,6 @@
 boolean gamepadEnabled = false;
 Game game;
+KeyTracker keyTracker;
 FancyInput gamepad;
   
 public void setup()
@@ -13,6 +14,10 @@ public void setup()
   if (gamepadEnabled)
   {
     gamepad = new FancyInput("controls.xml", this);
+  }
+  else
+  {
+    keyTracker = KeyTracker.getInstance();
   }
 }
 
@@ -34,8 +39,7 @@ public void keyPressed(KeyEvent e)
 {
   if (!gamepadEnabled)
   {
-    //forward keypress events to player object
-    game.level.hans.keyPressed(e); 
+    keyTracker.addKey(keyCode);
   }
 }
 
@@ -44,7 +48,6 @@ public void keyReleased(KeyEvent e)
 {
   if (!gamepadEnabled)
   {
-    //forward keyrelease events to player object
-    game.level.hans.keyReleased(e); 
+    keyTracker.removeKey(keyCode); 
   }  
 }

@@ -59,56 +59,29 @@ public class Player extends Actor
   float jumpHeight;
   float speedMax = 50;
   float lowerBoundary; //lower end of level
-  // keypress storage
-  boolean upPressed;
-  boolean downPressed;
-  boolean leftPressed;
-  boolean rightPressed;
+  KeyTracker keyTracker; // keypress storage
+  
   
   public Player(PVector pos)
   {
-    currVelocity = new PVector(0.0,0.0);
-    gravityAcc = new PVector(0.0,10.0);
+    currVelocity = new PVector(0.0, 0.0);
+    gravityAcc = new PVector(0.0, 10.0);
     walkingSpeed = 10;
     jumpHeight = 10;
-    // position = new PVector(width/2, height-20, 0);
     lowerBoundary = pos.y;
     position = pos;
     stateGraphic = loadImage("devAvatar.png");
+    
+    keyTracker = KeyTracker.getInstance();
+  }
 
-  }
-  
-  public void keyPressed(KeyEvent e) {
-    if ( key == CODED ){
-      if (keyCode == UP)
-        upPressed = true;
-      else if (keyCode == DOWN)
-        downPressed = true;
-      else if (keyCode == LEFT)
-        leftPressed = true;
-      else if (keyCode == RIGHT)
-        rightPressed = true;
-    }
-  }
-  
-  public void keyReleased(KeyEvent e) {
-    if ( key == CODED ) {
-      if ( keyCode == UP )
-        upPressed = false;
-      else if ( keyCode == DOWN )
-        downPressed = false;
-      else if ( keyCode == LEFT )
-        leftPressed = false;
-      else if ( keyCode == RIGHT )
-        rightPressed = false;
-    }
-  }
 
   public void drawPlayer()
   {
     fill(255);
     ellipse(position.x, position.y, 20, 20);
   }
+
 
   public PImage playerRender()
   {
@@ -118,51 +91,82 @@ public class Player extends Actor
     return avatar;
   }
   
+  
   @Override
-  public BoundingBox getBounds() {
+  public BoundingBox getBounds()
+  {
     return new BoundingBox(position, new PVector(avatar.width, avatar.height));
   }
 
-  public void jump() {
-     
-     if ( currVelocity.y <= 0.7 ) { //enable jumping only if player is not moving in y direction(already jumping or falling)
-          currVelocity.y = -jumpHeight;
-     println("JUMP");}
+
+  public void jump()
+  {
+    if ( currVelocity.y <= 0.7 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
+    { 
+      currVelocity.y = -jumpHeight;
+      println("JUMP");
+    }
   }
   
-  public void updatePosition() {
+  
+  public void updatePosition()
+  {
     if (alive)
+    {
       position.add(currVelocity);
       //println ("UPWARD FORCE: " + currVelocity.y);
+    }
   }
-  public void updateVelocity() {
+  
+  
+  public void updateVelocity()
+  {
     updateVelocity(0,0);
   }
   
-  public void updateVelocity(float x, float y) {
+  
+  public void updateVelocity(float x, float y)
+  {
     // gamepad is enabled if this happens
-    if ( x != 0 || y != 0) {
+    if ( x != 0 || y != 0)
+    {
       if ( x != 0 )
+      {
         currVelocity.x = x*10;
+      }
       if ( y != 0 )
+      {
         currVelocity.y = y*10;
-    } //this should only happen if keyboard input is enabled - ensure this by removing the keypress events if gamepad is true
-    else if ( leftPressed||rightPressed||upPressed||downPressed ) {
-     if ( leftPressed ) 
-      currVelocity.x += -acceleration; 
-     if ( rightPressed ) 
-      currVelocity.x += acceleration; 
-     if ( upPressed && currVelocity.y <= 0.1 ) { //enable double jump here, to disable set to 0
-       currVelocity.y = -jumpHeight;
-       upPressed = false; }
-     if ( downPressed )
-       currVelocity.y = 0;
-     }
-     else // if neither gamepad is moved nor keypresses are detected - slow down player
-       currVelocity.x *= 0.8;
+      }
+    }
+    //this should only happen if keyboard input is enabled - ensure this by removing the keypress events if gamepad is true
+    else if(keyTracker.anyKeyPressed())
+    {
+      if(keyTracker.leftPressed())
+      {
+        currVelocity.x += -acceleration;
+      }
+      if(keyTracker.rightPressed())
+      {
+        currVelocity.x += acceleration;
+      }
+      if(keyTracker.upPressed() && currVelocity.y <= 0.1) //enable double jump here, to disable set to 0
+      {
+        currVelocity.y = -jumpHeight;
+      }
+      if(keyTracker.downPressed())
+      {
+        currVelocity.y = 0;
+      }
+    }
+    // if neither gamepad is moved nor keypresses are detected - slow down player
+    else
+    {
+      currVelocity.x *= 0.8;
+    }
        
-     //calculate gravity vector
-     PVector tmpAccel = PVector.mult(gravityAcc, 1.0/30.0); //calculate gravitational Acceleration, assuming 30fps/can later be adjusted to use realtime for better simulation
+    //calculate gravity vector
+    PVector tmpAccel = PVector.mult(gravityAcc, 1.0/30.0); //calculate gravitational Acceleration, assuming 30fps/can later be adjusted to use realtime for better simulation
        
      //apply gravity if player is inside level bounds - could later be removed when physics completely takes over calculation
      // TODO: replace with level bounding boxes 
@@ -200,7 +204,6 @@ public class Player extends Actor
     }
      
  }
- 
 }
 
 
@@ -258,7 +261,7 @@ public class Enemy extends Actor
 
 public void patroling(Player player)
 {
-    if (spottedThePlayer(player) && !reachedEndOfPlattform()) 
+    if (spottedThePlayer(player)) 
     {
       run();
     } 
@@ -294,7 +297,7 @@ public void patroling(Player player)
   public boolean reachedEndOfPlattform()
   {
     //has to be changed to platform size instead of windowsize
-    if (position.x<= leftBoundary && walkingSpeed < 0 || position.x>= rightBoundary && walkingSpeed > 0 ) {
+    if (position.x<= 0 || position.x>= width) {
       return true;
     }
     return false;
