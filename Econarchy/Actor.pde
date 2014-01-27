@@ -342,6 +342,7 @@ public class Enemy extends Actor
     if (spottedThePlayer(player) && !reachedEndOfPlattform()) 
     {
       run();
+
     } 
     else
     {

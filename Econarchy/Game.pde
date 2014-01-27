@@ -4,11 +4,13 @@ public class Game
   private PVector viewportPosition;
   ParallaxBackground background;
   private Level level;
+  GUI guiStuff;
   
   
   
   public Game(int viewportWidth, int viewportHeight)
   {
+    
     viewport = createGraphics(viewportWidth, viewportHeight);
     viewport.beginDraw();
     viewport.noStroke();
@@ -29,11 +31,15 @@ public class Game
     background = new ParallaxBackground(levelData);
     
     level = new Level(levelData);
+    guiStuff = new GUI(level.hans);
   }
   
   
   public void render()
   {
+    
+   
+
     // render all level updates
     level.render();
     
@@ -66,6 +72,8 @@ public class Game
     
     // draw viewport to frame - actually display rendered result to player
     image(viewport, viewportPosition.x, viewportPosition.y);
+     guiStuff.update(level.hans);
+
   }
 }
 

@@ -23,10 +23,22 @@
 			<platform id="p1" type="regular" x="20" y="1900" />	
 			<platform id="p2" type="dissolvable" x="140" y="1800" />	
 			<platform id="p3" type="slippery" x="260" y="1700" />	
+			<platform id="p4" type="regular" x="20" y="1600" />	
+			<platform id="p5" type="dissolvable" x="140" y="1500" />	
+			<platform id="p6" type="slippery" x="260" y="1400" />	
+			<platform id="p7" type="regular" x="20" y="1300" />	
+			<platform id="p8" type="dissolvable" x="140" y="1200" />	
+			<platform id="p9" type="slippery" x="260" y="1100" />	
+			<platform id="p10" type="regular" x="20" y="1000" />	
+			<platform id="p11" type="dissolvable" x="140" y="900" />	
+			<platform id="p12" type="slippery" x="260" y="800" />	
 		</platforms>
 		<!-- enemy definitions -->	
 		<enemies>
 			<enemy platformId="p1" walkingSpeed="1" runningSpeed="5" startPosition="0.5" />
+			<enemy platformId="p4" walkingSpeed="1" runningSpeed="5" startPosition="0.5" />
+			<enemy platformId="p6" walkingSpeed="1" runningSpeed="5" startPosition="0.5" />
+			<enemy platformId="p10" walkingSpeed="1" runningSpeed="5" startPosition="0.5" />
 		</enemies>
 	</specification>
 </econarchy_level>
