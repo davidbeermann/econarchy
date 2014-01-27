@@ -12,11 +12,12 @@ public class SoundEvent {
 		
 		minim = new Minim(applet);
 		
-		
-		theme = minim.loadFile("badTetrisRemix.mp3");
 		fxSounds = new HashMap<String, AudioSample>();	
-		theme.loop();
-		theme.play();
+		
+		// Put some fancy theme music here
+		//theme = minim.loadFile("fancyTheme.mp3");
+		//theme.loop();
+		//theme.play();
 		
 	}
 	public void sound(String event)
