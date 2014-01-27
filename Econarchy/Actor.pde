@@ -209,6 +209,7 @@ public class Player extends Actor
       if(keyTracker.upPressed() && currVelocity.y <= 0.1) //enable double jump here, to disable set to 0
       {
         currVelocity.y = -jumpHeight;
+	music.sound("jump");
       }
       if(keyTracker.downPressed())
       {
@@ -259,6 +260,9 @@ public class Player extends Actor
     if (c.getCollider().isEnemy())
     {
       println("ENEMY COLLISION _ YOU'RE DEAD");
+      if (alive) {
+        music.sound("dead");  
+       }
       alive = false;
     }
   }
@@ -332,9 +336,11 @@ public class Enemy extends Actor
   }
 
 
-  public void patroling(Player player)
-  {
-    if (spottedThePlayer(player)) 
+}
+
+public void patroling(Player player)
+{
+    if (spottedThePlayer(player) && !reachedEndOfPlattform()) 
     {
       run();
     } 
@@ -370,7 +376,7 @@ public class Enemy extends Actor
   public boolean reachedEndOfPlattform()
   {
     //has to be changed to platform size instead of windowsize
-    if (position.x<= 0 || position.x>= width) {
+    if (position.x<= leftBoundary && walkingSpeed < 0 || position.x>= rightBoundary && walkingSpeed > 0 ) {
       return true;
     }
     return false;
