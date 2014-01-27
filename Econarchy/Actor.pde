@@ -258,7 +258,7 @@ public class Enemy extends Actor
 
 public void patroling(Player player)
 {
-    if (spottedThePlayer(player)) 
+    if (spottedThePlayer(player) && !reachedEndOfPlattform()) 
     {
       run();
     } 
@@ -294,7 +294,7 @@ public void patroling(Player player)
   public boolean reachedEndOfPlattform()
   {
     //has to be changed to platform size instead of windowsize
-    if (position.x<= 0 || position.x>= width) {
+    if (position.x<= leftBoundary && walkingSpeed < 0 || position.x>= rightBoundary && walkingSpeed > 0 ) {
       return true;
     }
     return false;
@@ -321,50 +321,3 @@ public void patroling(Player player)
     }
   }
 }
-
-// public boolean doEnemyAndPlayerColide()
-// {
-//   for (int i = 0; i < enemies.length; ++i)
-//   {
-//     if (enemies[i].isInViewport())
-//     {
-
-
-//       if (dist(enemies[i].position.x, enemies[i].position.y, hans.position.x, hans.position.y) <= enemies[i].runningSpeed)
-//       {
-//         //precise detection
-//         return true;
-//       }
-//     }
-//     else
-//     {
-//       return false;
-//     }
-//   }
-//   return false;
-// }
-
-public boolean standOnPlattform()
-{
-//  for (int i = 0; i < level.platforms.length; ++i) {
-//    //    if (platforms[i].isInViewport())
-//    //    {
-//    if (hans.position.x >= level.platforms[i].x && 
-//      hans.position.x <= level.platforms[i].x + level.platforms[i].width &&
-//      hans.position.y >= level.platforms[i].y &&
-//      hans.position.y <= level.platforms[i].y + level.platforms[i].height)
-//      //hier noch spielerhöhe mit einbeziehen
-//    {
-//      return true;
-//    } 
-//    else {
-//      return false;
-//    } 
-//    //    } else {
-//    //      return false;
-//    //      
-//    //    }
-//  }
-return false;
-}
-
