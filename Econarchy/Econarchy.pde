@@ -1,4 +1,4 @@
-boolean gamepadEnabled = true;
+boolean gamepadEnabled = false;
 Game game;
 FancyInput gamepad;
   
