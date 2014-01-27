@@ -25,13 +25,14 @@
 ### class Screen
 + change the viewport
 
-### class Soundmanager
-+  play backgroundmusic
-+  effectsounds on certain events
-
 ### class LevelGoals
 + raise a flag etc. approach a position on top trigger something
 +  (timer?)
+
+---
+### class Soundmanager
++  play backgroundmusic
++  effectsounds on certain events
 
 ---
 ## Graphics
