@@ -2,8 +2,8 @@ public class Type
 {
   public enum Platform
   {
-    REGULAR("regular"),
-    DISSOLVABLE("dissolvable"),
+    STABLE("stable"),
+    BREAKABLE("breakable"),
     SLIPPERY("slippery");
     
     private final String name;

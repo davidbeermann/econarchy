@@ -13,8 +13,8 @@
 			<image id="background4" url="resources/level1/background_layer4.png" />
 			<image id="background5" url="resources/level1/background_layer5.png" />
 			<!-- platform images -->
-			<image id="regular" url="resources/level1/platform_regular.png" />
-			<image id="dissolvable" url="resources/level1/platform_dissolvable.png" />
+			<image id="stable" url="resources/level1/platform_stable.png" />
+			<image id="breakable" url="resources/level1/platform_breakable.png" />
 			<image id="slippery" url="resources/level1/platform_slippery.png" />
 		</images>
 	</resources>
@@ -33,17 +33,17 @@
 		</foregrounds>
 		<!-- platform types have to match the image ids above!!! -->
 		<platforms>
-			<platform id="p1" type="regular" x="20" y="1900" />	
-			<platform id="p2" type="dissolvable" x="140" y="1800" />	
+			<platform id="p1" type="stable" x="20" y="1900" />	
+			<platform id="p2" type="breakable" x="140" y="1800" />	
 			<platform id="p3" type="slippery" x="260" y="1700" />	
-			<platform id="p4" type="regular" x="20" y="1600" />	
-			<platform id="p5" type="dissolvable" x="140" y="1500" />	
+			<platform id="p4" type="stable" x="20" y="1600" />	
+			<platform id="p5" type="breakable" x="140" y="1500" />	
 			<platform id="p6" type="slippery" x="260" y="1400" />	
-			<platform id="p7" type="regular" x="20" y="1300" />	
-			<platform id="p8" type="dissolvable" x="140" y="1200" />	
+			<platform id="p7" type="stable" x="20" y="1300" />	
+			<platform id="p8" type="breakable" x="140" y="1200" />	
 			<platform id="p9" type="slippery" x="260" y="1100" />	
-			<platform id="p10" type="regular" x="20" y="1000" />	
-			<platform id="p11" type="dissolvable" x="140" y="900" />	
+			<platform id="p10" type="stable" x="20" y="1000" />	
+			<platform id="p11" type="breakable" x="140" y="900" />	
 			<platform id="p12" type="slippery" x="260" y="800" />	
 		</platforms>
 		<!-- enemy definitions -->	
