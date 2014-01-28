@@ -25,9 +25,9 @@ Background
 Player
 --
 * ~~Idle Stance~~ // J
-* Idle Cycle
+* ~~Idle Cycle~~ // J
 * ~~Walk Stance~~ // J
-* Walk Cycle
+* ~~Walk Cycle~~ // J
 * Jump Stance
 * Jump Cycle
 * Drop Stance(?)
@@ -48,7 +48,7 @@ Enemies
 
 Platforms
 --
-* Various Idle Platforms
+* ~~Various Idle Platforms~~ // J
 * Break Cycles
 
 Flag
