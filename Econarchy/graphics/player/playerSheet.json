@@ -1,0 +1,108 @@
+{"frames": [
+
+{
+	"filename": "playerIdle1.png",
+	"frame": {"x":90,"y":46,"w":14,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":5,"w":14,"h":26},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "playerIdle2.png",
+	"frame": {"x":2,"y":54,"w":14,"h":24},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":7,"w":14,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "playerRun1.png",
+	"frame": {"x":92,"y":2,"w":26,"h":24},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":6,"w":26,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "playerRun2.png",
+	"frame": {"x":2,"y":2,"w":28,"h":26},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":5,"w":28,"h":26},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "playerRun3.png",
+	"frame": {"x":2,"y":30,"w":22,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":5,"w":22,"h":26},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "playerRun4.png",
+	"frame": {"x":32,"y":2,"w":20,"h":28},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":3,"w":20,"h":28},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "playerRun5.png",
+	"frame": {"x":62,"y":2,"w":18,"h":28},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":3,"w":18,"h":28},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "playerRun6.png",
+	"frame": {"x":32,"y":24,"w":24,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":5,"w":24,"h":26},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "playerRun7.png",
+	"frame": {"x":62,"y":22,"w":24,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":5,"w":24,"h":26},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "playerRun8.png",
+	"frame": {"x":60,"y":48,"w":24,"h":24},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":6,"w":24,"h":24},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "playerTurn1.png",
+	"frame": {"x":90,"y":28,"w":16,"h":26},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":4,"w":16,"h":26},
+	"sourceSize": {"w":32,"h":32}
+},
+{
+	"filename": "playerTurn2.png",
+	"frame": {"x":30,"y":50,"w":18,"h":24},
+	"rotated": true,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":6,"w":18,"h":24},
+	"sourceSize": {"w":32,"h":32}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "playerSheet.png",
+	"format": "RGBA8888",
+	"size": {"w":128,"h":128},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:93dbd69d5421bf58d9b3808fbe942ba6:101c220847864cd209480f7215e26057:8ae178b1c4f11b46b8950ab7eb768161$"
+}
+}
