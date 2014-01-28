@@ -6,6 +6,9 @@
 			<!-- background images -->
 			<image id="layer1" url="resources/level1/background_layer1.png" />
 			<image id="layer2" url="resources/level1/background_layer2.png" />
+			<image id="layer3" url="resources/level1/background_layer3.png" />
+			<image id="layer4" url="resources/level1/background_layer4.png" />
+			<image id="layer5" url="resources/level1/background_layer5.png" />
 			<!-- platform images -->
 			<image id="regular" url="resources/level1/platform_regular.png" />
 			<image id="dissolvable" url="resources/level1/platform_dissolvable.png" />
@@ -15,6 +18,9 @@
 	<specification>
 		<!-- background parallax images should be from back to front -->
 		<backgrounds>
+			<background id="layer5" />
+			<background id="layer4" />
+			<background id="layer3" />
 			<background id="layer2" />
 			<background id="layer1" />
 		</backgrounds>
