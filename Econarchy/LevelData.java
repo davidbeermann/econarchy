@@ -1,8 +1,15 @@
+import java.util.HashMap;
 import java.util.Map;
+import processing.core.PApplet;
+import processing.core.PImage;
+import processing.core.PVector;
+import processing.data.XML;
 
 
 public class LevelData
 {
+  private static LevelData instance = null;
+  PApplet applet;
   String id;
   PVector size;
   int levelWidth;
@@ -11,10 +18,29 @@ public class LevelData
   private PlatformSpec[] platformSpecs;
   private EnemySpec[] enemySpecs;
   private String[] backgroundIds;
-
-
-  public LevelData(XML data)
+  private String[] foregroundIds;
+  
+  
+  public static LevelData instantiate(PApplet applet, XML data)
   {
+    if(instance == null)
+    {
+      instance = new LevelData(applet, data);
+    }
+    return instance;
+  }
+  
+  
+  public static LevelData getInstance()
+  {
+    return instance;
+  }
+
+
+  private LevelData(PApplet applet, XML data)
+  {
+    this.applet = applet;
+    
     id = data.getString("id");
     size = new PVector(data.getInt("width"), data.getInt("height"));
 
@@ -28,7 +54,7 @@ public class LevelData
     PImage image;
     for (XML xml : imagesXML)
     {
-      image = loadImage(xml.getString("url"));
+      image = applet.loadImage(xml.getString("url"));
       imageResources.put(xml.getString("id"), image);
     }
 
@@ -42,6 +68,15 @@ public class LevelData
     for(int i = 0; i < backgroundsXML.length; i++)
     {
       backgroundIds[i] = backgroundsXML[i].getString("id");
+    }
+    
+    // parse foreground ids
+    XML[] foregroundsXML = data.getChild("specification").getChild("foregrounds").getChildren("foreground");
+    foregroundIds = new String[foregroundsXML.length];
+    
+    for(int i = 0; i < foregroundsXML.length; i++)
+    {
+      foregroundIds[i] = foregroundsXML[i].getString("id");
     }
 
     // parse platforms
@@ -66,7 +101,7 @@ public class LevelData
 
       if (platformType == null)
       {
-        println("ERROR: Unknown platform type defined in XML: " + platformXML.getString("type"));
+        applet.println("ERROR: Unknown platform type defined in XML: " + platformXML.getString("type"));
       }
       else
       {
@@ -104,6 +139,12 @@ public class LevelData
   {
     return backgroundIds;
   }
+  
+  
+  public String[] getForegroundIds()
+  {
+    return foregroundIds;
+  }
 
 
   public PlatformSpec[] getPlatformSpecs()
@@ -131,71 +172,72 @@ public class LevelData
   {
     return enemySpecs;
   }
-}
-
-
-public class PlatformSpec
-{
-  private String id;
-  private Type.Platform type;
-  private PVector position;
-
-  public PlatformSpec(String id, Type.Platform type, int xPos, int yPos)
+  
+  
+  public class PlatformSpec
   {
-    this.id = id;
-    this.type = type;
-    this.position = new PVector(xPos, yPos);
+    private String id;
+    private Type.Platform type;
+    private PVector position;
+  
+    public PlatformSpec(String id, Type.Platform type, int xPos, int yPos)
+    {
+      this.id = id;
+      this.type = type;
+      this.position = new PVector(xPos, yPos);
+    }
+    
+    public String getId()
+    {
+      return this.id;
+    }
+  
+    public Type.Platform getType()
+    {
+      return this.type;
+    }
+  
+    public PVector getPosition()
+    {
+      return this.position;
+    }
   }
   
-  public String getId()
-  {
-    return this.id;
-  }
-
-  public Type.Platform getType()
-  {
-    return this.type;
-  }
-
-  public PVector getPosition()
-  {
-    return this.position;
-  }
-}
-
-public class EnemySpec
-{
-  private String platformId;
-  private float walkingSpeed;
-  private float runningSpeed;
-  private float startPosition;
   
-  public EnemySpec(String platformId, float walkingSpeed, float runningSpeed, float startPosition)
+  public class EnemySpec
   {
-    this.platformId = platformId;
-    this.walkingSpeed = walkingSpeed;
-    this.runningSpeed = runningSpeed;
-    this.startPosition = startPosition;
-  }
-  
-  public String getPlatformId()
-  {
-    return this.platformId;
-  }
-  
-  public float getWalkingSpeed()
-  {
-    return this.walkingSpeed;
-  }
-  
-  public float getRunningSpeed()
-  {
-    return this.runningSpeed;
-  }
-  
-  public float getStartPosition()
-  {
-    return this.startPosition;
+    private String platformId;
+    private float walkingSpeed;
+    private float runningSpeed;
+    private float startPosition;
+    
+    public EnemySpec(String platformId, float walkingSpeed, float runningSpeed, float startPosition)
+    {
+      this.platformId = platformId;
+      this.walkingSpeed = walkingSpeed;
+      this.runningSpeed = runningSpeed;
+      this.startPosition = startPosition;
+    }
+    
+    public String getPlatformId()
+    {
+      return this.platformId;
+    }
+    
+    public float getWalkingSpeed()
+    {
+      return this.walkingSpeed;
+    }
+    
+    public float getRunningSpeed()
+    {
+      return this.runningSpeed;
+    }
+    
+    public float getStartPosition()
+    {
+      return this.startPosition;
+    }
   }
 }
 

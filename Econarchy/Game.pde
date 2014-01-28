@@ -2,15 +2,13 @@ public class Game
 {
   private PGraphics viewport;
   private PVector viewportPosition;
-  ParallaxBackground background;
+  Parallax background, foreground;
   private Level level;
   GUI guiStuff;
   
   
-  
   public Game(int viewportWidth, int viewportHeight)
   {
-    
     viewport = createGraphics(viewportWidth, viewportHeight);
     viewport.beginDraw();
     viewport.noStroke();
@@ -19,16 +17,13 @@ public class Game
     viewport.endDraw();
     
     viewportPosition = new PVector((width - viewport.width) / 2, (height - viewport.height) / 2);
-   
   }
   
   
-  public void setupLevel(String xmlPath)
+  public void setupLevel(LevelData levelData)
   {
-    XML levelXML = loadXML(xmlPath);
-    LevelData levelData = new LevelData(levelXML);
-    
-    background = new ParallaxBackground(levelData);
+    background = new Parallax(levelData.getBackgroundIds());
+    foreground = new Parallax(levelData.getForegroundIds());
     
     level = new Level(levelData);
     guiStuff = new GUI(level.hans);
@@ -37,9 +32,6 @@ public class Game
   
   public void render()
   {
-    
-   
-
     // render all level updates
     level.render();
     
@@ -67,6 +59,8 @@ public class Game
     {
       viewport.image(level.renderedImage, posX, posY-viewport.height/2+level.hans.avatar.height);   
     }
+    
+    foreground.render(viewport, level);
   
     viewport.endDraw();
     
@@ -78,14 +72,14 @@ public class Game
 }
 
 
-private class ParallaxBackground
+private class Parallax
 {
-  LevelData data;
+  String[] ids;
 
 
-  public ParallaxBackground(LevelData data)
+  public Parallax(String[] ids)
   {
-    this.data = data;
+    this.ids = ids;
   }
 
 
@@ -94,9 +88,9 @@ private class ParallaxBackground
     PImage bgImage;
     float percent;
     PVector diff = new PVector();
-    for (String id : data.getBackgroundIds())
+    for (String id : ids)
     {
-      bgImage = data.getImageResource(id);
+      bgImage = LevelData.getInstance().getImageResource(id);
       percent = 1 - (level.hans.position.y + level.hans.avatar.height / 2) / level.renderedImage.height;
       diff.x = viewport.width - bgImage.width;
       diff.y = viewport.height - bgImage.height;
