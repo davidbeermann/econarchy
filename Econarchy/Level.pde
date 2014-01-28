@@ -16,9 +16,18 @@ public class Level
   public Level(LevelData data)
   {
     
+    //setupLevelBoundaries();
+    LevelBoundary[] levelBounds = new LevelBoundary[]{new LevelBoundary(-50f,(float)data.levelWidth + 100f, (float) data.levelHeight,50f), 
+                                                  new LevelBoundary(-50f, -50f, (float) data.levelWidth + 100f, 50f), 
+                                                  new LevelBoundary(-50f,0f,50f, (float) data.levelHeight),
+                                                  new LevelBoundary((float) data.levelWidth, 0, 50, (float) data.levelHeight)};
+                                                  
+    //setup CollisionDetection with level boundaries
+    collider = new CollisionDetector(levelBounds);
+    
     // setup main level graphic
     renderedImage = createGraphics((int) data.size.x, (int) data.size.y);
-
+    
     // setup platforms
     platforms = new Platform[data.getPlatformSpecs().length];
     PlatformSpec platformSpec;
@@ -30,7 +39,7 @@ public class Level
         platforms[i] = new Platform(platformSpec.getId(), platformSpec.getType(), platformSpec.getPosition(), data.getImageResource(platformSpec.getType().toString()));
       }
     }
-    collider = new CollisionDetector(platforms);
+    collider.addCollidables(platforms);
       
     // setup enemies
     PImage enemyImage = loadImage("devEnemy.png");
@@ -49,6 +58,7 @@ public class Level
       enemies[i] = new Enemy(position, leftBoundary, rightBoundary, enemySpec.getWalkingSpeed(), enemySpec.getRunningSpeed(), enemyImage);
     }
     collider.addCollidables(enemies);
+    
 
     //playerAvatar size is currently 30 x 30 therefore x-15 and y-30
     hans = new Player(new PVector(renderedImage.width/2 -15, renderedImage.height-30, 0));
@@ -108,5 +118,19 @@ public class Level
   }
 }
 
-
+public class LevelBoundary extends Collidable{
+  PVector position;
+  PVector size;
+  
+  public LevelBoundary(float posx, float posy, float w, float h) {
+    position = new PVector(posx, posy);
+    size = new PVector(w,h);
+  }
+  
+  public BoundingBox getBounds(){
+    return new BoundingBox(position, size);
+  }
+  
+}
+    
 

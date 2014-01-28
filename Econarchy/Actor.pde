@@ -57,6 +57,7 @@ public class Player extends Actor
   PVector currVelocity;
   PVector gravityAcc;
   float jumpHeight;
+  boolean doubleJumpEnabled = true;
   float speedMax = 50;
   float lowerBoundary; //lower end of level
   
@@ -157,9 +158,14 @@ public class Player extends Actor
 
   public void jump()
   {
-    if ( currVelocity.y <= 0.7 && currVelocity.y > -0.7 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
-    { 
-      currVelocity.y = -jumpHeight; //FIXME: optimize double jump here
+    if ( doubleJumpEnabled) {
+      if ( currVelocity.y <= 0.1 && currVelocity.y > -0.1 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
+      { 
+        currVelocity.y = -jumpHeight; //FIXME: optimize double jump here
+        music.sound("jump");
+        println("CAN DOUBLEJUMP: " + doubleJumpEnabled);
+        doubleJumpEnabled = !doubleJumpEnabled;
+      }
     }
   }
   
@@ -169,6 +175,7 @@ public class Player extends Actor
     if (alive)
     {
       position.add(currVelocity);
+      println("player_position.x: " + position.x + "   .y: " + position.y);
       //println ("UPWARD FORCE: " + currVelocity.y);
     }
   }
@@ -205,10 +212,9 @@ public class Player extends Actor
       {
         currVelocity.x += acceleration;
       }
-      if(keyTracker.upPressed() && currVelocity.y <= 0.1 && currVelocity.y >-0.05) //enable double jump here, to disable set to 0
+      if(keyTracker.upPressed()) //enable double jump here, to disable set to 0
       {
-        currVelocity.y = -jumpHeight; //FIXME: limit double jump to once a few seconds
-        music.sound("jump");
+        jump();
       }
       if(keyTracker.downPressed())
       {
@@ -228,18 +234,18 @@ public class Player extends Actor
      // TODO: replace with level bounding boxes 
      if( position.y < lowerBoundary )
        currVelocity.add(tmpAccel);  
-     else if (currVelocity.y > 1)
-       currVelocity.y = 0.0; //reset vertical velocity if player hits rock bottom
+    // else if (currVelocity.y > 1)
+    //   currVelocity.y = 0.0; //reset vertical velocity if player hits rock bottom
        
     // rest of calculations
     // reflect player if he hits a wall //replace with collision system, as soon as physics can distinguish between ver and hor collisions
     if ( currVelocity.x != 0 && (position.x > 400-avatar.width || position.x < 0 )) {
       currVelocity.x *= -1;
-       
+   }   
     //limit player speed
-    if ( currVelocity.mag() >= speedMax ) 
-         currVelocity.setMag(speedMax);
-    }
+//    if ( currVelocity.mag() >= speedMax ) 
+//         currVelocity.setMag(speedMax);
+    
   }
   
   
@@ -247,21 +253,24 @@ public class Player extends Actor
   {
     if ( (c.direction == 1 || c.direction == 8)  && !c.getCollider().isEnemy())
     {
+        println("COLLIDED WITH LEVEL BOUNDS");
         currVelocity.x *= -1;
     }
     
-    if ( (c.direction == 2 || c.direction == 3 || c.direction == 10) && !c.getCollider().isEnemy())
+    if (c.direction == 2 || c.direction == 3 || c.direction == 10) 
     {
-        println("COLLISION FROM ABOVE");
+        if ( currVelocity.y <= 20) { 
         currVelocity.y = 0f;
         position.y = c.getCollider().getBounds().top - avatar.height;
+        }
+        else 
+          alive = false;
+        doubleJumpEnabled = true;
     }
     
     if (c.direction == 12 ||c.direction == 4 || c.direction == 5) {
       println("COLLISION FROM BELOW");
       }
-    
-    //FIXME Collision from below
     
     if (c.getCollider().isEnemy())
     {

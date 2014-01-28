@@ -39,13 +39,13 @@ public class CollisionDetector{
     if ( (tempBox.width < source.width+target.width) && (tempBox.height < source.height+target.height)) {
       //determine direction
       if ( source.left < target.right && source.right > target.right ) //right
-        direction += 1;
+        direction += 8;
       if ( source.top < target.top && source.bottom > target.top ) //top
         direction += 2;
       if ( source.top < target.bottom && source.bottom > target.bottom ) // bottom
         direction += 4;
-      if ( source.left < target.left && source.right > target.left ) //right
-        direction += 8;
+      if ( source.left < target.left && source.right > target.left ) //left
+        direction += 1;
       }
       return direction;
   }
