@@ -42,8 +42,8 @@ Enemies
 * ~~Walk Cycles~~ // S
 * Jump/Drop Cycles (?)
 * Attack Cycle
-* Death Stance
-* Death Cycle
+* Death Stance (?)
+* Death Cycle (?)
 
 Platforms
 --
