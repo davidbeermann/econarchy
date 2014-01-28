@@ -15,7 +15,25 @@ public class Level
   // define global level settings in xml driven data class
   public Level(LevelData data)
   {
-    
+    this.data = data;
+    //divided and moved the level and actor loading into these methods
+    createLevel();
+    createActors();
+  }
+
+
+  public void createLevel()
+  {
+    //setupLevelBoundaries();
+     LevelBoundary top =  new LevelBoundary(-50.0, -50.0, (float) data.levelWidth + 100.0, 50.0);
+     LevelBoundary bottom = new LevelBoundary(-50.0,(float) data.levelHeight,(float)data.levelWidth+100.0, 50.0);
+     LevelBoundary left = new LevelBoundary(-50.0,0.0,50.0, (float) data.levelHeight);
+     LevelBoundary right = new LevelBoundary((float) data.levelWidth, 0.0, 50.0, (float) data.levelHeight);
+     LevelBoundary[] levelBounds = new LevelBoundary[]{top, bottom,left,right};
+                                                  
+    //setup CollisionDetection with level boundaries
+    collider = new CollisionDetector(levelBounds);
+
     // setup main level graphic
     renderedImage = createGraphics((int) data.size.x, (int) data.size.y);
 
@@ -30,8 +48,17 @@ public class Level
         platforms[i] = new Platform(platformSpec.getId(), platformSpec.getType(), platformSpec.getPosition(), data.getImageResource(platformSpec.getType().toString()));
       }
     }
+
     collider = new CollisionDetector(platforms);
-      
+  }
+
+
+  public void createActors()
+  {
+    collider = new CollisionDetector(platforms);
+
+    collider.addCollidables(platforms);
+
     // setup enemies
     enemies = new Enemy[data.getEnemyVOs().length];
     for(int i = 0; i < data.getEnemyVOs().length; i++)
@@ -80,7 +107,7 @@ public class Level
       {
         //handing over hans position to determine if the enemy is seeing hans
         enemies[i].patroling(hans);
-       
+        
         renderedImage.image( enemies[i].enemyRender(), enemies[i].position.x, enemies[i].position.y);
       } 
     }
@@ -104,6 +131,22 @@ public class Level
       }
     }
     return platform;
+  }
+}
+
+
+public class LevelBoundary extends Collidable
+{
+  PVector position;
+  PVector size;
+  
+  public LevelBoundary(float posx, float posy, float w, float h) {
+    position = new PVector(posx, posy);
+    size = new PVector(w,h);
+  }
+  
+  public BoundingBox getBounds(){
+    return new BoundingBox(position, size);
   }
 }
 

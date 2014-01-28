@@ -41,6 +41,7 @@ public void draw()
   }
 
   game.render();
+  
 }
 
 
