@@ -30,7 +30,7 @@ public class Level
     
     // setup platforms
     platforms = new Platform[data.getPlatformSpecs().length];
-    PlatformSpec platformSpec;
+    LevelData.PlatformSpec platformSpec;
     for (int i = 0; i < data.getPlatformSpecs().length; i++)
     {
       platformSpec = data.getPlatformSpecs()[i];
@@ -46,7 +46,7 @@ public class Level
     enemies = new Enemy[data.getEnemySpecs().length];
     for(int i = 0; i < data.getEnemySpecs().length; i++)
     {
-      EnemySpec enemySpec = data.getEnemySpecs()[i];
+      LevelData.EnemySpec enemySpec = data.getEnemySpecs()[i];
       Platform platform = getPlatformById(enemySpec.getPlatformId());
       println(enemySpec);
       println(platform);
