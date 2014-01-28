@@ -30,7 +30,7 @@ public class CollisionDetector{
      coll from left - 1;
      coll from top  - 2;
      coll from bottom - 4;
-     coll from right - 8;
+     coll from right - 8; bottom right: 12, bottom left:5, bottom 4
      other directions sum of directions */
   private int intersectsDirectional(BoundingBox source, BoundingBox target) {
     int direction = 0;
@@ -38,11 +38,11 @@ public class CollisionDetector{
     //println("BOX B:" + a);
     if ( (tempBox.width < source.width+target.width) && (tempBox.height < source.height+target.height)) {
       //determine direction
-      if ( source.left < target.right && source.right > target.right ) //left
+      if ( source.left < target.right && source.right > target.right ) //right
         direction += 1;
       if ( source.top < target.top && source.bottom > target.top ) //top
         direction += 2;
-      if ( source.top > target.bottom && source.bottom > target.bottom ) // bottom
+      if ( source.top < target.bottom && source.bottom > target.bottom ) // bottom
         direction += 4;
       if ( source.left < target.left && source.right > target.left ) //right
         direction += 8;
