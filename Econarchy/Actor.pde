@@ -157,10 +157,9 @@ public class Player extends Actor
 
   public void jump()
   {
-    if ( currVelocity.y <= 0.7 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
+    if ( currVelocity.y <= 0.7 && currVelocity.y > -0.7 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
     { 
-      currVelocity.y = -jumpHeight;
-      println("JUMP");
+      currVelocity.y = -jumpHeight; //FIXME: optimize double jump here
     }
   }
   
@@ -206,9 +205,9 @@ public class Player extends Actor
       {
         currVelocity.x += acceleration;
       }
-      if(keyTracker.upPressed() && currVelocity.y <= 0.1) //enable double jump here, to disable set to 0
+      if(keyTracker.upPressed() && currVelocity.y <= 0.1 && currVelocity.y >-0.05) //enable double jump here, to disable set to 0
       {
-        currVelocity.y = -jumpHeight;
+        currVelocity.y = -jumpHeight; //FIXME: limit double jump to once a few seconds
         music.sound("jump");
       }
       if(keyTracker.downPressed())
@@ -253,9 +252,16 @@ public class Player extends Actor
     
     if ( (c.direction == 2 || c.direction == 3 || c.direction == 10) && !c.getCollider().isEnemy())
     {
+        println("COLLISION FROM ABOVE");
         currVelocity.y = 0f;
         position.y = c.getCollider().getBounds().top - avatar.height;
     }
+    
+    if (c.direction == 12 ||c.direction == 4 || c.direction == 5) {
+      println("COLLISION FROM BELOW");
+      }
+    
+    //FIXME Collision from below
     
     if (c.getCollider().isEnemy())
     {
