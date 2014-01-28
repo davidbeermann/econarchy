@@ -1,4 +1,3 @@
-
 GRAFIK - To DO
 ==
 Global
@@ -40,7 +39,7 @@ Player
 Enemies
 --
 * ~~Idle Stances~~ // S
-* Idle Cycles
+* ~~Walk Cycles~~ // S
 * Jump/Drop Cycles (?)
 * Attack Cycle
 * Death Stance
