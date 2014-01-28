@@ -13,9 +13,10 @@ class Sprite
   private int defaultUpdateSpeed = 5;
   
   private PGraphics graphic;
-  private PImage[] images;
+  private PImage[] images = null;
   private int frame, updateSpeed, updateIndex;
   private String state;
+  private boolean flipH;
   
   
   public Sprite(PGraphics graphic)
@@ -43,6 +44,12 @@ class Sprite
       updateIndex = 0; 
     }
   }
+
+
+  public void setFlipH(boolean value)
+  {
+    flipH = value;
+  }
   
   
   public void render()
@@ -53,6 +60,12 @@ class Sprite
   
   public void render(boolean reset)
   {
+    if(images == null)
+    {
+      System.out.println(this + " ERROR : execute setImages() method at least once before calling render() method!");
+      return;
+    }
+
     if(reset)
     {
       frame = 0;
@@ -72,7 +85,19 @@ class Sprite
     
     graphic.beginDraw();
     graphic.clear();
-    graphic.image(images[frame], 0, 0);
+
+    if(flipH)
+    {
+      graphic.pushMatrix();
+      graphic.scale(-1, 1);
+      graphic.image(images[frame], -images[frame].width, 0);
+      graphic.popMatrix();
+    }
+    else
+    {
+      graphic.image(images[frame], 0, 0);  
+    }
+
     graphic.endDraw();
   }
 }

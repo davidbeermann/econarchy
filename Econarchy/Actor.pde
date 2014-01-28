@@ -24,16 +24,15 @@ public class Collidable {
 public class Actor extends Collidable
 {
   PVector position;
-  float walkingSpeed;
-  float runningSpeed;
+  float walkingSpeed, runningSpeed;
   PGraphics avatar;
-  PImage stateGraphic;
+  Sprite sprite;
   
   
   public Actor()
   {
-    walkingSpeed=1;
-    runningSpeed=5;
+    walkingSpeed = 1;
+    runningSpeed = 5;
   }
 
   public void walk()
@@ -49,6 +48,16 @@ public class Actor extends Collidable
   public void handleCollision(Collision c)
   {
     return;
+  }
+
+  private PImage[] loadImagesIntoArray(String[] images)
+  {
+    PImage[] output = new PImage[images.length];
+    for(int i = 0; i < images.length; i++)
+    {
+      output[i] = loadImage(images[i]);
+    }
+    return output;
   }
 }
 
@@ -67,13 +76,13 @@ public class Player extends Actor
   KeyTracker keyTracker; // keypress storage
   
   //TODO image loading needs optimization : one sprite sheet? global image cache?
+  //TODO adapt image logic from enemy
   String[] jumpLeftImages = new String[]{"resources/player/jump_left.gif"};
   String[] jumpRightImages = new String[]{"resources/player/jump_right.gif"};
   String[] walkLeftImages = new String[]{"resources/player/walk_left_1.gif","resources/player/walk_left_2.gif"};
   String[] walkRightImages = new String[]{"resources/player/walk_right_1.gif","resources/player/walk_right_2.gif"};
   String[] deadImages = new String[]{"resources/player/dead.gif"};
   PImage[] jumpLeft, jumpRight, walkLeft, walkRight, dead;
-  Sprite sprite;
   
   
   public Player(PVector pos)
@@ -86,17 +95,16 @@ public class Player extends Actor
     jumpHeight = 10;
     lowerBoundary = pos.y;
     position = pos;
-    //stateGraphic = loadImage("devAvatar.png");
     
     keyTracker = KeyTracker.getInstance();
   
-    jumpLeft = loadImagesIntoArray(jumpLeftImages);
-    jumpRight = loadImagesIntoArray(jumpRightImages);
-    walkLeft = loadImagesIntoArray(walkLeftImages);
-    walkRight = loadImagesIntoArray(walkRightImages);
-    dead = loadImagesIntoArray(deadImages);
+    jumpLeft = super.loadImagesIntoArray(jumpLeftImages);
+    jumpRight = super.loadImagesIntoArray(jumpRightImages);
+    walkLeft = super.loadImagesIntoArray(walkLeftImages);
+    walkRight = super.loadImagesIntoArray(walkRightImages);
+    dead = super.loadImagesIntoArray(deadImages);
     
-    avatar = createGraphics(32, 32);
+    avatar = createGraphics(walkLeft[0].width, walkLeft[0].height);
     sprite = new Sprite(avatar);
     // set initial state of avatar
     sprite.setImages(Sprite.STATE_WALK_LEFT, walkLeft);
@@ -287,46 +295,37 @@ public class Player extends Actor
       alive = false;
     }
   }
-
-
-  private PImage[] loadImagesIntoArray(String[] images)
-  {
-    PImage[] output = new PImage[images.length];
-    for(int i = 0; i < images.length; i++)
-    {
-      output[i] = loadImage(images[i]);
-    }
-    return output;
-  }
 }
 
 
 
 public class Enemy extends Actor
 {
-  float leftBoundary;
-  float rightBoundary;
+  float leftBoundary, rightBoundary;
+  PImage[] sprites;
+  PVector size;
   
   
-  public Enemy(PVector position, float leftBoundary, float rightBoundary, float walkingSpeed, float runningSpeed, PImage stateGraphic)
+  public Enemy(PImage[] sprites, PVector position, float leftBoundary, float rightBoundary, float walkingSpeed, float runningSpeed)
   {
+    this.sprites = sprites;
     this.position = position;
     this.leftBoundary = leftBoundary;
     this.rightBoundary = rightBoundary;
     this.walkingSpeed = walkingSpeed;
     this.runningSpeed = runningSpeed;
-    this.stateGraphic = stateGraphic;
     
-    //TODO rework to use sprite class instead
-    avatar = createGraphics(30, 30);
-    stateGraphic = loadImage("devEnemy.png");
+    size = new PVector(sprites[0].width, sprites[0].height);
+    avatar = createGraphics(sprites[0].width, sprites[0].height);
+    sprite = new Sprite(avatar);
+    sprite.setImages("walk", sprites);
   }
   
   
   @Override
   public BoundingBox getBounds()
   {
-    return new BoundingBox(position, new PVector(avatar.width, avatar.height));
+    return new BoundingBox(position, size);
   }
     
     
@@ -338,21 +337,20 @@ public class Enemy extends Actor
 
   public PImage enemyRender()
   {
-    avatar.beginDraw();
-    
-    if (walkingSpeed>0)
+    //println(this + " render() : walkingSpeed: " + walkingSpeed);
+
+    // flip sprite images according to direction
+    if (walkingSpeed > 0)
     {
-      avatar.pushMatrix();
-      avatar.scale(-1,1);
-      avatar.image(stateGraphic,-stateGraphic.width, 0);
-      avatar.popMatrix();
+      sprite.setFlipH(false);
     } 
     else if (walkingSpeed < 0)
     {
-      avatar.image(stateGraphic,0, 0);
+      sprite.setFlipH(true);
     }
 
-    avatar.endDraw();  
+    sprite.render();
+
     return avatar;
   }
 
@@ -362,13 +360,12 @@ public class Enemy extends Actor
     if (spottedThePlayer(player) && !reachedEndOfPlattform()) 
     {
       run();
-
-    } 
+    }
     else
     {
       if (reachedEndOfPlattform()) {
         walkingSpeed = walkingSpeed*-1;
-        runningSpeed = runningSpeed*-1;
+        //runningSpeed = runningSpeed*-1;
         walk();
       }
       else {

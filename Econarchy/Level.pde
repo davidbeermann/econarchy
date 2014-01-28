@@ -33,27 +33,26 @@ public class Level
     collider = new CollisionDetector(platforms);
       
     // setup enemies
-    PImage enemyImage = loadImage("devEnemy.png");
-    enemies = new Enemy[data.getEnemySpecs().length];
-    for(int i = 0; i < data.getEnemySpecs().length; i++)
+    enemies = new Enemy[data.getEnemyVOs().length];
+    for(int i = 0; i < data.getEnemyVOs().length; i++)
     {
-      LevelData.EnemySpec enemySpec = data.getEnemySpecs()[i];
-      Platform platform = getPlatformById(enemySpec.getPlatformId());
-      println(enemySpec);
-      println(platform);
+      LevelData.EnemyVO enemyVO = data.getEnemyVOs()[i];
+      LevelData.EnemySpriteVO spriteVO = data.getEnemySpriteVO(enemyVO.spriteId);
+      PImage[] sprites = data.getImageResources(spriteVO.imageIds);
+      Platform platform = getPlatformById(enemyVO.platformId);
+      //System.out.println(sprites);
+      //System.out.println(sprites.length);
       
       float leftBoundary = platform.getPosition().x;
-      float rightBoundary = platform.getPosition().x + platform.getSize().x - enemyImage.width;
-      PVector position = new PVector(leftBoundary + rightBoundary * enemySpec.getStartPosition(), platform.getPosition().y - enemyImage.height);
+      float rightBoundary = platform.getPosition().x + platform.getSize().x - sprites[0].width;
+      PVector position = new PVector(leftBoundary + rightBoundary * enemyVO.startPosition, platform.getPosition().y - sprites[0].height);
       
-      enemies[i] = new Enemy(position, leftBoundary, rightBoundary, enemySpec.getWalkingSpeed(), enemySpec.getRunningSpeed(), enemyImage);
+      enemies[i] = new Enemy(sprites, position, leftBoundary, rightBoundary, enemyVO.walkingSpeed, enemyVO.runningSpeed);
     }
     collider.addCollidables(enemies);
 
     //playerAvatar size is currently 30 x 30 therefore x-15 and y-30
     hans = new Player(new PVector(renderedImage.width/2 -15, renderedImage.height-30, 0));
-    
-
   }
 
 

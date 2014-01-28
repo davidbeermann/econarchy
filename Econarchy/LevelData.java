@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import processing.core.PApplet;
@@ -15,8 +16,9 @@ public class LevelData
   int levelWidth;
   int levelHeight;
   private HashMap<String, PImage> imageResources;
+  private HashMap<String, EnemySpriteVO> enemySpriteVos;
   private PlatformSpec[] platformSpecs;
-  private EnemySpec[] enemySpecs;
+  private EnemyVO[] enemyVOs;
   private String[] backgroundIds;
   private String[] foregroundIds;
   
@@ -108,16 +110,34 @@ public class LevelData
         platformSpecs[i] = new PlatformSpec(platformXML.getString("id"), platformType, platformXML.getInt("x"), platformXML.getInt("y"));
       }
     }
+
+    // parse enemy sprites
+    enemySpriteVos = new HashMap<String, EnemySpriteVO>();
+    XML[] enemySprites = data.getChild("specification").getChild("enemy_sprites").getChildren("enemy_sprite");
+    for(XML enemySprite : enemySprites)
+    {
+      String id = enemySprite.getString("id");
+      String[] imageIds = enemySprite.getString("imageIds").split(",");
+      //System.out.println(imageIds);
+      //System.out.println(imageIds.length);
+      enemySpriteVos.put(id, new EnemySpriteVO(id, imageIds));
+    }
     
     // parse enemies
     XML[] enemiesXML = data.getChild("specification").getChild("enemies").getChildren("enemy");
-    enemySpecs = new EnemySpec[enemiesXML.length];
+    enemyVOs = new EnemyVO[enemiesXML.length];
     
     XML enemyXML;
     for(int i = 0; i < enemiesXML.length; i++)
     {
       enemyXML = enemiesXML[i];
-      enemySpecs[i] = new EnemySpec(enemyXML.getString("platformId"), enemyXML.getFloat("walkingSpeed"), enemyXML.getFloat("runningSpeed"), enemyXML.getFloat("startPosition"));
+      enemyVOs[i] = new EnemyVO(
+        enemyXML.getString("spriteId"),
+        enemyXML.getString("platformId"),
+        enemyXML.getFloat("walkingSpeed"),
+        enemyXML.getFloat("runningSpeed"),
+        enemyXML.getFloat("startPosition")
+      );
     }
   }
 
@@ -132,6 +152,26 @@ public class LevelData
     {
       return null;
     }
+  }
+
+
+  public PImage[] getImageResources(String[] ids)
+  {
+    ArrayList<PImage> tmp = new ArrayList<PImage>();
+    for(String id : ids)
+    {
+      if (imageResources.containsKey(id))
+      {
+        tmp.add(imageResources.get(id));
+      }
+      else
+      {
+        System.out.println("WARNING : image with id " + id + " is not a valid resource.");
+      }
+    }
+
+    PImage[] output = new PImage[tmp.size()];
+    return tmp.toArray(output);
   }
   
   
@@ -168,9 +208,15 @@ public class LevelData
   }
 
 
-  public EnemySpec[] getEnemySpecs()
+  public EnemySpriteVO getEnemySpriteVO(String id)
   {
-    return enemySpecs;
+    return enemySpriteVos.get(id);
+  }
+
+
+  public EnemyVO[] getEnemyVOs()
+  {
+    return enemyVOs;
   }
   
   
@@ -202,41 +248,32 @@ public class LevelData
       return this.position;
     }
   }
-  
-  
-  public class EnemySpec
+
+
+  public class EnemySpriteVO
   {
-    private String platformId;
-    private float walkingSpeed;
-    private float runningSpeed;
-    private float startPosition;
-    
-    public EnemySpec(String platformId, float walkingSpeed, float runningSpeed, float startPosition)
+    public String id;
+    public String[] imageIds;
+
+    public EnemySpriteVO(String id, String[] imageIds)
     {
+      this.id = id;
+      this.imageIds = imageIds;
+    }
+  }
+  
+  public class EnemyVO
+  {
+    public String spriteId, platformId;
+    public float walkingSpeed, runningSpeed, startPosition;
+    
+    public EnemyVO(String spriteId, String platformId, float walkingSpeed, float runningSpeed, float startPosition)
+    {
+      this.spriteId = spriteId;
       this.platformId = platformId;
       this.walkingSpeed = walkingSpeed;
       this.runningSpeed = runningSpeed;
       this.startPosition = startPosition;
-    }
-    
-    public String getPlatformId()
-    {
-      return this.platformId;
-    }
-    
-    public float getWalkingSpeed()
-    {
-      return this.walkingSpeed;
-    }
-    
-    public float getRunningSpeed()
-    {
-      return this.runningSpeed;
-    }
-    
-    public float getStartPosition()
-    {
-      return this.startPosition;
     }
   }
 }
