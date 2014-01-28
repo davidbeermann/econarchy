@@ -16,7 +16,15 @@ public class Level
   public Level(LevelData data)
   {
     
-    // setup main level graphic
+    this.data = data;
+    //divided and moved the level and actor loading into these methods
+    createLevel();
+    createActors();
+
+  }
+
+  public void createLevel() {
+
     renderedImage = createGraphics((int) data.size.x, (int) data.size.y);
 
     // setup platforms
@@ -30,8 +38,12 @@ public class Level
         platforms[i] = new Platform(platformSpec.getId(), platformSpec.getType(), platformSpec.getPosition(), data.getImageResource(platformSpec.getType().toString()));
       }
     }
+    
+  }
+
+  public void createActors() {
     collider = new CollisionDetector(platforms);
-      
+    
     // setup enemies
     PImage enemyImage = loadImage("devEnemy.png");
     enemies = new Enemy[data.getEnemySpecs().length];
@@ -52,8 +64,6 @@ public class Level
 
     //playerAvatar size is currently 30 x 30 therefore x-15 and y-30
     hans = new Player(new PVector(renderedImage.width/2 -15, renderedImage.height-30, 0));
-    
-
   }
 
 
@@ -73,15 +83,15 @@ public class Level
     for (Platform platform : platforms)
     {
       platform.render(renderedImage);//(int) startY);
-    }
+}
 
-    for (int i=0; i < enemies.length; i++)
-    {
-      if (enemies[i].isInViewport(hans.position))
-      {
+for (int i=0; i < enemies.length; i++)
+{
+  if (enemies[i].isInViewport(hans.position))
+  {
         //handing over hans position to determine if the enemy is seeing hans
         enemies[i].patroling(hans);
-       
+        
         renderedImage.image( enemies[i].enemyRender(), enemies[i].position.x, enemies[i].position.y);
       } 
     }

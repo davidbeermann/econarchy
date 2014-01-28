@@ -5,12 +5,13 @@ public class Game
   ParallaxBackground background;
   private Level level;
   GUI guiStuff;
+  boolean gameOver = true;
   
   
   
   public Game(int viewportWidth, int viewportHeight)
   {
-    
+
     viewport = createGraphics(viewportWidth, viewportHeight);
     viewport.beginDraw();
     viewport.noStroke();
@@ -19,7 +20,7 @@ public class Game
     viewport.endDraw();
     
     viewportPosition = new PVector((width - viewport.width) / 2, (height - viewport.height) / 2);
-   
+
   }
   
   
@@ -31,18 +32,30 @@ public class Game
     background = new ParallaxBackground(levelData);
     
     level = new Level(levelData);
-    guiStuff = new GUI(level.hans);
+    if (guiStuff==null) {
+      guiStuff = new GUI(level.hans);  
+    }else {
+      guiStuff.player=level.hans;
+    }
+    
   }
   
   
   public void render()
   {
-    
-   
+
+
 
     // render all level updates
-    level.render();
-    
+    if (!gameOver) {
+      level.render();  
+
+    }
+
+    if (guiStuff.sawInfoScreen) {
+
+
+
     // draw rendered level onto viewport
     float posX = (viewport.width - level.renderedImage.width) / 2;
     float posY = (viewport.height - level.hans.position.y);
@@ -67,39 +80,50 @@ public class Game
     {
       viewport.image(level.renderedImage, posX, posY-viewport.height/2+level.hans.avatar.height);   
     }
-  
+
     viewport.endDraw();
     
     // draw viewport to frame - actually display rendered result to player
     image(viewport, viewportPosition.x, viewportPosition.y);
-     guiStuff.update(level.hans);
-
   }
+  guiStuff.update();
+
 }
 
+public void startGame(){
+  if (guiStuff.sawInfoScreen) {
+    level.createActors();
+          //setting the reference in the gui class to new player if the game gets restarted
+          guiStuff.player=level.hans;
+        }
+        gameOver=false;
+        level.hans.alive=true;
+      }
+    }
 
-private class ParallaxBackground
-{
-  LevelData data;
 
-
-  public ParallaxBackground(LevelData data)
-  {
-    this.data = data;
-  }
-
-
-  public void render(PGraphics viewport, Level level)
-  {
-    PImage bgImage;
-    float percent;
-    PVector diff = new PVector();
-    for (String id : data.getBackgroundIds())
+    private class ParallaxBackground
     {
-      bgImage = data.getImageResource(id);
-      percent = 1 - (level.hans.position.y + level.hans.avatar.height / 2) / level.renderedImage.height;
-      diff.x = viewport.width - bgImage.width;
-      diff.y = viewport.height - bgImage.height;
+      LevelData data;
+
+
+      public ParallaxBackground(LevelData data)
+      {
+        this.data = data;
+      }
+
+
+      public void render(PGraphics viewport, Level level)
+      {
+        PImage bgImage;
+        float percent;
+        PVector diff = new PVector();
+        for (String id : data.getBackgroundIds())
+        {
+          bgImage = data.getImageResource(id);
+          percent = 1 - (level.hans.position.y + level.hans.avatar.height / 2) / level.renderedImage.height;
+          diff.x = viewport.width - bgImage.width;
+          diff.y = viewport.height - bgImage.height;
       // println("percent: " + percent + " - diff: " + diff);
       
       viewport.image(bgImage, diff.x / 2, diff.y - percent * diff.y);
