@@ -17,10 +17,11 @@ public class Level
   {
     
     //setupLevelBoundaries();
-    LevelBoundary[] levelBounds = new LevelBoundary[]{new LevelBoundary(-50f,(float)data.levelWidth + 100f, (float) data.levelHeight,50f), 
-                                                  new LevelBoundary(-50f, -50f, (float) data.levelWidth + 100f, 50f), 
-                                                  new LevelBoundary(-50f,0f,50f, (float) data.levelHeight),
-                                                  new LevelBoundary((float) data.levelWidth, 0, 50, (float) data.levelHeight)};
+     LevelBoundary top =  new LevelBoundary(-50.0, -50.0, (float) data.levelWidth + 100.0, 50.0);
+     LevelBoundary bottom = new LevelBoundary(-50.0,(float) data.levelHeight,(float)data.levelWidth+100.0, 50.0);
+     LevelBoundary left = new LevelBoundary(-50.0,0.0,50.0, (float) data.levelHeight);
+     LevelBoundary right = new LevelBoundary((float) data.levelWidth, 0.0, 50.0, (float) data.levelHeight);
+     LevelBoundary[] levelBounds = new LevelBoundary[]{top, bottom,left,right};
                                                   
     //setup CollisionDetection with level boundaries
     collider = new CollisionDetector(levelBounds);
@@ -30,7 +31,7 @@ public class Level
     
     // setup platforms
     platforms = new Platform[data.getPlatformSpecs().length];
-    LevelData.PlatformSpec platformSpec;
+    PlatformSpec platformSpec;
     for (int i = 0; i < data.getPlatformSpecs().length; i++)
     {
       platformSpec = data.getPlatformSpecs()[i];
@@ -46,7 +47,7 @@ public class Level
     enemies = new Enemy[data.getEnemySpecs().length];
     for(int i = 0; i < data.getEnemySpecs().length; i++)
     {
-      LevelData.EnemySpec enemySpec = data.getEnemySpecs()[i];
+      EnemySpec enemySpec = data.getEnemySpecs()[i];
       Platform platform = getPlatformById(enemySpec.getPlatformId());
       println(enemySpec);
       println(platform);

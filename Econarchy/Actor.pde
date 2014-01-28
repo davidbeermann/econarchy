@@ -239,9 +239,9 @@ public class Player extends Actor
        
     // rest of calculations
     // reflect player if he hits a wall //replace with collision system, as soon as physics can distinguish between ver and hor collisions
-    if ( currVelocity.x != 0 && (position.x > 400-avatar.width || position.x < 0 )) {
-      currVelocity.x *= -1;
-   }   
+   // if ( currVelocity.x != 0 && (position.x > 400-avatar.width || position.x < 0 )) {
+   //   currVelocity.x *= -1;
+   //}   
     //limit player speed
 //    if ( currVelocity.mag() >= speedMax ) 
 //         currVelocity.setMag(speedMax);
