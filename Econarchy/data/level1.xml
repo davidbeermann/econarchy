@@ -3,9 +3,15 @@
 	<!-- resource ids must be UNIQUE!!! -->
 	<resources>
 		<images>
+			<!-- foreground images -->
+			<image id="foreground1" url="resources/level1/foreground_layer1.png" />
+			<image id="foreground2" url="resources/level1/foreground_layer2.png" />
 			<!-- background images -->
-			<image id="layer1" url="resources/level1/background_layer1.png" />
-			<image id="layer2" url="resources/level1/background_layer2.png" />
+			<image id="background1" url="resources/level1/background_layer1.png" />
+			<image id="background2" url="resources/level1/background_layer2.png" />
+			<image id="background3" url="resources/level1/background_layer3.png" />
+			<image id="background4" url="resources/level1/background_layer4.png" />
+			<image id="background5" url="resources/level1/background_layer5.png" />
 			<!-- platform images -->
 			<image id="regular" url="resources/level1/platform_regular.png" />
 			<image id="dissolvable" url="resources/level1/platform_dissolvable.png" />
@@ -13,11 +19,18 @@
 		</images>
 	</resources>
 	<specification>
-		<!-- background parallax images should be from back to front -->
+		<!-- background and foreground parallax images should be from back to front -->
 		<backgrounds>
-			<background id="layer2" />
-			<background id="layer1" />
+			<background id="background5" />
+			<background id="background4" />
+			<background id="background3" />
+			<background id="background2" />
+			<background id="background1" />
 		</backgrounds>
+		<foregrounds>
+			<foreground id="foreground2" />
+			<foreground id="foreground1" />
+		</foregrounds>
 		<!-- platform types have to match the image ids above!!! -->
 		<platforms>
 			<platform id="p1" type="regular" x="20" y="1900" />	

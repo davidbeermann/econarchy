@@ -16,6 +16,7 @@ public class Level
   public Level(LevelData data)
   {
     
+
     this.data = data;
     //divided and moved the level and actor loading into these methods
     createLevel();
@@ -25,11 +26,23 @@ public class Level
 
   public void createLevel() {
 
-    renderedImage = createGraphics((int) data.size.x, (int) data.size.y);
+    //setupLevelBoundaries();
+     LevelBoundary top =  new LevelBoundary(-50.0, -50.0, (float) data.levelWidth + 100.0, 50.0);
+     LevelBoundary bottom = new LevelBoundary(-50.0,(float) data.levelHeight,(float)data.levelWidth+100.0, 50.0);
+     LevelBoundary left = new LevelBoundary(-50.0,0.0,50.0, (float) data.levelHeight);
+     LevelBoundary right = new LevelBoundary((float) data.levelWidth, 0.0, 50.0, (float) data.levelHeight);
+     LevelBoundary[] levelBounds = new LevelBoundary[]{top, bottom,left,right};
+                                                  
+    //setup CollisionDetection with level boundaries
+    collider = new CollisionDetector(levelBounds);
+    
+    // setup main level graphic
 
+    renderedImage = createGraphics((int) data.size.x, (int) data.size.y);
+    
     // setup platforms
     platforms = new Platform[data.getPlatformSpecs().length];
-    PlatformSpec platformSpec;
+    LevelData.PlatformSpec platformSpec;
     for (int i = 0; i < data.getPlatformSpecs().length; i++)
     {
       platformSpec = data.getPlatformSpecs()[i];
@@ -38,18 +51,22 @@ public class Level
         platforms[i] = new Platform(platformSpec.getId(), platformSpec.getType(), platformSpec.getPosition(), data.getImageResource(platformSpec.getType().toString()));
       }
     }
+
     
   }
 
   public void createActors() {
     collider = new CollisionDetector(platforms);
     
+    collider.addCollidables(platforms);
+      
+
     // setup enemies
     PImage enemyImage = loadImage("devEnemy.png");
     enemies = new Enemy[data.getEnemySpecs().length];
     for(int i = 0; i < data.getEnemySpecs().length; i++)
     {
-      EnemySpec enemySpec = data.getEnemySpecs()[i];
+      LevelData.EnemySpec enemySpec = data.getEnemySpecs()[i];
       Platform platform = getPlatformById(enemySpec.getPlatformId());
       println(enemySpec);
       println(platform);
@@ -61,6 +78,7 @@ public class Level
       enemies[i] = new Enemy(position, leftBoundary, rightBoundary, enemySpec.getWalkingSpeed(), enemySpec.getRunningSpeed(), enemyImage);
     }
     collider.addCollidables(enemies);
+    
 
     //playerAvatar size is currently 30 x 30 therefore x-15 and y-30
     hans = new Player(new PVector(renderedImage.width/2 -15, renderedImage.height-30, 0));
@@ -118,5 +136,19 @@ for (int i=0; i < enemies.length; i++)
   }
 }
 
-
+public class LevelBoundary extends Collidable{
+  PVector position;
+  PVector size;
+  
+  public LevelBoundary(float posx, float posy, float w, float h) {
+    position = new PVector(posx, posy);
+    size = new PVector(w,h);
+  }
+  
+  public BoundingBox getBounds(){
+    return new BoundingBox(position, size);
+  }
+  
+}
+    
 

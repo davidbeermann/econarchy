@@ -3,17 +3,20 @@ Game game;
 KeyTracker keyTracker;
 FancyInput gamepad;
 SoundEvent music;
-  
+
 
 public void setup()
 {
   size(400, 640);
-  
+
+  XML levelXML = loadXML("level1.xml");
+  LevelData levelData = LevelData.instantiate(this, levelXML);
+
   game = new Game(400, 600);
-  game.setupLevel("level1.xml");
-  
+  game.setupLevel(levelData);
+
   music = new SoundEvent(this);
-  
+
   //setup gamepad if needed
   if (gamepadEnabled)
   {
@@ -28,13 +31,15 @@ public void setup()
 
 public void draw()
 { 
+  println(frameRate);
+
   background(0);
-  
+
   if (gamepadEnabled)
   {
     gamepad.update();
   }
-   
+
   game.render();
   
 }
@@ -59,6 +64,7 @@ public void keyReleased(KeyEvent e)
 {
   if (!gamepadEnabled)
   {
-    keyTracker.removeKey(keyCode); 
-  }  
+    keyTracker.removeKey(keyCode);
+  }
 }
+
