@@ -86,10 +86,12 @@ public class Collision {
   
   
 // boundingbox of object 
-public static class BoundingBox {
+public static class BoundingBox
+{
   float left=0, top=0, bottom=0, right=0,x,y;
   float width=0;
   float height=0;
+
   
   public BoundingBox(float lcor, float tcor, float rcor, float bcor) {
     x = left = lcor;
@@ -99,10 +101,15 @@ public static class BoundingBox {
     width = right-left;
     height = bottom-top;
   }
-  
- 
+
   // wrapper constructor for direct support of sizes supplied as vectors
-  public BoundingBox(PVector xy, PVector wh) {
+  public BoundingBox(PVector xy, PVector wh)
+  {
+    updateDimensions(xy, wh);
+  }
+  
+  public void updateDimensions(PVector xy, PVector wh)
+  {
     x = left = xy.x;
     y = top = xy.y;
     width = wh.x;

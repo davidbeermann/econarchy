@@ -8,6 +8,10 @@ public class Collidable {
     return false;
   }
   
+  public boolean isPlatform() {
+    return false;
+  }
+  
   //return empty bounding box
   public BoundingBox getBounds() {
     return new BoundingBox(0,0,0,0);
@@ -262,6 +266,16 @@ public class Player extends Actor
       }
     
     //FIXME Collision from below
+    
+    // check for breakable platforms
+    if (c.getCollider().isPlatform() && currVelocity.y == 0)
+    {
+      Platform platform = (Platform) c.getCollider();
+      if(platform.getType() == Type.Platform.BREAKABLE)
+      {
+        platform.setBroken();
+      }
+    }
     
     if (c.getCollider().isEnemy())
     {
