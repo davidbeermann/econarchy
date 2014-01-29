@@ -32,7 +32,7 @@ Player
 * Drop Stance(?)
 * Drop Cycles(?)
 * Flag Cycle
-* Death Cycle
+* ~~Death Cycle~~
 
 Enemies
 --
