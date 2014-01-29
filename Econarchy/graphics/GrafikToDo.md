@@ -50,7 +50,7 @@ Platforms
 
 Flag
 --
-* Idle
-* Idle Cycle
+* ~~Idle~~
+* ~~Idle Cycle~~
 
 
