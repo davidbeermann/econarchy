@@ -27,10 +27,10 @@ Player
 * ~~Idle Cycle~~ // J
 * ~~Walk Stance~~ // J
 * ~~Walk Cycle~~ // J
-* Jump Stance
-* Jump Cycle
-* Drop Stance(?)
-* Drop Cycles(?)
+* ~~Jump Stance~~
+* ~~Jump Cycle~~
+* ~~Drop Stance(?)~~
+* ~~Drop Cycles(?)~~
 * ~~Flag Cycle~~
 * ~~Death Cycle~~
 
