@@ -31,8 +31,6 @@ Player
 * Jump Cycle
 * Drop Stance(?)
 * Drop Cycles(?)
-* Attack Stance
-* Attack Cycle
 * Flag Cycle
 * Death Cycle
 
