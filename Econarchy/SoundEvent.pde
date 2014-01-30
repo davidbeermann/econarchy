@@ -1,26 +1,25 @@
 import ddf.minim.*;
 
-public class SoundEvent {
+public class SoundEvent
+{
 	Minim minim;
-	AudioPlayer theme;
-	
-	HashMap<String, AudioSample> fxSounds;
-	
+	AudioPlayer theme;	
+	HashMap<String, AudioSample> fxSounds;	
 	
 
-	public  SoundEvent(PApplet applet) {
-		
+	public  SoundEvent(PApplet applet)
+    {
 		minim = new Minim(applet);
 		
 		fxSounds = new HashMap<String, AudioSample>();	
 		
 		// Put some fancy theme music here
-		theme = minim.loadFile("resources/sounds/theme.wav");
-		
+		theme = minim.loadFile("resources/sounds/theme.wav");	
 		theme.play();
 		theme.loop();
-		
 	}
+
+
 	public void sound(String event)
 	{	
 		AudioSample efect = null;
@@ -37,11 +36,10 @@ public class SoundEvent {
 		if (efect != null) {
 			efect.trigger();
 		}
-
-
 	}
-	public void backagroundTheme() {
 
-		
-	}
+
+	public void backagroundTheme()
+    {
+    }
 }

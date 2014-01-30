@@ -187,7 +187,7 @@ public class Player extends Actor
     if (alive)
     {
       position.add(currVelocity);
-      println("player_position.x: " + position.x + "   .y: " + position.y);
+      //println("player_position.x: " + position.x + "   .y: " + position.y);
       //println ("UPWARD FORCE: " + currVelocity.y);
     }
   }
