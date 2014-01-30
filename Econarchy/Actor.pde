@@ -45,6 +45,7 @@ public class Player extends Actor
   boolean doubleJumpEnabled = true;
   float speedMax = 50;
   float lowerBoundary; //lower end of level
+  boolean chuteActive = false;
   
   KeyTracker keyTracker; // keypress storage
   PImage[] run, jump, idle, die;
@@ -158,13 +159,13 @@ public class Player extends Actor
   @Override
   public BoundingBox getBounds()
   {
-    return new BoundingBox(position, new PVector(avatar.width, avatar.height));
+    return new BoundingBox(position, new PVector(avatar.width/3, avatar.height));
   }
 
 
   public void jump()
   {
-    if ( doubleJumpEnabled) {
+    if ( doubleJumpEnabled && !chuteActive) {
       if ( currVelocity.y <= 0.1 && currVelocity.y > -0.1 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
       { 
         currVelocity.y = -jumpHeight; //FIXME: optimize double jump here
@@ -238,16 +239,9 @@ public class Player extends Actor
        
      //apply gravity if player is inside level bounds - could later be removed when physics completely takes over calculation
      // TODO: replace with level bounding boxes 
-     if( position.y < lowerBoundary )
+//     if( position.y < lowerBoundary )
        currVelocity.add(tmpAccel);  
-    // else if (currVelocity.y > 1)
-    //   currVelocity.y = 0.0; //reset vertical velocity if player hits rock bottom
-       
-    // rest of calculations
-    // reflect player if he hits a wall //replace with collision system, as soon as physics can distinguish between ver and hor collisions
-   // if ( currVelocity.x != 0 && (position.x > 400-avatar.width || position.x < 0 )) {
-   //   currVelocity.x *= -1;
-   //}   
+   
     //limit player speed
 //    if ( currVelocity.mag() >= speedMax ) 
 //         currVelocity.setMag(speedMax);
@@ -259,7 +253,6 @@ public class Player extends Actor
   {
     if ( (c.direction == 1 || c.direction == 8)  && !c.getCollider().isEnemy())
     {
-        println("COLLIDED WITH LEVEL BOUNDS");
         currVelocity.x *= -1;
     }
     
@@ -275,7 +268,7 @@ public class Player extends Actor
     }
     
     if (c.direction == 12 ||c.direction == 4 || c.direction == 5) {
-      println("COLLISION FROM BELOW");
+      //println("COLLISION FROM BELOW");
       }
     
     // check for breakable platforms
@@ -286,6 +279,7 @@ public class Player extends Actor
       {
         platform.setBroken();
       }
+      
     }
 
     if (c.getCollider().isEnemy())
