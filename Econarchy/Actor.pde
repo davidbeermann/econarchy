@@ -49,16 +49,6 @@ public class Actor extends Collidable
   {
     return;
   }
-
-  private PImage[] loadImagesIntoArray(String[] images)
-  {
-    PImage[] output = new PImage[images.length];
-    for(int i = 0; i < images.length; i++)
-    {
-      output[i] = loadImage(images[i]);
-    }
-    return output;
-  }
 }
 
 
@@ -75,18 +65,10 @@ public class Player extends Actor
   float lowerBoundary; //lower end of level
   
   KeyTracker keyTracker; // keypress storage
-  
-  //TODO image loading needs optimization : one sprite sheet? global image cache?
-  //TODO adapt image logic from enemy
-  String[] jumpLeftImages = new String[]{"resources/player/jump_left.gif"};
-  String[] jumpRightImages = new String[]{"resources/player/jump_right.gif"};
-  String[] walkLeftImages = new String[]{"resources/player/walk_left_1.gif","resources/player/walk_left_2.gif"};
-  String[] walkRightImages = new String[]{"resources/player/walk_right_1.gif","resources/player/walk_right_2.gif"};
-  String[] deadImages = new String[]{"resources/player/dead.gif"};
-  PImage[] jumpLeft, jumpRight, walkLeft, walkRight, dead;
+  PImage[] run, jump, idle, die;
   
   
-  public Player(PVector pos)
+  public Player(LevelData.PlayerSpriteVO spriteVO, PVector pos)
   {
     super();
     
@@ -98,17 +80,18 @@ public class Player extends Actor
     position = pos;
     
     keyTracker = KeyTracker.getInstance();
-  
-    jumpLeft = super.loadImagesIntoArray(jumpLeftImages);
-    jumpRight = super.loadImagesIntoArray(jumpRightImages);
-    walkLeft = super.loadImagesIntoArray(walkLeftImages);
-    walkRight = super.loadImagesIntoArray(walkRightImages);
-    dead = super.loadImagesIntoArray(deadImages);
     
-    avatar = createGraphics(walkLeft[0].width, walkLeft[0].height);
+    LevelData levelData = LevelData.getInstance();
+    run = levelData.getImageResources(spriteVO.runIds);
+    jump = levelData.getImageResources(spriteVO.jumpIds);
+    idle = levelData.getImageResources(spriteVO.idleIds);
+    die = levelData.getImageResources(spriteVO.dieIds);
+    
+    avatar = createGraphics(run[0].width, run[0].height);
     sprite = new Sprite(avatar);
     // set initial state of avatar
-    sprite.setImages(Sprite.STATE_WALK_LEFT, walkLeft);
+    sprite.setImages("run", run);
+    sprite.setFlipH(true);
   }
 
 
@@ -118,43 +101,50 @@ public class Player extends Actor
     {
       if(keyTracker.upPressed() && (keyTracker.leftPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID))
       {
-        sprite.setImages(Sprite.STATE_JUMP_LEFT, jumpLeft);
+        sprite.setImages("jump", jump);
+        sprite.setFlipH(true);
       }
       else if(keyTracker.upPressed() && (keyTracker.rightPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.RIGHT_ID))
       {
-        sprite.setImages(Sprite.STATE_JUMP_RIGHT, jumpRight);
+        sprite.setImages("jump", jump);
+        sprite.setFlipH(false);
       }
       else if(keyTracker.leftPressed() && !keyTracker.rightPressed())
       {
-        sprite.setImages(Sprite.STATE_WALK_LEFT, walkLeft);
+        sprite.setImages("run", run);
+        sprite.setFlipH(true);
       }
       else if(keyTracker.rightPressed() && !keyTracker.leftPressed())
       {
-        sprite.setImages(Sprite.STATE_WALK_RIGHT, walkRight);
+        sprite.setImages("run", run);
+        sprite.setFlipH(false);
       }
       
       if(keyTracker.noKeyPressed())
       {
-        if(keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID)
+        /*if(keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID)
         {
-          sprite.setImages(Sprite.STATE_WALK_LEFT, walkLeft);
+          sprite.setImages("run", run);
         }
         else if(keyTracker.recentHorizontalKeyId() == KeyTracker.RIGHT_ID)
         {
-          sprite.setImages(Sprite.STATE_WALK_RIGHT, walkRight);
+          sprite.setImages("run", run);
         }
+        */
         
-        sprite.render(true);
+        sprite.setImages("idle", idle);
+        //sprite.render(true);
       }
-      else
-      {
+      //else
+      //{
         sprite.render();
-      }
+      //}
     }
     else
     {
-      sprite.setImages(Sprite.STATE_DEAD, dead);
-      sprite.render(true);
+      sprite.setImages("die", die);
+      //sprite.setImages(Sprite.STATE_DEAD, dead);
+      //sprite.render(true);
     }
     
     return avatar;

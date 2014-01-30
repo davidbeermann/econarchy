@@ -79,7 +79,8 @@ public class Level
     collider.addCollidables(enemies);
 
     //playerAvatar size is currently 30 x 30 therefore x-15 and y-30
-    hans = new Player(new PVector(renderedImage.width/2 -15, renderedImage.height-30, 0));
+    PVector position = new PVector(renderedImage.width/2 -15, renderedImage.height-30, 0);
+    hans = new Player(LevelData.getInstance().getPlayerSpriteVO(), position);
   }
 
 

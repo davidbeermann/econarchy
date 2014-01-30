@@ -3,13 +3,7 @@ import processing.core.PImage;
 import processing.core.PVector;
 
 class Sprite
-{
-  public static String STATE_JUMP_LEFT = "jump_left";
-  public static String STATE_JUMP_RIGHT = "jump_right";
-  public static String STATE_WALK_LEFT = "walk_left";
-  public static String STATE_WALK_RIGHT = "walk_right";
-  public static String STATE_DEAD = "dead";
-  
+{ 
   private int defaultUpdateSpeed = 5;
   
   private PGraphics graphic;

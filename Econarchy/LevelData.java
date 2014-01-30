@@ -18,6 +18,7 @@ public class LevelData
   private HashMap<String, PImage> imageResources;
   private HashMap<String, EnemySpriteVO> enemySpriteVos;
   private PlatformSpec[] platformSpecs;
+  private PlayerSpriteVO playerSpriteVO;
   private EnemyVO[] enemyVOs;
   private String[] backgroundIds;
   private String[] foregroundIds;
@@ -110,6 +111,15 @@ public class LevelData
         platformSpecs[i] = new PlatformSpec(platformXML.getString("id"), platformType, platformXML.getInt("x"), platformXML.getInt("y"));
       }
     }
+
+    // parse player sprites
+    XML playerSprite = data.getChild("specification").getChild("player_sprite");
+    playerSpriteVO = new PlayerSpriteVO(
+      playerSprite.getChild("runFrames").getString("imageIds").split(","),
+      playerSprite.getChild("jumpFrames").getString("imageIds").split(","),
+      playerSprite.getChild("idleFrames").getString("imageIds").split(","),
+      playerSprite.getChild("dieFrames").getString("imageIds").split(",")
+    );
 
     // parse enemy sprites
     enemySpriteVos = new HashMap<String, EnemySpriteVO>();
@@ -208,6 +218,12 @@ public class LevelData
   }
 
 
+  public PlayerSpriteVO getPlayerSpriteVO()
+  {
+    return playerSpriteVO;
+  }
+
+
   public EnemySpriteVO getEnemySpriteVO(String id)
   {
     return enemySpriteVos.get(id);
@@ -249,6 +265,21 @@ public class LevelData
     }
   }
 
+  public class PlayerSpriteVO
+  {
+    public String[] runIds;
+    public String[] jumpIds;
+    public String[] idleIds;
+    public String[] dieIds;
+
+    public PlayerSpriteVO(String[] runIds, String[] jumpIds, String[] idleIds, String[] dieIds)
+    {
+      this.runIds = runIds;
+      this.jumpIds = jumpIds;
+      this.idleIds = idleIds;
+      this.dieIds = dieIds;
+    }
+  }
 
   public class EnemySpriteVO
   {
