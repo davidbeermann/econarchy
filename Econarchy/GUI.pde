@@ -48,10 +48,12 @@ public class GUI
 		{
 			//println(this + " state: infoScreen");
 			
-			fill(255);
+			//fill(255);
+			PImage startscreen = loadImage("resources/startscreen.png");
+			image(startscreen, 0, 0);
 			text(
 				"Welcome X,\nToday the consumegood inc. annouced the construction of three more oil rigs in the north sea. They will be placed in a biologically very sensible area and as we know from the past the consumegood inc. tend to build their oil rigs on low budget and not very leakproof.\nPeacufull demonstrations are no longer a sufficient measure. We have to act and set signs.\nSome might call it acts of terrorism. We understand them as acts of non-violent resistance. And tonight we will start by announcing the existence of our organization.\nWe hit them were they feel save. You will have to climb the consumegood inc. headquarter and play our banner on the very top of the building. Be cautious don't get caught by any security guards or employees and take care of the plattforms you are climbing. They might behave against expectation. Place the banner and grab you parachute to sail down. Avoid the plattforms on your way down.\nYou can move using the arrowkeys.\n\nGood luck!\n\nPRESS S TO CONTINUE"
-				, 10, height/4, width-50, height);
+				, 45, 220, width-90, height - 220);
 		// maybe put this into the keytracker
 		if (keyPressed && key == 's' || key == 'S')
 		{
