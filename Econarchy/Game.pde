@@ -8,20 +8,20 @@ public class Game
   boolean gameOver = true;
   
   
-  public Game(int viewportWidth, int viewportHeight)
+  public Game(PVector viewportSize, PVector viewportPosition)
   {
-    viewport = createGraphics(viewportWidth, viewportHeight);
+    viewport = createGraphics((int) viewportSize.x, (int) viewportSize.y);
     viewport.beginDraw();
     viewport.noStroke();
-    viewport.fill(255);
-    viewport.rect(0, 0, viewportWidth, viewportHeight);
+    viewport.fill(0);
+    viewport.rect(0, 0, viewportSize.x, viewportSize.y);
     viewport.endDraw();
     
-    viewportPosition = new PVector((width - viewport.width) / 2, (height - viewport.height) / 2);
+    this.viewportPosition = viewportPosition;
   }
   
   
-  public void setupLevel()
+  public void init()
   {
     LevelData levelData = LevelData.getInstance();
 

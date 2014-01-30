@@ -12,8 +12,11 @@ public void setup()
   XML levelXML = loadXML("level1.xml");
   LevelData levelData = LevelData.instantiate(this, levelXML);
 
-  game = new Game(400, 600);
-  game.setupLevel();
+  PVector gameSize = new PVector(400, 600);
+  PVector gamePosition = new PVector(0, height - gameSize.y);
+
+  game = new Game(gameSize, gamePosition);
+  game.init();
 
   music = new SoundEvent(this);
 

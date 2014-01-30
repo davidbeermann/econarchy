@@ -35,10 +35,14 @@ public class GUI
 		{
 			meterToGo = levelHeight - int((playerpos - player.position.y)/player.jumpHeight);
 			
-			fill(0);
-			textAlign(LEFT,BOTTOM);
+			noStroke();
+			fill(216, 18, 63);
+			rect(0, 0, width, 40);
+			
+			fill(255);
+			textAlign(LEFT,TOP);
 			textFont(pixelFont, 20);
-			text(meterToGo+" m to go", 20, height-50);
+			text(meterToGo+" m to go", 10, 10);
 		}
 	}
 
