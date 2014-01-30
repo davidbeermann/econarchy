@@ -38,14 +38,15 @@ public class Actor extends Collidable
 public class Player extends Actor
 {
   boolean alive = true;
-  float acceleration = 0.1;
+  float acceleration = 0.5;
   PVector currVelocity;
   PVector gravityAcc;
+  PVector chuteDrag;
   float jumpHeight;
   boolean doubleJumpEnabled = true;
-  float speedMax = 50;
+  float speedMax = 15;
   float lowerBoundary; //lower end of level
-  boolean chuteActive = false;
+  boolean chuteActive = true;
   
   KeyTracker keyTracker; // keypress storage
   PImage[] run, jump, idle, die;
@@ -84,10 +85,11 @@ public class Player extends Actor
   public void reset()
   {
     position = new PVector(startPosition.x, startPosition.y);
-    lowerBoundary = startPosition.y;
+    
     
     currVelocity = new PVector(0.0, 0.0);
     gravityAcc = new PVector(0.0, 10.0);
+    
     walkingSpeed = 10;
     jumpHeight = 10;
 
@@ -97,6 +99,7 @@ public class Player extends Actor
 
     alive = true;
     doubleJumpEnabled = true;
+    chuteActive = false;
   }
 
 
@@ -159,7 +162,7 @@ public class Player extends Actor
   @Override
   public BoundingBox getBounds()
   {
-    return new BoundingBox(position, new PVector(avatar.width/3, avatar.height));
+    return new BoundingBox(position, new PVector(avatar.width/3.0, avatar.height));
   }
 
 
@@ -196,6 +199,7 @@ public class Player extends Actor
   
   public void updateVelocity(float x, float y)
   {
+    speedMax = 10;
     // gamepad is enabled if this happens
     if ( x != 0 || y != 0)
     {
@@ -213,11 +217,17 @@ public class Player extends Actor
     {
       if(keyTracker.leftPressed())
       {
-        currVelocity.x += -acceleration;
+        if ( currVelocity.x >= walkingSpeed*-1)
+          currVelocity.x += -acceleration;
+        if (chuteActive) 
+          speedMax = 21;
       }
       if(keyTracker.rightPressed())
       {
-        currVelocity.x += acceleration;
+        if (currVelocity.x <= walkingSpeed)
+          currVelocity.x += acceleration;
+        if (chuteActive) 
+          speedMax = 21;
       }
       if(keyTracker.upPressed()) //enable double jump here, to disable set to 0
       {
@@ -237,15 +247,12 @@ public class Player extends Actor
     //calculate gravity vector
     PVector tmpAccel = PVector.mult(gravityAcc, 1.0/30.0); //calculate gravitational Acceleration, assuming 30fps/can later be adjusted to use realtime for better simulation
        
-     //apply gravity if player is inside level bounds - could later be removed when physics completely takes over calculation
-     // TODO: replace with level bounding boxes 
-//     if( position.y < lowerBoundary )
+     //apply gravity
        currVelocity.add(tmpAccel);  
-   
-    //limit player speed
-//    if ( currVelocity.mag() >= speedMax ) 
-//         currVelocity.setMag(speedMax);
-    
+  
+      if ( chuteActive && currVelocity.y > speedMax )
+        currVelocity.y = speedMax;
+      
   }
   
   
@@ -253,6 +260,7 @@ public class Player extends Actor
   {
     if ( (c.direction == 1 || c.direction == 8)  && !c.getCollider().isEnemy())
     {
+        println("Colliding with bounds");
         currVelocity.x *= -1;
     }
     
@@ -268,7 +276,7 @@ public class Player extends Actor
     }
     
     if (c.direction == 12 ||c.direction == 4 || c.direction == 5) {
-      //println("COLLISION FROM BELOW");
+     // println("COLLISION FROM BELOW");
       }
     
     // check for breakable platforms

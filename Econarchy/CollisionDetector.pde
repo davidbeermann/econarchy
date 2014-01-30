@@ -19,6 +19,7 @@ public class CollisionDetector
       }
       else
       {
+       //println( "ADDING COLLIDER: " + collidables[i].getBounds().x);
         static_colliders.add(collidables[i]);
       }
     }
