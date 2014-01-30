@@ -13,7 +13,7 @@ public void setup()
   LevelData levelData = LevelData.instantiate(this, levelXML);
 
   game = new Game(400, 600);
-  game.setupLevel(levelData);
+  game.setupLevel();
 
   music = new SoundEvent(this);
 

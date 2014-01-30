@@ -45,8 +45,9 @@ public class GUI
 
 	void introScreen()
 	{
-		if (game.gameOver && !sawInfoScreen) {
-			println("infoScreen");
+		if (game.gameOver && !sawInfoScreen)
+		{
+			//println(this + " state: infoScreen");
 			
 			fill(255);
 			text(
@@ -55,11 +56,8 @@ public class GUI
 		// maybe put this into the keytracker
 		if (keyPressed && key == 's' || key == 'S')
 		{
-			
 			game.startGame();
 			sawInfoScreen = true;
-			
-
 		}
 	}
 }

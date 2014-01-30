@@ -68,7 +68,7 @@ public class Player extends Actor
   PImage[] run, jump, idle, die;
   
   
-  public Player(LevelData.PlayerSpriteVO spriteVO, PVector pos)
+  public Player(LevelData.PlayerSpriteVO spriteVO, PVector position)
   {
     super();
     
@@ -76,8 +76,8 @@ public class Player extends Actor
     gravityAcc = new PVector(0.0, 10.0);
     walkingSpeed = 10;
     jumpHeight = 10;
-    lowerBoundary = pos.y;
-    position = pos;
+    lowerBoundary = position.y;
+    this.position = position;
     
     keyTracker = KeyTracker.getInstance();
     
@@ -92,6 +92,12 @@ public class Player extends Actor
     // set initial state of avatar
     sprite.setImages("run", run);
     sprite.setFlipH(true);
+  }
+
+
+  public void updatePosition(PVector position)
+  {
+    this.position = position;
   }
 
 

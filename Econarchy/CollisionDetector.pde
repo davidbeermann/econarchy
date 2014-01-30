@@ -1,16 +1,27 @@
-public class CollisionDetector{
+public class CollisionDetector
+{
  ArrayList<Collidable> static_colliders;
   
-  public CollisionDetector(Collidable[] collidables) {
+
+  public CollisionDetector()
+  {
     static_colliders = new ArrayList<Collidable>();
-    for (int i=0; i < collidables.length; i++) {
-      static_colliders.add(collidables[i]);
-    }
   }
   
-  public void addCollidables(Collidable[] coll) {
-    for (int i=0; i < coll.length; i++) 
-      static_colliders.add(coll[i]);
+
+  public void addCollidables(Collidable[] collidables)
+  {
+    for (int i = 0; i < collidables.length; i++)
+    {
+      if(static_colliders.contains(collidables[i]))
+      {
+        println(this + " WARNING: tried to add instance " + collidables[i] + " twice");
+      }
+      else
+      {
+        static_colliders.add(collidables[i]);
+      }
+    }
   }
     
   
