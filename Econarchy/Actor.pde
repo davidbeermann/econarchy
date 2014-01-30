@@ -1,26 +1,3 @@
-//super uber class to enable collision detection
-public class Collidable {
-  
-  public Collidable() {
-  }
-  
-  public boolean isEnemy() {
-    return false;
-  }
-  
-  public boolean isPlatform() {
-    return false;
-  }
-  
-  //return empty bounding box
-  public BoundingBox getBounds() {
-    return new BoundingBox(0,0,0,0);
-  }
-  
-  public void handleCollision(Collision c) {}
-}
-
-
 public class Actor extends Collidable
 {
   PVector startPosition, position;
@@ -56,7 +33,6 @@ public class Actor extends Collidable
     return;
   }
 }
-
 
 
 public class Player extends Actor
