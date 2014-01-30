@@ -305,9 +305,10 @@ public class Player extends Actor
 
 public class Enemy extends Actor
 {
+  float speed;
   float leftBoundary, rightBoundary;
   PImage[] sprites;
-  PVector size;
+  PVector size, direction;
   
   
   public Enemy(PImage[] sprites, PVector position, float leftBoundary, float rightBoundary, float walkingSpeed, float runningSpeed)
@@ -318,6 +319,9 @@ public class Enemy extends Actor
     this.rightBoundary = rightBoundary;
     this.walkingSpeed = walkingSpeed;
     this.runningSpeed = runningSpeed;
+
+    // direction normals vector - used for multiplication of speed
+    direction = new PVector(0, 0);
     
     size = new PVector(sprites[0].width, sprites[0].height);
     avatar = createGraphics(sprites[0].width, sprites[0].height);
@@ -339,6 +343,9 @@ public class Enemy extends Actor
   public void reset()
   {
     this.position = new PVector(startPosition.x, startPosition.y);
+
+    direction.x = 1;
+    speed = walkingSpeed;
   }
     
     
@@ -353,11 +360,11 @@ public class Enemy extends Actor
     //println(this + " render() : walkingSpeed: " + walkingSpeed);
 
     // flip sprite images according to direction
-    if (walkingSpeed > 0)
+    if (direction.x > 0)
     {
       sprite.setFlipH(false);
     } 
-    else if (walkingSpeed < 0)
+    else if (direction.x < 0)
     {
       sprite.setFlipH(true);
     }
@@ -370,48 +377,56 @@ public class Enemy extends Actor
 
   public void patroling(Player player)
   {
-    if (spottedThePlayer(player) && !reachedEndOfPlattform()) 
+    // does the enemy see the player
+    if(spottedThePlayer(player))
     {
-      run();
+      speed = runningSpeed;
     }
     else
     {
-      if (reachedEndOfPlattform()) {
-        walkingSpeed = walkingSpeed*-1;
-        //runningSpeed = runningSpeed*-1;
-        walk();
-      }
-      else {
-        //extendable random behaviour
-        int r = int(random(30));
-        switch(r) {
-          case 0:
-          //with chance of 1/30 the enemy will turn around and walk in the other direction before reaching the end of the plattform
-          walkingSpeed = walkingSpeed*-1;
-          runningSpeed = runningSpeed*-1;
-          walk();
+      // add random enemy movement
+      int r = int(random(100));
+      switch(r)
+      {
+        // with chance of 1/100 the enemy will turn around and walk
+        // in the other direction before reaching the end of the plattform
+        case 0:
+          direction.x *= -1;
+          speed = walkingSpeed;
           break;
-          case 1: 
-          //with chance of 1/30 the enemy will stand still
+        //with chance of 1/100 the enemy will stand still
+        case 1: 
+          speed = 0;
           break;
-          default :
-          //with chance of 28/10 the enemy will continue walking in the same direction he was walking before.
-          walk();
+        //with chance of 98/100 the enemy will continue walking
+        // in the same direction he was walking before.
+        default:
+          speed = walkingSpeed;
           break;
-        }
       }
     }
+
+    // turn around at the end of platform
+    if (reachedEndOfPlattform())
+    {
+      direction.x *= -1;
+    }
+
+    position.add(direction.x * speed, 0, 0);
   }
 
-  public boolean reachedEndOfPlattform()
+
+  private boolean reachedEndOfPlattform()
   {
-    //has to be changed to platform size instead of windowsize
-    if (position.x<= leftBoundary && walkingSpeed < 0 || position.x>= rightBoundary && walkingSpeed > 0 )
+    //if (position.x <= leftBoundary && walkingSpeed < 0 || position.x >= rightBoundary && walkingSpeed > 0)
+    if (position.x <= leftBoundary && direction.x < 0 || position.x >= rightBoundary && direction.x > 0)
     {
       return true;
     }
+
     return false;
   }
+
 
   public boolean isInViewport(PVector playerpos)
   {
@@ -425,15 +440,17 @@ public class Enemy extends Actor
     }
   }
 
-  public boolean spottedThePlayer(Player player)
+
+  private boolean spottedThePlayer(Player player)
   {
-    if (walkingSpeed>0 && position.x< player.position.x && abs(player.position.y-position.y)<player.avatar.height|| walkingSpeed<0 && position.x> player.position.x && abs(player.position.y-position.y)<player.avatar.height) 
-    {
-      return true;
-    }
-    else {
-      return false;
-    }
+    // is player avatar within horizontal boudaries of enemy?
+    boolean inHBounds = player.position.x + player.avatar.width >= leftBoundary && player.position.x <= rightBoundary + size.x;
+    // is player avatar within vertical boudaries of enemy?
+    boolean inVBounds = player.position.y < position.y + size.y && player.position.y + player.avatar.height > position.y;
+    // is enemy facing the player?
+    boolean facingPlayer = abs((position.x + direction.x * speed) - player.position.x) < abs(position.x - player.position.x);
+
+    return inHBounds && inVBounds && facingPlayer;
   }
 }
 

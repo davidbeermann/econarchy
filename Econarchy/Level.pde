@@ -48,6 +48,7 @@ public class Level
 
     //calculate new velocity for player
     hans.updateVelocity();
+
     //do collision detection for this frame
     
     //update player position
@@ -66,7 +67,7 @@ public class Level
     {
       if (enemies[i].isInViewport(hans.position))
       {
-        //handing over hans position to determine if the enemy is seeing hans
+        // handing over hans position to determine if the enemy is seeing hans
         enemies[i].patroling(hans);
         
         renderedImage.image( enemies[i].enemyRender(), enemies[i].position.x, enemies[i].position.y);
