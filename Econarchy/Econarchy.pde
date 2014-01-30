@@ -31,7 +31,7 @@ public void setup()
 
 public void draw()
 { 
-  //println(frameRate);
+  //println(this + " frameRate: " + frameRate);
 
   background(0);
 
