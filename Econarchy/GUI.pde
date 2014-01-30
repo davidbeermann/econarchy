@@ -17,7 +17,7 @@ public class GUI
 		meterToGo = 0;
 		levelHeight = int(player.position.y / player.jumpHeight); 
 		playerpos = player.position.y;
-		pixelFont = loadFont("LCDDot-48.vlw");
+		pixelFont = loadFont("resources/fonts/LCDDot-48.vlw");
 		sawInfoScreen = false;
 		
 	}

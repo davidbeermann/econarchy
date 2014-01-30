@@ -15,7 +15,7 @@ public class SoundEvent {
 		fxSounds = new HashMap<String, AudioSample>();	
 		
 		// Put some fancy theme music here
-		theme = minim.loadFile("theme.wav");
+		theme = minim.loadFile("resources/sounds/theme.wav");
 		
 		theme.play();
 		theme.loop();
@@ -24,7 +24,7 @@ public class SoundEvent {
 	public void sound(String event)
 	{	
 		AudioSample efect = null;
-		String filename = event+".wav";
+		String filename = "resources/sounds/" + event + ".wav";
 		File f = new File(dataPath(filename));
 		if (fxSounds.containsKey(event)) {
 			efect = fxSounds.get(event);
