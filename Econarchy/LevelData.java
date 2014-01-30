@@ -45,7 +45,10 @@ public class LevelData
     this.applet = applet;
     
     id = data.getString("id");
-    size = new PVector(data.getInt("width"), data.getInt("height"));
+    levelWidth = data.getInt("width");
+    levelHeight = data.getInt("height");
+    size = new PVector(levelWidth, levelHeight);
+    
 
     // ----- PARSE RESOURCES -----
     // ---------------------------
