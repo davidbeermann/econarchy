@@ -31,9 +31,8 @@ public class GUI
 
 	void storyCounter()
 	{
-		if (!game.gameOver) {
-			
-			
+		if (!game.gameOver)
+		{
 			meterToGo = levelHeight - int((playerpos - player.position.y)/player.jumpHeight);
 			
 			fill(0);
@@ -79,7 +78,7 @@ void gameOver()
 		}
 		else 
 		{
-			println("GAME OVER");
+			//println(this + " state: GAME OVER");
 			rect(0, 0, width, height);
 			textAlign(CENTER,CENTER);
 			fill(255);
@@ -103,7 +102,5 @@ void gameOver()
 				}
 			}
 		}
-
-
 	}
 }

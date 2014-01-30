@@ -25,15 +25,27 @@ public class Level
 
   public void reset()
   {
-    //TODO write real reset for enemies
-    addEnemies();
+    for(Platform platform : platforms)
+    {
+      platform.reset();
+    }
 
-    hans.updatePosition(getPlayerStartPosition());
+    for(Enemy enemy : enemies)
+    {
+      enemy.reset();
+    }
+
+    hans.reset();
   }
 
 
   public void render()
   {
+    if(!hans.alive)
+    {
+      return;
+    }
+
     //calculate new velocity for player
     hans.updateVelocity();
     //do collision detection for this frame
@@ -127,14 +139,10 @@ public class Level
 
   private void addPlayer()
   {
-    hans = new Player(LevelData.getInstance().getPlayerSpriteVO(), getPlayerStartPosition());
-  }
+    hans = new Player(LevelData.getInstance().getPlayerSpriteVO());
 
-
-  private PVector getPlayerStartPosition()
-  {
-    //playerAvatar size is currently 30 x 30 therefore x-15 and y-30
-    return new PVector(renderedImage.width/2 -15, renderedImage.height-30, 0);
+    PVector position = new PVector(renderedImage.width/2 - hans.avatar.width / 2, renderedImage.height - hans.avatar.height, 0);
+    hans.init(position);
   }
   
   

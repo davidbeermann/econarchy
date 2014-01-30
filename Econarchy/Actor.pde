@@ -23,7 +23,7 @@ public class Collidable {
 
 public class Actor extends Collidable
 {
-  PVector position;
+  PVector startPosition, position;
   float walkingSpeed, runningSpeed;
   PGraphics avatar;
   Sprite sprite;
@@ -31,8 +31,14 @@ public class Actor extends Collidable
   
   public Actor()
   {
-    walkingSpeed = 1;
-    runningSpeed = 5;
+    walkingSpeed = 0;
+    runningSpeed = 0;
+  }
+
+  public void reset()
+  {
+    walkingSpeed = 0;
+    runningSpeed = 0;
   }
 
   public void walk()
@@ -68,36 +74,52 @@ public class Player extends Actor
   PImage[] run, jump, idle, die;
   
   
-  public Player(LevelData.PlayerSpriteVO spriteVO, PVector position)
+  public Player(LevelData.PlayerSpriteVO spriteVO)
   {
     super();
-    
-    currVelocity = new PVector(0.0, 0.0);
-    gravityAcc = new PVector(0.0, 10.0);
-    walkingSpeed = 10;
-    jumpHeight = 10;
-    lowerBoundary = position.y;
-    this.position = position;
-    
+
+    // get instance of global key tracker
     keyTracker = KeyTracker.getInstance();
-    
+
+    // retrieve sprite images
     LevelData levelData = LevelData.getInstance();
     run = levelData.getImageResources(spriteVO.runIds);
     jump = levelData.getImageResources(spriteVO.jumpIds);
     idle = levelData.getImageResources(spriteVO.idleIds);
     die = levelData.getImageResources(spriteVO.dieIds);
-    
+
+    // setup sprite
     avatar = createGraphics(run[0].width, run[0].height);
     sprite = new Sprite(avatar);
-    // set initial state of avatar
-    sprite.setImages("run", run);
-    sprite.setFlipH(true);
   }
 
 
-  public void updatePosition(PVector position)
+  public void init(PVector startPosition)
   {
-    this.position = position;
+    this.startPosition = startPosition;
+
+    // set correct initial values
+    reset();
+  }
+
+
+  @Override
+  public void reset()
+  {
+    position = new PVector(startPosition.x, startPosition.y);
+    lowerBoundary = startPosition.y;
+    
+    currVelocity = new PVector(0.0, 0.0);
+    gravityAcc = new PVector(0.0, 10.0);
+    walkingSpeed = 10;
+    jumpHeight = 10;
+
+    // set initial state of avatar
+    sprite.setImages("run", run);
+    sprite.setFlipH(true);
+
+    alive = true;
+    doubleJumpEnabled = true;
   }
 
 
@@ -292,12 +314,13 @@ public class Player extends Actor
 
     if (c.getCollider().isEnemy())
     {
-      println("ENEMY COLLISION _ YOU'RE DEAD");
       if (alive)
       {
-        music.sound("dead");  
+        alive = false;
+        music.sound("dead");
+
+        println(this + " ENEMY COLLISION _ YOU'RE DEAD");
       }
-      alive = false;
     }
   }
 }
@@ -314,7 +337,7 @@ public class Enemy extends Actor
   public Enemy(PImage[] sprites, PVector position, float leftBoundary, float rightBoundary, float walkingSpeed, float runningSpeed)
   {
     this.sprites = sprites;
-    this.position = position;
+    this.startPosition = position;
     this.leftBoundary = leftBoundary;
     this.rightBoundary = rightBoundary;
     this.walkingSpeed = walkingSpeed;
@@ -324,6 +347,8 @@ public class Enemy extends Actor
     avatar = createGraphics(sprites[0].width, sprites[0].height);
     sprite = new Sprite(avatar);
     sprite.setImages("walk", sprites);
+
+    reset();
   }
   
   
@@ -331,6 +356,13 @@ public class Enemy extends Actor
   public BoundingBox getBounds()
   {
     return new BoundingBox(position, size);
+  }
+
+
+  @Override
+  public void reset()
+  {
+    this.position = new PVector(startPosition.x, startPosition.y);
   }
     
     

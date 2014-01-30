@@ -5,7 +5,9 @@ public class Platform extends Collidable
   private PVector position, size;
   private PImage image;
   private BoundingBox box;
-  private int breakCount = 0;
+  private boolean broken;
+  private int breakCount;
+  private int alphaValue;
  
 
   public Platform(String id, Type.Platform type, PVector position, PImage image)
@@ -15,31 +17,59 @@ public class Platform extends Collidable
     this.position = position;
     this.image = image;
     
+    reset();
+  }
+
+
+  public void reset()
+  {
     size = new PVector(image.width, image.height);
     box = new BoundingBox(position.x, position.y, position.x + image.width, position.y + image.height);
+
+    broken = false;
+    breakCount = 0;
+    alphaValue = 255;
   }
 
 
   public void render(PGraphics output)
   {
+    if(broken && alphaValue < 0.5)
+    {
+      return;
+    }
+
+    if(broken && size.x != 0)
+    {
+      if(++breakCount > 10)
+      {
+        size.x = size.y = 0;
+        box.updateDimensions(position, size);
+      }
+    }
+
     if(size.x != 0)
     {
       output.image(image, position.x, position.y);
     }
-    else
+    else if(alphaValue > 0.5)
     {
-      //TODO add animation for disappearing platform
+      alphaValue -= alphaValue * 0.1;
+      
+      output.tint(255, alphaValue);
+      output.image(image, position.x, position.y);
+      output.tint(255, 255);
+    }
+    else
+    { 
+      // do nothing here :)
     }
   }
   
   
   public void setBroken()
   {
-    if(++breakCount > 10)
-    {
-      size.x = size.y = 0;
-      box.updateDimensions(position, size);
-    }
+    broken = true;
   }
   
   
