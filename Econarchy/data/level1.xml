@@ -14,10 +14,20 @@
 			<image id="breakable" url="resources/level1/platform_breakable.png" />
 			<image id="slippery" url="resources/level1/platform_slippery.png" />
 			<!-- enemy images -->
-			<image id="enemy1_state1" url="resources/enemies/enemy1_state1.gif" />
-			<image id="enemy1_state2" url="resources/enemies/enemy1_state2.gif" />
-			<image id="enemy1_state3" url="resources/enemies/enemy1_state3.gif" />
-			<image id="enemy1_state4" url="resources/enemies/enemy1_state4.gif" />
+			<image id="e1_f1" url="resources/enemies/enemy1_state1.gif" />
+			<image id="e1_f2" url="resources/enemies/enemy1_state2.gif" />
+			<image id="e1_f3" url="resources/enemies/enemy1_state3.gif" />
+			<image id="e1_f4" url="resources/enemies/enemy1_state4.gif" />
+			<image id="e1_f5" url="resources/enemies/enemy1_state5.gif" />
+			<image id="e1_f6" url="resources/enemies/enemy1_state6.gif" />
+			<image id="e1_f7" url="resources/enemies/enemy1_state7.gif" />
+			<image id="e1_f8" url="resources/enemies/enemy1_state8.gif" />
+			<image id="e2_f1" url="resources/enemies/enemy2_state1.gif" />
+			<image id="e2_f2" url="resources/enemies/enemy2_state2.gif" />
+			<image id="e2_f3" url="resources/enemies/enemy2_state3.gif" />
+			<image id="e2_f4" url="resources/enemies/enemy2_state4.gif" />
+			<image id="e2_f5" url="resources/enemies/enemy2_state5.gif" />
+			<image id="e2_f6" url="resources/enemies/enemy2_state6.gif" />
 		</images>
 	</resources>
 	<specification>
@@ -47,13 +57,14 @@
 		</platforms>
 		<!-- enemy definitions -->
 		<enemy_sprites>
-			<enemy_sprite id="enemy1" imageIds="enemy1_state1,enemy1_state2,enemy1_state3,enemy1_state4" />
+			<enemy_sprite id="enemy1" imageIds="e1_f1,e1_f2,e1_f3,e1_f4,e1_f5,e1_f6,e1_f7,e1_f8" />
+			<enemy_sprite id="enemy2" imageIds="e2_f1,e2_f2,e2_f3,e2_f4,e2_f5,e2_f6" />
 		</enemy_sprites>
 		<enemies>
 			<enemy spriteId="enemy1" platformId="p1" walkingSpeed="1" runningSpeed="5" startPosition="0.5" />
-			<enemy spriteId="enemy1" platformId="p4" walkingSpeed="1" runningSpeed="5" startPosition="0.5" />
+			<enemy spriteId="enemy2" platformId="p4" walkingSpeed="1" runningSpeed="5" startPosition="0.5" />
 			<enemy spriteId="enemy1" platformId="p6" walkingSpeed="1" runningSpeed="5" startPosition="0.5" />
-			<enemy spriteId="enemy1" platformId="p10" walkingSpeed="1" runningSpeed="5" startPosition="0.5" />
+			<enemy spriteId="enemy2" platformId="p10" walkingSpeed="1" runningSpeed="5" startPosition="0.5" />
 		</enemies>
 	</specification>
 </econarchy_level>
