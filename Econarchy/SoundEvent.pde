@@ -2,6 +2,7 @@ import ddf.minim.*;
 
 public class SoundEvent
 {
+	boolean enabled = true;
 	Minim minim;
 	AudioPlayer theme;	
 	HashMap<String, AudioSample> fxSounds;	
@@ -15,31 +16,33 @@ public class SoundEvent
 		
 		// Put some fancy theme music here
 		theme = minim.loadFile("resources/sounds/theme.wav");	
-		theme.play();
-		theme.loop();
+		if(enabled)
+		{
+			theme.play();
+			theme.loop();
+		}
 	}
 
 
 	public void sound(String event)
 	{	
-		AudioSample efect = null;
+		AudioSample effect = null;
 		String filename = "resources/sounds/" + event + ".wav";
 		File f = new File(dataPath(filename));
-		if (fxSounds.containsKey(event)) {
-			efect = fxSounds.get(event);
-		} else if (f.exists()){
-			efect= minim.loadSample(filename,512);
-			fxSounds.put(event, efect);
 
+		if (fxSounds.containsKey(event))
+		{
+			effect = fxSounds.get(event);
+		}
+		else if (f.exists())
+		{
+			effect= minim.loadSample(filename,512);
+			fxSounds.put(event, effect);
 		}
 
-		if (efect != null) {
-			efect.trigger();
+		if (enabled && effect != null)
+		{
+			effect.trigger();
 		}
 	}
-
-
-	public void backagroundTheme()
-    {
-    }
 }
