@@ -66,6 +66,7 @@ public class Player extends Actor
     idle = levelData.getImageResources(spriteVO.idleIds);
     die = levelData.getImageResources(spriteVO.dieIds);
     levelWidth = levelData.levelWidth;
+    lowerBoundary = levelData.levelHeight;
 
     // setup sprite
     avatar = createGraphics(run[0].width, run[0].height);
@@ -185,7 +186,10 @@ public class Player extends Actor
   {
     if (alive)
     {
-      position.add(currVelocity);
+      PVector tmpPos = PVector.add(position,currVelocity);
+      if ( tmpPos.x > 1 && tmpPos.x < levelWidth) //only move if velocity doesn't push player out of level
+        position.add(currVelocity);
+      
       //println("player_position.x: " + position.x + "   .y: " + position.y);
       //println ("UPWARD FORCE: " + currVelocity.y);
     }
@@ -247,6 +251,7 @@ public class Player extends Actor
     PVector tmpAccel = PVector.mult(gravityAcc, 1.0/30.0); //calculate gravitational Acceleration, assuming 30fps/can later be adjusted to use realtime for better simulation
        
      //apply gravity
+    // if (position.y < lowerBoundary)
        currVelocity.add(tmpAccel);  
   
       if ( chuteActive && currVelocity.y > speedMax )
@@ -259,13 +264,13 @@ public class Player extends Actor
   public void handleCollision(Collision c)
   {
     doubleJumpEnabled = true;
-    if ( c.direction == 1 || c.direction == 3 || c.direction == 5 ) //left/top-left/bottom-left
+    if ( c.direction == 1 || c.direction == 5 ) //left/top-left/bottom-left
     {
       if ( currVelocity.x > 0 ) ///if player moves to the right 
         currVelocity.x *= -1;
     }
     
-    if ( c.direction == 8 || c.direction == 10 || c.direction == 12 ) //right/top-right/bottom-right
+    if ( c.direction == 8 || c.direction == 12 ) //right/top-right/bottom-right
     {
       if ( currVelocity.x < 0 ) // player moves to the left
         currVelocity.x *= -1;
