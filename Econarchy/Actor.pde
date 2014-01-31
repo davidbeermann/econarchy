@@ -446,7 +446,8 @@ public class Enemy extends Actor
     else
     {
       playerSpotted = false;
-
+      speed = walkingSpeed;
+      
       // add random enemy movement
       /*int r = int(random(100));
       switch(r)
