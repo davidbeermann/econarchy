@@ -50,6 +50,7 @@ public class Player extends Actor
   int levelWidth;
   KeyTracker keyTracker; // keypress storage
   PImage[] run, jump, idle, die;
+  boolean flagRaised = false;
   
   
   public Player(LevelData.PlayerSpriteVO spriteVO)
@@ -103,6 +104,7 @@ public class Player extends Actor
     doubleJumpEnabled = true;
     chuteActive = false;
     collisionInProgress = false;
+    flagRaised = false;
   }
 
 
@@ -172,12 +174,12 @@ public class Player extends Actor
   public void jump()
   {
     if ( doubleJumpEnabled && !chuteActive) {
-      println("JUMP");
+      //println("JUMP");
       if ( currVelocity.y <= 0.1 && currVelocity.y > -0.1 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
       { 
         currVelocity.y = -jumpHeight; //FIXME: optimize double jump here
         music.sound("jump");
-        println("CAN DOUBLEJUMP: " + doubleJumpEnabled);
+        //println("CAN DOUBLEJUMP: " + doubleJumpEnabled);
         doubleJumpEnabled = !doubleJumpEnabled;
       }
     }
@@ -228,7 +230,6 @@ public class Player extends Actor
         if (chuteActive) 
           speedMax = 21;
       }
-      
       if(keyTracker.rightPressed())
       {
         if (currVelocity.x <= walkingSpeed)
@@ -236,7 +237,6 @@ public class Player extends Actor
         if (chuteActive) 
           speedMax = 21;
       }
-
       if(keyTracker.upPressed()) //enable double jump here, to disable set to 0
       {
         jump();
@@ -315,6 +315,12 @@ public class Player extends Actor
        // println(this + " ENEMY COLLISION _ YOU'RE DEAD");
       }
     }
+    
+    if (c.getCollider().isFlag())
+      flagRaised = true;
+     
+    if (c.getCollider().isParachute())
+      chuteActive = true;
     }
     collisionInProgress = false;
   }
@@ -406,10 +412,9 @@ public class Enemy extends Actor
     else
     {
       playerSpotted = false;
-      speed = walkingSpeed;
-      
+
       // add random enemy movement
-      /*int r = int(random(100));
+      int r = int(random(100));
       switch(r)
       {
         // with chance of 1/100 the enemy will turn around and walk
@@ -427,7 +432,7 @@ public class Enemy extends Actor
         default:
           speed = walkingSpeed;
           break;
-      }*/
+      }
     }
 
     // turn around at the end of platform
