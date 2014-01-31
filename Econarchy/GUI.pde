@@ -72,7 +72,7 @@ void gameOver()
 	if (!player.alive) 
 	{
 		game.gameOver=true;
-		fill(0, 200);
+		fill(#DB1444, 200);
 		if (frame*20< height) 
 		{
 			rect(0, 0, width, size);

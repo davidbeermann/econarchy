@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<econarchy_level id="level1" width="400" height="2000">
+	<!-- resource ids must be UNIQUE!!! -->
+	<resources>
+		<images>
+			<!-- foreground images -->
+			<image id="foreground1" url="resources/level1/foreground_layer1.png" />
+			<!-- background images -->
+			<image id="background1" url="resources/level1/background_layer1.png" />
+			<image id="background2" url="resources/level1/background_layer2.png" />
+			<image id="background3" url="resources/level1/background_layer3.png" />
+			<!-- platform images -->
+			<image id="stable" url="resources/level1/platform_stable.png" />
+			<image id="breakable" url="resources/level1/platform_breakable.png" />
+			<image id="slippery" url="resources/level1/platform_slippery.png" />
+			<!-- player images -->
+			<image id="p_run_f1" url="resources/player/player_run_frame1.gif" />
+			<image id="p_run_f2" url="resources/player/player_run_frame2.gif" />
+			<image id="p_run_f3" url="resources/player/player_run_frame3.gif" />
+			<image id="p_run_f4" url="resources/player/player_run_frame4.gif" />
+			<image id="p_run_f5" url="resources/player/player_run_frame5.gif" />
+			<image id="p_run_f6" url="resources/player/player_run_frame6.gif" />
+			<image id="p_run_f7" url="resources/player/player_run_frame7.gif" />
+			<image id="p_run_f8" url="resources/player/player_run_frame8.gif" />
+			<image id="p_jump_f1" url="resources/player/player_jump_frame1.gif" />
+			<image id="p_jump_f2" url="resources/player/player_jump_frame2.gif" />
+			<image id="p_idle_f1" url="resources/player/player_idle_frame1.gif" />
+			<image id="p_idle_f2" url="resources/player/player_idle_frame1.gif" />
+			<image id="p_die_f1" url="resources/player/dead.gif" />
+			<!-- enemy images -->
+			<image id="e1_f1" url="resources/enemies/enemy1_state1.gif" />
+			<image id="e1_f2" url="resources/enemies/enemy1_state2.gif" />
+			<image id="e1_f3" url="resources/enemies/enemy1_state3.gif" />
+			<image id="e1_f4" url="resources/enemies/enemy1_state4.gif" />
+			<image id="e1_f5" url="resources/enemies/enemy1_state5.gif" />
+			<image id="e1_f6" url="resources/enemies/enemy1_state6.gif" />
+			<image id="e1_f7" url="resources/enemies/enemy1_state7.gif" />
+			<image id="e1_f8" url="resources/enemies/enemy1_state8.gif" />
+			<image id="e2_f1" url="resources/enemies/enemy2_state1.gif" />
+			<image id="e2_f2" url="resources/enemies/enemy2_state2.gif" />
+			<image id="e2_f3" url="resources/enemies/enemy2_state3.gif" />
+			<image id="e2_f4" url="resources/enemies/enemy2_state4.gif" />
+			<image id="e2_f5" url="resources/enemies/enemy2_state5.gif" />
+			<image id="e2_f6" url="resources/enemies/enemy2_state6.gif" />
+		</images>
+	</resources>
+	<specification>
+		<!-- background and foreground parallax images should be from back to front -->
+		<backgrounds>
+			<background id="background3" />
+			<background id="background2" />
+			<background id="background1" />
+		</backgrounds>
+		<foregrounds>
+			<foreground id="foreground1" />
+		</foregrounds>
+		<!-- platform types have to match the image ids above!!! -->
+		<platforms>
+			<platform id="p1" type="stable" x="20" y="1900" />	
+			<platform id="p2" type="breakable" x="140" y="1800" />	
+			<platform id="p3" type="slippery" x="260" y="1700" />	
+			<platform id="p4" type="stable" x="20" y="1600" />	
+			<platform id="p5" type="breakable" x="140" y="1500" />	
+			<platform id="p6" type="slippery" x="260" y="1400" />	
+			<platform id="p7" type="stable" x="20" y="1300" />	
+			<platform id="p8" type="breakable" x="140" y="1200" />	
+			<platform id="p9" type="slippery" x="260" y="1100" />	
+			<platform id="p10" type="stable" x="20" y="1000" />	
+			<platform id="p11" type="breakable" x="140" y="900" />	
+			<platform id="p12" type="slippery" x="260" y="800" />	
+		</platforms>
+		<!-- player specs -->
+		<player_sprite>
+			<runFrames imageIds="p_run_f1,p_run_f2,p_run_f3,p_run_f4,p_run_f5,p_run_f6,p_run_f7,p_run_f8" />
+			<jumpFrames imageIds="p_jump_f1,p_jump_f2" />
+			<idleFrames imageIds="p_idle_f1,p_idle_f2" />
+			<dieFrames imageIds="p_die_f1" />
+		</player_sprite>
+		<!-- enemy definitions -->
+		<enemy_sprites>
+			<enemy_sprite id="enemy1" imageIds="e1_f1,e1_f2,e1_f3,e1_f4,e1_f5,e1_f6,e1_f7,e1_f8" />
+			<enemy_sprite id="enemy2" imageIds="e2_f1,e2_f2,e2_f3,e2_f4,e2_f5,e2_f6" />
+		</enemy_sprites>
+		<enemies>
+			<enemy spriteId="enemy1" platformId="p1" walkingSpeed="1" runningSpeed="2" startPosition="0.5" />
+			<enemy spriteId="enemy2" platformId="p4" walkingSpeed="1" runningSpeed="3" startPosition="0.5" />
+			<enemy spriteId="enemy1" platformId="p6" walkingSpeed="1" runningSpeed="2" startPosition="0.5" />
+			<enemy spriteId="enemy2" platformId="p10" walkingSpeed="1" runningSpeed="3" startPosition="0.5" />
+		</enemies>
+	</specification>
+</econarchy_level>
