@@ -37,7 +37,7 @@ public class Actor extends Collidable
 
 public class Player extends Actor
 {
-  boolean alive = true;
+  boolean alive = true, collisionInProgress = false;
   float acceleration = 0.5;
   PVector currVelocity;
   PVector gravityAcc;
@@ -50,6 +50,7 @@ public class Player extends Actor
   int levelWidth;
   KeyTracker keyTracker; // keypress storage
   PImage[] run, jump, idle, die;
+  boolean flagRaised = false;
   
   
   public Player(LevelData.PlayerSpriteVO spriteVO)
@@ -102,6 +103,8 @@ public class Player extends Actor
     alive = true;
     doubleJumpEnabled = true;
     chuteActive = false;
+    collisionInProgress = false;
+    flagRaised = false;
   }
 
 
@@ -171,11 +174,12 @@ public class Player extends Actor
   public void jump()
   {
     if ( doubleJumpEnabled && !chuteActive) {
+      //println("JUMP");
       if ( currVelocity.y <= 0.1 && currVelocity.y > -0.1 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
       { 
         currVelocity.y = -jumpHeight; //FIXME: optimize double jump here
         music.sound("jump");
-        println("CAN DOUBLEJUMP: " + doubleJumpEnabled);
+        //println("CAN DOUBLEJUMP: " + doubleJumpEnabled);
         doubleJumpEnabled = !doubleJumpEnabled;
       }
     }
@@ -187,11 +191,10 @@ public class Player extends Actor
     if (alive)
     {
       PVector tmpPos = PVector.add(position,currVelocity);
-      if ( tmpPos.x > 1 && tmpPos.x < levelWidth) //only move if velocity doesn't push player out of level
-        position.add(currVelocity);
-      
-      //println("player_position.x: " + position.x + "   .y: " + position.y);
-      //println ("UPWARD FORCE: " + currVelocity.y);
+      if ( tmpPos.x > 0 && tmpPos.x < levelWidth-30) //only move if velocity doesn't push player out of level
+        position.x = tmpPos.x;
+      if ( tmpPos.y < lowerBoundary || tmpPos.y > 0)
+        position.y = tmpPos.y;
     }
   }
   
@@ -227,7 +230,6 @@ public class Player extends Actor
         if (chuteActive) 
           speedMax = 21;
       }
-      
       if(keyTracker.rightPressed())
       {
         if (currVelocity.x <= walkingSpeed)
@@ -235,7 +237,6 @@ public class Player extends Actor
         if (chuteActive) 
           speedMax = 21;
       }
-
       if(keyTracker.upPressed()) //enable double jump here, to disable set to 0
       {
         jump();
@@ -244,25 +245,30 @@ public class Player extends Actor
     // if neither gamepad is moved nor keypresses are detected - slow down player
     else
     {
-      currVelocity.x *= 0.8;
+      currVelocity.x *= 0;
     }
        
     //calculate gravity vector
     PVector tmpAccel = PVector.mult(gravityAcc, 1.0/30.0); //calculate gravitational Acceleration, assuming 30fps/can later be adjusted to use realtime for better simulation
        
      //apply gravity
-    // if (position.y < lowerBoundary)
+     if (position.y < lowerBoundary-100)
        currVelocity.add(tmpAccel);  
   
       if ( chuteActive && currVelocity.y > speedMax )
         currVelocity.y = speedMax;
      
-      println(currVelocity.y);
+     // println(currVelocity.y);
   }
   
   
   public void handleCollision(Collision c)
   {
+    //doubleJumpEnabled = true;
+    if (collisionInProgress == false) {
+      //println("COLLISION");
+    collisionInProgress = true;
+    
     doubleJumpEnabled = true;
     if ( c.direction == 1 || c.direction == 5 ) //left/top-left/bottom-left
     {
@@ -309,6 +315,14 @@ public class Player extends Actor
        // println(this + " ENEMY COLLISION _ YOU'RE DEAD");
       }
     }
+    
+    if (c.getCollider().isFlag())
+      flagRaised = true;
+     
+    if (c.getCollider().isParachute())
+      chuteActive = true;
+    }
+    collisionInProgress = false;
   }
 }
 
@@ -398,10 +412,9 @@ public class Enemy extends Actor
     else
     {
       playerSpotted = false;
-      speed = walkingSpeed;
-      
+
       // add random enemy movement
-      /*int r = int(random(100));
+      int r = int(random(100));
       switch(r)
       {
         // with chance of 1/100 the enemy will turn around and walk
@@ -419,7 +432,7 @@ public class Enemy extends Actor
         default:
           speed = walkingSpeed;
           break;
-      }*/
+      }
     }
 
     // turn around at the end of platform

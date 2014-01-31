@@ -113,6 +113,21 @@ public class Collidable
     return false;
   }
   
+  public boolean isFlag() 
+  {
+    return false;
+  }
+  
+  public boolean isGoal() 
+  {
+    return false;
+  }
+  
+  public boolean isParachute() 
+  {
+    return false;
+  }
+  
   //return empty bounding box
   public BoundingBox getBounds()
   {
@@ -166,3 +181,4 @@ public static class BoundingBox
   }
   
 }
+
