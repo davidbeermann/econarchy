@@ -62,6 +62,7 @@ HOW TO COMPILE THE SOURCES:
 - Download Processing (http://processing.org)
 - Copy libraries from source folder into main Processing libraries folder
 - Click Econarchy.pde in order to open project in Processing
+- For XBox gamepad support please attach the controller to the computer and change the boolean value for 'gamepadEnabled' at the top of Econarchy.pde to 'true' before compiling the application. Currently only the XBox wireless gamepad is supported!
 
 ---
 
