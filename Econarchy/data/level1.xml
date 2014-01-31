@@ -42,8 +42,13 @@
 			<image id="e2_f4" url="resources/enemies/enemy2_state4.gif" />
 			<image id="e2_f5" url="resources/enemies/enemy2_state5.gif" />
 			<image id="e2_f6" url="resources/enemies/enemy2_state6.gif" />
-			<!-- effect images -->
+			<!-- extra images -->
 			<image id="spotted" url="resources/extras/spotted.png" />
+			<image id="flag_inactive" url="resources/extras/flag_inactive.png" />
+			<image id="flag_active1" url="resources/extras/flag_active_frame1.png" />
+			<image id="flag_active2" url="resources/extras/flag_active_frame2.png" />
+			<image id="flag_active3" url="resources/extras/flag_active_frame3.png" />
+			<image id="flag_active4" url="resources/extras/flag_active_frame4.png" />
 		</images>
 	</resources>
 	<specification>
@@ -58,43 +63,35 @@
 		</foregrounds>
 		<!-- platform types have to match the image ids above!!! -->
 		<platforms>
-			<platform id="p1" type="stable" x="161" y="1850"/>
-			<platform id="p2" type="stable" x="161" y="1715"/>
-			<platform id="p25" type="breakable" x="161" y="1575"/>
-			<platform id="p3" type="stable" x="323" y="1500"/>
-			<platform id="p4" type="stable" x="10" y="1615"/>
-			<platform id="p5" type="slippery" x="20" y="1495"/>
-			<platform id="p6" type="breakable" x="150" y="1400"/>
-			<platform id="p7" type="stable" x="323" y="1300"/>
-			<platform id="p8" type="stable" x="10" y="1395"/>
-			<platform id="p9" type="stable" x="120" y="1275"/>
-			<platform id="p10" type="stable" x="300" y="1175"/>
-			<platform id="p22" type="breakable" x="172" y="1125"/>
-			<platform id="p11" type="slippery" x="40" y="1065"/>
-
-			<platform id="p27" type="breakable" x="300" y="999"/>
-
-			<platform id="p12" type="stable" x="5" y="925"/>
-
-			<platform id="p23" type="brakable" x="160" y="890"/>
-
-			<platform id="p13" type="stable" x="300" y="845"/>
-			<platform id="p14" type="slippery" x="10" y="775"/>
-			<platform id="p24" type="breakable" x="110" y="740"/>
-			<platform id="p15" type="stable" x="220" y="630"/>
-			<platform id="p16" type="stable" x="10" y="550"/>
-			<platform id="p17" type="slippery" x="161" y="475"/>
-			<platform id="p11" type="breakable" x="50" y="350"/>
-			<platform id="p18" type="stable" x="300" y="385"/>
-			<platform id="p19" type="slippery" x="300" y="320"/>
-			<platform id="p20" type="breakable" x="200" y="200"/>
-			<platform id="p28" type="slippery" x="30" y="230"/>
-			<platform id="p26" type="stable" x="51" y="108"/>
-			
-
-
-			
-			</platforms>
+			<platform id="p1" type="stable" x="161" y="1850" hasFlag="true"/>
+			<platform id="p2" type="stable" x="161" y="1715" hasFlag="false"/>
+			<platform id="p25" type="breakable" x="161" y="1575" hasFlag="false"/>
+			<platform id="p3" type="stable" x="323" y="1500" hasFlag="false"/>
+			<platform id="p4" type="stable" x="10" y="1615" hasFlag="false"/>
+			<platform id="p5" type="slippery" x="20" y="1495" hasFlag="false"/>
+			<platform id="p6" type="breakable" x="150" y="1400" hasFlag="false"/>
+			<platform id="p7" type="stable" x="323" y="1300" hasFlag="false"/>
+			<platform id="p8" type="stable" x="10" y="1395" hasFlag="false"/>
+			<platform id="p9" type="stable" x="120" y="1275" hasFlag="false"/>
+			<platform id="p10" type="stable" x="300" y="1175" hasFlag="false"/>
+			<platform id="p22" type="breakable" x="172" y="1125" hasFlag="false"/>
+			<platform id="p11" type="slippery" x="40" y="1065" hasFlag="false"/>
+			<platform id="p27" type="breakable" x="300" y="999" hasFlag="false"/>
+			<platform id="p12" type="stable" x="5" y="925" hasFlag="false"/>
+			<platform id="p23" type="brakable" x="160" y="890" hasFlag="false"/>
+			<platform id="p13" type="stable" x="300" y="845" hasFlag="false"/>
+			<platform id="p14" type="slippery" x="10" y="775" hasFlag="false"/>
+			<platform id="p24" type="breakable" x="110" y="740" hasFlag="false"/>
+			<platform id="p15" type="stable" x="220" y="630" hasFlag="false"/>
+			<platform id="p16" type="stable" x="10" y="550" hasFlag="false"/>
+			<platform id="p17" type="slippery" x="161" y="475" hasFlag="false"/>
+			<platform id="p11" type="breakable" x="50" y="350" hasFlag="false"/>
+			<platform id="p18" type="stable" x="300" y="385" hasFlag="false"/>
+			<platform id="p19" type="slippery" x="300" y="320" hasFlag="false"/>
+			<platform id="p20" type="breakable" x="200" y="200" hasFlag="false"/>
+			<platform id="p28" type="slippery" x="30" y="230" hasFlag="false"/>
+			<platform id="p26" type="stable" x="51" y="108" hasFlag="false"/>
+		</platforms>
 		<!-- player specs -->
 		<player_sprite>
 			<runFrames imageIds="p_run_f1,p_run_f2,p_run_f3,p_run_f4,p_run_f5,p_run_f6,p_run_f7,p_run_f8" />

@@ -7,6 +7,20 @@ public class CollisionDetector
   {
     static_colliders = new ArrayList<Collidable>();
   }
+
+
+  public void addCollidable(Collidable collidable)
+  {
+    if(static_colliders.contains(collidable))
+      {
+        println(this + " WARNING: tried to add instance " + collidable + " twice");
+      }
+      else
+      {
+       println( "ADDING COLLIDER: " + collidable + " " + collidable.getBounds().x);
+        static_colliders.add(collidable);
+      }
+  }
   
 
   public void addCollidables(Collidable[] collidables)
@@ -113,7 +127,7 @@ public class Collidable
     return false;
   }
   
-  public boolean isFlag() 
+  public boolean isFlag()
   {
     return false;
   }

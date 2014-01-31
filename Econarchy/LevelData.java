@@ -111,7 +111,13 @@ public class LevelData
       }
       else
       {
-        platformSpecs[i] = new PlatformSpec(platformXML.getString("id"), platformType, platformXML.getInt("x"), platformXML.getInt("y"));
+        platformSpecs[i] = new PlatformSpec(
+          platformXML.getString("id"),
+          platformType,
+          platformXML.getInt("x"),
+          platformXML.getInt("y"),
+          platformXML.getString("hasFlag")
+        );
       }
     }
 
@@ -244,12 +250,14 @@ public class LevelData
     private String id;
     private Type.Platform type;
     private PVector position;
+    String hasFlag;
   
-    public PlatformSpec(String id, Type.Platform type, int xPos, int yPos)
+    public PlatformSpec(String id, Type.Platform type, int xPos, int yPos, String hasFlag)
     {
       this.id = id;
       this.type = type;
       this.position = new PVector(xPos, yPos);
+      this.hasFlag = hasFlag;
     }
     
     public String getId()

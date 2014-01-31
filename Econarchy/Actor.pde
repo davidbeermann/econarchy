@@ -265,64 +265,80 @@ public class Player extends Actor
   public void handleCollision(Collision c)
   {
     //doubleJumpEnabled = true;
-    if (collisionInProgress == false) {
+    if (collisionInProgress == false)
+    {
       //println("COLLISION");
-    collisionInProgress = true;
+      collisionInProgress = true;
     
-    doubleJumpEnabled = true;
-    if ( c.direction == 1 || c.direction == 5 ) //left/top-left/bottom-left
-    {
-      if ( currVelocity.x > 0 ) ///if player moves to the right 
-        currVelocity.x *= -1;
-    }
-    
-    if ( c.direction == 8 || c.direction == 12 ) //right/top-right/bottom-right
-    {
-      if ( currVelocity.x < 0 ) // player moves to the left
-        currVelocity.x *= -1;
-    }
-    
-    if ( c.direction != 1 || c.direction != 8 ) //left-top, top, right-top
-    {
-      if ( currVelocity.y > 0 ) { //player is falling
-        if ( currVelocity.y <= 20) { 
-          currVelocity.y = 0f;
-          position.y = c.getCollider().getBounds().top - avatar.height;
-        }
-        else 
-          alive = false;
-      }
-      else doubleJumpEnabled = false;
-    }
-
-    // check for breakable platforms
-    if (c.getCollider().isPlatform() && currVelocity.y == 0)
-    {
-      Platform platform = (Platform) c.getCollider();
-      if(platform.getType() == Type.Platform.BREAKABLE)
+      doubleJumpEnabled = true;
+      if ( c.direction == 1 || c.direction == 5 ) //left/top-left/bottom-left
       {
-        platform.setBroken();
+        if ( currVelocity.x > 0 ) ///if player moves to the right 
+          currVelocity.x *= -1;
       }
       
-    }
-
-    if (c.getCollider().isEnemy())
-    {
-      if (alive)
+      if ( c.direction == 8 || c.direction == 12 ) //right/top-right/bottom-right
       {
-        alive = false;
-        music.sound("dead");
-       // println(this + " ENEMY COLLISION _ YOU'RE DEAD");
+        if ( currVelocity.x < 0 ) // player moves to the left
+          currVelocity.x *= -1;
       }
+      
+      if ( c.direction != 1 || c.direction != 8 ) //left-top, top, right-top
+      {
+        if ( currVelocity.y > 0 ) //player is falling
+        {
+          if ( currVelocity.y <= 20)
+          { 
+            currVelocity.y = 0f;
+            position.y = c.getCollider().getBounds().top - avatar.height;
+          }
+          else
+          {
+            alive = false;
+          } 
+        }
+        else doubleJumpEnabled = false;
+      }
+
+      // check for breakable platforms
+      if (c.getCollider().isPlatform() && currVelocity.y == 0)
+      {
+        Platform platform = (Platform) c.getCollider();
+        if(platform.getType() == Type.Platform.BREAKABLE)
+        {
+          platform.setBroken();
+        }
+      }
+
+      print(c.getCollider() + " ");
+
+      // check for flag
+      if (c.getCollider().isFlag())
+      {
+        Flag flag = (Flag) c.getCollider();
+        flag.setActive();
+
+        flagRaised = true;
+        chuteActive = true;
+      }
+
+      if (c.getCollider().isEnemy())
+      {
+        if (alive)
+        {
+          alive = false;
+          music.sound("dead");
+         // println(this + " ENEMY COLLISION _ YOU'RE DEAD");
+        }
+      }
+       
+      /*if (c.getCollider().isParachute())
+      {
+        chuteActive = true;
+      }*/
+
+      collisionInProgress = false;
     }
-    
-    if (c.getCollider().isFlag())
-      flagRaised = true;
-     
-    if (c.getCollider().isParachute())
-      chuteActive = true;
-    }
-    collisionInProgress = false;
   }
 }
 

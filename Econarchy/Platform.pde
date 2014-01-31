@@ -114,21 +114,63 @@ public class Platform extends Collidable
   }
 }
 
-public class Flag extends Platform {
-  
-  public Flag(String id, PVector position, PImage image)
+
+public class Flag extends Collidable
+{
+  PVector position;
+  PImage[] inactive, active;
+  PGraphics graphic;
+  BoundingBox bounds;
+  Sprite sprite;
+
+
+  public Flag(PVector position)
   {
-    super(id, Type.Platform.STABLE, position, image)
-    this.id = id;
-    this.type = type;
     this.position = position;
-    this.image = image;
-    
+
+    inactive = new PImage[1];
+    inactive[0] = LevelData.getInstance().getImageResource("flag_inactive");
+
+    active = new PImage[4];
+    active[0] = LevelData.getInstance().getImageResource("flag_active1");
+    active[1] = LevelData.getInstance().getImageResource("flag_active2");
+    active[2] = LevelData.getInstance().getImageResource("flag_active3");
+    active[3] = LevelData.getInstance().getImageResource("flag_active4");
+
+    graphic = createGraphics(inactive[0].width, inactive[0].height);
+    sprite = new Sprite(graphic);
+
+    bounds = new BoundingBox(new PVector(position.x, position.y + graphic.height - 30), new PVector(position.x + 3, 30));
+
     reset();
   }
-  
-  public boolean isFlag() {
-    return true;
+
+  public void render(PGraphics output)
+  {
+    sprite.render();
+    output.image(graphic, position.x, position.y);
+  }
+
+  public void reset()
+  {
+    sprite.setImages("inactive", inactive);
+  }
+
+  public void setActive()
+  {
+    bounds.width = bounds.height = 0;
+    sprite.setImages("active", active);
   }
   
+  @Override  
+  public boolean isFlag()
+  {
+    return true;
+  }
+
+  @Override
+  public BoundingBox getBounds()
+  {
+    return bounds;
+  }
 }

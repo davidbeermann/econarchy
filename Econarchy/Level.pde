@@ -3,6 +3,7 @@ public class Level
   CollisionDetector collider;
   PGraphics renderedImage;
   Platform[] platforms;
+  Flag flag = null;
   Enemy[] enemies;
   Player hans;
 
@@ -63,6 +64,11 @@ public class Level
       platform.render(renderedImage);//(int) startY);
     }
 
+    if(flag != null)
+    {
+      flag.render(renderedImage);
+    }
+
     for (int i=0; i < enemies.length; i++)
     {
       if (enemies[i].isInViewport(hans.position))
@@ -115,7 +121,24 @@ public class Level
       platformSpec = data.getPlatformSpecs()[i];
       if (platformSpec != null)
       {
-        platforms[i] = new Platform(platformSpec.getId(), platformSpec.getType(), platformSpec.getPosition(), data.getImageResource(platformSpec.getType().toString()));
+        platforms[i] = new Platform(
+          platformSpec.getId(),
+          platformSpec.getType(),
+          platformSpec.getPosition(),
+          data.getImageResource(platformSpec.getType().toString())
+        );
+
+        if(platformSpec.hasFlag.equals("true"))
+        {
+          Platform platform = platforms[i];
+          PVector position = new PVector(platform.getPosition().x, platform.getPosition().y);
+          //TODO remove fixed flg size: 68x100
+          position.x += (platform.getSize().x - 68) / 2;
+          position.y -= 100;
+          flag = new Flag(position);
+
+          collider.addCollidable(flag);
+        }
       }
     }
 
