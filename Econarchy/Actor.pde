@@ -49,7 +49,7 @@ public class Player extends Actor
   boolean chuteActive = true;
   int levelWidth;
   KeyTracker keyTracker; // keypress storage
-  PImage[] run, jump, idle, die;
+  PImage[] run, jump, idle, die, win;
   boolean flagRaised = false;
   boolean isWinner = false;
   
@@ -67,6 +67,7 @@ public class Player extends Actor
     jump = levelData.getImageResources(spriteVO.jumpIds);
     idle = levelData.getImageResources(spriteVO.idleIds);
     die = levelData.getImageResources(spriteVO.dieIds);
+    win = levelData.getImageResources(spriteVO.winIds);
     levelWidth = levelData.levelWidth;
     lowerBoundary = levelData.levelHeight;
 
@@ -135,7 +136,7 @@ public class Player extends Actor
         sprite.setFlipH(false);
       }
       
-      if(keyTracker.noKeyPressed())
+      if(keyTracker.noKeyPressed() && !chuteActive)
       {
         /*if(keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID)
         {
@@ -149,6 +150,11 @@ public class Player extends Actor
         
         sprite.setImages("idle", idle, 15);
         //sprite.render(true);
+      }
+
+      if(chuteActive)
+      {
+        sprite.setImages("win", win);
       }
       //else
       //{

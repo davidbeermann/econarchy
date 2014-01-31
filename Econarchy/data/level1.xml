@@ -27,6 +27,8 @@
 			<image id="p_idle_f1" url="resources/player/player_idle_frame1.gif" />
 			<image id="p_idle_f2" url="resources/player/player_idle_frame2.gif" />
 			<image id="p_die_f1" url="resources/player/dead.gif" />
+			<image id="p_win_f1" url="resources/player/player_parachute.png" />
+			<image id="p_win_extra" url="resources/player/player_parachute_extra.png" />
 			<!-- enemy images -->
 			<image id="e1_f1" url="resources/enemies/enemy1_state1.gif" />
 			<image id="e1_f2" url="resources/enemies/enemy1_state2.gif" />
@@ -98,6 +100,7 @@
 			<jumpFrames imageIds="p_jump_f1,p_jump_f2" />
 			<idleFrames imageIds="p_idle_f1,p_idle_f2" />
 			<dieFrames imageIds="p_die_f1" />
+			<winFrames imageIds="p_win_f1" />
 		</player_sprite>
 		<!-- enemy definitions -->
 		<enemy_sprites>

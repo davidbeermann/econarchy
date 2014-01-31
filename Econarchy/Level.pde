@@ -91,6 +91,17 @@ public class Level
     // render player last to be on top of everything else
     renderedImage.image(hans.playerRender(), hans.position.x, hans.position.y);
 
+    // render chute
+    if(hans.chuteActive)
+    {
+      PImage chute = LevelData.getInstance().getImageResource("p_win_extra");
+      PVector cPos = new PVector(hans.position.x, hans.position.y);
+      cPos.x += ((hans.avatar.width - chute.width) / 2);
+      cPos.y -= chute.height - 2;
+
+      renderedImage.image(chute, cPos.x, cPos.y);
+    }
+
     renderedImage.endDraw();
   }
 

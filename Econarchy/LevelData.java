@@ -127,7 +127,8 @@ public class LevelData
       playerSprite.getChild("runFrames").getString("imageIds").split(","),
       playerSprite.getChild("jumpFrames").getString("imageIds").split(","),
       playerSprite.getChild("idleFrames").getString("imageIds").split(","),
-      playerSprite.getChild("dieFrames").getString("imageIds").split(",")
+      playerSprite.getChild("dieFrames").getString("imageIds").split(","),
+      playerSprite.getChild("winFrames").getString("imageIds").split(",")
     );
 
     // parse enemy sprites
@@ -282,13 +283,15 @@ public class LevelData
     public String[] jumpIds;
     public String[] idleIds;
     public String[] dieIds;
+    public String[] winIds;
 
-    public PlayerSpriteVO(String[] runIds, String[] jumpIds, String[] idleIds, String[] dieIds)
+    public PlayerSpriteVO(String[] runIds, String[] jumpIds, String[] idleIds, String[] dieIds, String[] winIds)
     {
       this.runIds = runIds;
       this.jumpIds = jumpIds;
       this.idleIds = idleIds;
       this.dieIds = dieIds;
+      this.winIds = winIds;
     }
   }
 
