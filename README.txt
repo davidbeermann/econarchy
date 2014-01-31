@@ -28,7 +28,7 @@ platform // Windows, Mac OSX, Xbox 360 (?)
 
 ---
 
-CREDIT // Julian Hespenheide, Jonas Otto, David Beermann, Piotrus Bczkwsk, Sammy Jobbins Wells
+CREDIT // Julian Hespenheide, Jonas Otto, David Beermann, Peter Buczkowski, Sammy Jobbins Wells, Florian Lütkebohmert
 
 ---
 
@@ -43,10 +43,50 @@ CONTROLS:
 a = move left
 w = jump up
 d = move right
-s = move down
 
 OR
 
+arrows
+
 arrow keys up, down, right, left to jump up, move down, right and left.
 ---
+
+HOW TO RUN THE PROTOTYPE:
+- Start the "econarchy" executable
+- No further installations required
+
+---
+
+STRUCTURE
+
+
+---
+
+INDIVIDUAL REPORTS //
+
+Jonas Otto:
+- basic wireframe for the classes
+- player and enemy classes + enemy "ai" implementation
+- level xml design
+- gui class (startscreen + text, meters to go, game over screen and reset procedure)
+- sound manager
+- co-developing viewport shifting for the position of the player
+- some render methods
+- initial idea for eco-terrorism
+- game name suggestion winner (in a democratic voting)
+
+Julian Hespenheide:
+- overall color scheme, look & feel
+- foreground/background layers
+- platforms
+- player animations (states: idle, walking, jumping, dropping, cheering for the flag, death)
+- startscreen design
+
+David Beermann:
+
+Peter Buczkowski:
+
+Sammy Jobbins Wells:
+
+Florian Lütkebohmert:
 
