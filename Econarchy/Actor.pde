@@ -107,14 +107,14 @@ public class Player extends Actor
   {
     if(alive)
     {
-      if(keyTracker.upPressed() && (keyTracker.leftPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID))
+      if(keyTracker.upPressed() && (keyTracker.leftPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID || keyTracker.recentHorizontalKeyId() == null))
       {
-        sprite.setImages("jump", jump);
+        sprite.setImages("jump", jump, false);
         sprite.setFlipH(true);
       }
       else if(keyTracker.upPressed() && (keyTracker.rightPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.RIGHT_ID))
       {
-        sprite.setImages("jump", jump);
+        sprite.setImages("jump", jump, false);
         sprite.setFlipH(false);
       }
       else if(keyTracker.leftPressed() && !keyTracker.rightPressed())
@@ -140,7 +140,7 @@ public class Player extends Actor
         }
         */
         
-        sprite.setImages("idle", idle);
+        sprite.setImages("idle", idle, 15);
         //sprite.render(true);
       }
       //else

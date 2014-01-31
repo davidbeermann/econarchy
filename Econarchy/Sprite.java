@@ -2,6 +2,7 @@ import processing.core.PGraphics;
 import processing.core.PImage;
 import processing.core.PVector;
 
+
 class Sprite
 { 
   private int defaultUpdateSpeed = 5;
@@ -10,7 +11,7 @@ class Sprite
   private PImage[] images = null;
   private int frame, updateSpeed, updateIndex;
   private String state;
-  private boolean flipH;
+  private boolean flipH, looping;
   
   
   public Sprite(PGraphics graphic)
@@ -23,7 +24,29 @@ class Sprite
   public Sprite(PGraphics graphic, int updateSpeed)
   {
     this.graphic = graphic;
-    this.updateSpeed = updateSpeed;
+    this.defaultUpdateSpeed = this.updateSpeed = updateSpeed;
+  }
+  
+  
+  public void setImages(String state, PImage[] images, boolean looping)
+  {
+    if(this.state != state)
+    {
+      setImages(state, images);
+
+      this.looping = looping;
+    }
+  }
+  
+  
+  public void setImages(String state, PImage[] images, int enforcedUpdateSpeed)
+  {
+    if(this.state != state)
+    {
+      setImages(state, images);
+
+      this.updateSpeed = enforcedUpdateSpeed;
+    }
   }
   
   
@@ -33,6 +56,8 @@ class Sprite
     {
       this.state = state;
       this.images = images;
+      this.updateSpeed = defaultUpdateSpeed;
+      this.looping = true;
       
       frame = 0;
       updateIndex = 0; 
@@ -72,7 +97,14 @@ class Sprite
         if(++updateIndex >= updateSpeed)
         {
           updateIndex = 0;
-          frame = (frame + 1) % images.length;
+          if(!looping && frame == images.length - 1)
+          {
+            // don't change the frame anymore
+          }
+          else
+          {
+            frame = (frame + 1) % images.length;
+          }
         }
       }
     }

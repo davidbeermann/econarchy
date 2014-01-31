@@ -25,7 +25,7 @@
 			<image id="p_jump_f1" url="resources/player/player_jump_frame1.gif" />
 			<image id="p_jump_f2" url="resources/player/player_jump_frame2.gif" />
 			<image id="p_idle_f1" url="resources/player/player_idle_frame1.gif" />
-			<image id="p_idle_f2" url="resources/player/player_idle_frame1.gif" />
+			<image id="p_idle_f2" url="resources/player/player_idle_frame2.gif" />
 			<image id="p_die_f1" url="resources/player/dead.gif" />
 			<!-- enemy images -->
 			<image id="e1_f1" url="resources/enemies/enemy1_state1.gif" />
