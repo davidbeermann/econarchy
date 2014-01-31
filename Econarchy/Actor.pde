@@ -47,7 +47,7 @@ public class Player extends Actor
   float speedMax = 15;
   float lowerBoundary; //lower end of level
   boolean chuteActive = true;
-  
+  int levelWidth;
   KeyTracker keyTracker; // keypress storage
   PImage[] run, jump, idle, die;
   
@@ -65,6 +65,7 @@ public class Player extends Actor
     jump = levelData.getImageResources(spriteVO.jumpIds);
     idle = levelData.getImageResources(spriteVO.idleIds);
     die = levelData.getImageResources(spriteVO.dieIds);
+    levelWidth = levelData.levelWidth;
 
     // setup sprite
     avatar = createGraphics(run[0].width, run[0].height);
@@ -253,6 +254,10 @@ public class Player extends Actor
       if ( chuteActive && currVelocity.y > speedMax )
         currVelocity.y = speedMax;
       
+      if (position.x > levelWidth || position.x < 0 )
+        currVelocity.x *= -1;
+        
+      println(currVelocity.y);
   }
   
   
@@ -277,7 +282,7 @@ public class Player extends Actor
     
     if (c.direction == 12 ||c.direction == 4 || c.direction == 5) {
      // println("COLLISION FROM BELOW");
-      }
+     }
     
     // check for breakable platforms
     if (c.getCollider().isPlatform() && currVelocity.y == 0)

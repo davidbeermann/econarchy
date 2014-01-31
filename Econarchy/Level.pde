@@ -88,8 +88,8 @@ public class Level
     // calculate level boundaries to collision detection
     LevelBoundary top =  new LevelBoundary(-50.0, -50.0, (float) data.levelWidth + 100.0, 50.0);
     LevelBoundary bottom = new LevelBoundary(-50.0,(float) data.levelHeight,(float)data.levelWidth+100.0, 50.0);
-    LevelBoundary left = new LevelBoundary(-50.0,-50.0,50.0, (float) data.levelHeight+100);
-    LevelBoundary right = new LevelBoundary((float) data.levelWidth, -50.0, 50.0, (float) data.levelHeight+100);
+    LevelBoundary left = new LevelBoundary(-data.levelWidth/2,-50,data.levelWidth/2, (float) data.levelHeight+200);
+    LevelBoundary right = new LevelBoundary((float) data.levelWidth, -50.0, data.levelWidth/2, (float) data.levelHeight+100);
 
     LevelBoundary[] levelBounds = new LevelBoundary[]{top, bottom,left,right};
     collider.addCollidables(levelBounds);
