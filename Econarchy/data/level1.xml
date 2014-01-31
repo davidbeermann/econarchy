@@ -42,6 +42,8 @@
 			<image id="e2_f4" url="resources/enemies/enemy2_state4.gif" />
 			<image id="e2_f5" url="resources/enemies/enemy2_state5.gif" />
 			<image id="e2_f6" url="resources/enemies/enemy2_state6.gif" />
+			<!-- effect images -->
+			<image id="spotted" url="resources/spotted.png" />
 		</images>
 	</resources>
 	<specification>

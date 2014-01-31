@@ -71,6 +71,14 @@ public class Level
         enemies[i].patroling(hans);
         
         renderedImage.image( enemies[i].enemyRender(), enemies[i].position.x, enemies[i].position.y);
+
+        if(enemies[i].playerSpotted)
+        {
+          PImage tmp = LevelData.getInstance().getImageResource("spotted");
+          int tmpX = int(enemies[i].position.x - ((enemies[i].size.x - tmp.width) / 2));
+          int tmpY = int(enemies[i].position.y - tmp.height);
+          renderedImage.image(tmp, tmpX, tmpY);
+        }
       } 
     }
     

@@ -316,6 +316,7 @@ public class Enemy extends Actor
   float leftBoundary, rightBoundary;
   PImage[] sprites;
   PVector size, direction;
+  boolean playerSpotted;
   
   
   public Enemy(PImage[] sprites, PVector position, float leftBoundary, float rightBoundary, float walkingSpeed, float runningSpeed)
@@ -353,6 +354,7 @@ public class Enemy extends Actor
 
     direction.x = 1;
     speed = walkingSpeed;
+    playerSpotted = false;
   }
     
     
@@ -375,7 +377,6 @@ public class Enemy extends Actor
     {
       sprite.setFlipH(true);
     }
-
     sprite.render();
 
     return avatar;
@@ -387,10 +388,13 @@ public class Enemy extends Actor
     // does the enemy see the player
     if(spottedThePlayer(player))
     {
+      playerSpotted = true;
       speed = runningSpeed;
     }
     else
     {
+      playerSpotted = false;
+
       // add random enemy movement
       int r = int(random(100));
       switch(r)
