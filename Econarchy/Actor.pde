@@ -301,7 +301,7 @@ public class Player extends Actor
       {
         if ( currVelocity.y > 0 ) //player is falling
         {
-          if ( currVelocity.y <= 15) 
+          if ( currVelocity.y <= 10) 
           { 
             currVelocity.y = 0f;
             position.y = c.getCollider().getBounds().top - avatar.height;
