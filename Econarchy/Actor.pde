@@ -332,10 +332,11 @@ public class Player extends Actor
         }
       }       
     
-      /*if (position.y > lowerBounds-100 && chuteActive && flagRaised)
+      if (position.y > lowerBoundary-100 && chuteActive && flagRaised)
       {
-        //PLAYER WINS
-      }*/
+        //PLAYER WINS 
+        println("LSBTTIQ MENSCHEN");
+      }
     }
 
     collisionInProgress = false;
