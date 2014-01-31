@@ -163,7 +163,7 @@ public class Player extends Actor
   @Override
   public BoundingBox getBounds()
   {
-    return new BoundingBox(position, new PVector(avatar.width/3.0, avatar.height));
+    return new BoundingBox(position, new PVector(avatar.width, avatar.height));
   }
 
 
@@ -253,37 +253,39 @@ public class Player extends Actor
   
       if ( chuteActive && currVelocity.y > speedMax )
         currVelocity.y = speedMax;
-      
-      if (position.x > levelWidth || position.x < 0 )
-        currVelocity.x *= -1;
-        
+     
       println(currVelocity.y);
   }
   
   
   public void handleCollision(Collision c)
   {
-    if ( (c.direction == 1 || c.direction == 8)  && !c.getCollider().isEnemy())
+    doubleJumpEnabled = true;
+    if ( c.direction == 1 || c.direction == 3 || c.direction == 5 ) //left/top-left/bottom-left
     {
-        println("Colliding with bounds");
+      if ( currVelocity.x > 0 ) ///if player moves to the right 
         currVelocity.x *= -1;
     }
     
-    if (c.direction == 2 || c.direction == 3 || c.direction == 10) 
+    if ( c.direction == 8 || c.direction == 10 || c.direction == 12 ) //right/top-right/bottom-right
     {
+      if ( currVelocity.x < 0 ) // player moves to the left
+        currVelocity.x *= -1;
+    }
+    
+    if ( c.direction != 1 || c.direction != 8 ) //left-top, top, right-top
+    {
+      if ( currVelocity.y > 0 ) { //player is falling
         if ( currVelocity.y <= 20) { 
-        currVelocity.y = 0f;
-        position.y = c.getCollider().getBounds().top - avatar.height;
+          currVelocity.y = 0f;
+          position.y = c.getCollider().getBounds().top - avatar.height;
         }
         else 
           alive = false;
-        doubleJumpEnabled = true;
+      }
+      else doubleJumpEnabled = false;
     }
-    
-    if (c.direction == 12 ||c.direction == 4 || c.direction == 5) {
-     // println("COLLISION FROM BELOW");
-     }
-    
+
     // check for breakable platforms
     if (c.getCollider().isPlatform() && currVelocity.y == 0)
     {
@@ -301,8 +303,7 @@ public class Player extends Actor
       {
         alive = false;
         music.sound("dead");
-
-        println(this + " ENEMY COLLISION _ YOU'RE DEAD");
+       // println(this + " ENEMY COLLISION _ YOU'RE DEAD");
       }
     }
   }
