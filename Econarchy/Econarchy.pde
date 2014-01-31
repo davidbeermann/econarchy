@@ -7,12 +7,12 @@ SoundEvent music;
 
 public void setup()
 {
-  size(400, 640);
+  size(400, 800);
 
   XML levelXML = loadXML("level1.xml");
   LevelData levelData = LevelData.instantiate(this, levelXML);
 
-  PVector gameSize = new PVector(400, 600);
+  PVector gameSize = new PVector(400, 760);
   PVector gamePosition = new PVector(0, height - gameSize.y);
 
   game = new Game(gameSize, gamePosition);
