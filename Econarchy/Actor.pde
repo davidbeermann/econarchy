@@ -282,7 +282,7 @@ public class Player extends Actor
     
     if (c.direction == 12 ||c.direction == 4 || c.direction == 5) {
      // println("COLLISION FROM BELOW");
-      }
+     }
     
     // check for breakable platforms
     if (c.getCollider().isPlatform() && currVelocity.y == 0)
