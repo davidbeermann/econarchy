@@ -223,6 +223,7 @@ public class Player extends Actor
         if (chuteActive) 
           speedMax = 21;
       }
+      
       if(keyTracker.rightPressed())
       {
         if (currVelocity.x <= walkingSpeed)
@@ -230,13 +231,10 @@ public class Player extends Actor
         if (chuteActive) 
           speedMax = 21;
       }
+
       if(keyTracker.upPressed()) //enable double jump here, to disable set to 0
       {
         jump();
-      }
-      if(keyTracker.downPressed())
-      {
-        currVelocity.y = 0;
       }
     }
     // if neither gamepad is moved nor keypresses are detected - slow down player
