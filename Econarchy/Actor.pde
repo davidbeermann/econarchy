@@ -285,7 +285,7 @@ public class Player extends Actor
     if ( c.direction != 1 || c.direction != 8 ) //left-top, top, right-top
     {
       if ( currVelocity.y > 0 ) { //player is falling
-        if ( currVelocity.y <= 20) { 
+        if ( currVelocity.y <= 15) { 
           currVelocity.y = 0f;
           position.y = c.getCollider().getBounds().top - avatar.height;
         }
@@ -294,6 +294,11 @@ public class Player extends Actor
       }
       else doubleJumpEnabled = false;
     }
+    
+    if (position.y > lowerBounds-100 && chuteActive && flagRaised) {
+      //PLAYER WINS
+    }
+    
 
     // check for breakable platforms
     if (c.getCollider().isPlatform() && currVelocity.y == 0)
