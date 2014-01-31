@@ -1,4 +1,5 @@
-boolean gamepadEnabled = false;
+  
+   boolean gamepadEnabled = false;
 Game game;
 KeyTracker keyTracker;
 FancyInput gamepad;
