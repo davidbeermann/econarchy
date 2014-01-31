@@ -35,8 +35,8 @@ public class GUI
 	{
 		if (!game.gameOver && !player.isWinner)
 		{
-			// -8
-			meterToGo = levelHeight - int((playerpos - player.position.y)/player.jumpHeight);
+			//TODO remove static substraction
+			meterToGo = levelHeight - int((playerpos - player.position.y)/player.jumpHeight) - 8;
 			
 			noStroke();
 			fill(216, 18, 63);
