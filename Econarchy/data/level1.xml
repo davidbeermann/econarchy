@@ -65,7 +65,7 @@
 		</foregrounds>
 		<!-- platform types have to match the image ids above!!! -->
 		<platforms>
-			<platform id="p1" type="stable" x="161" y="1850" hasFlag="true"/>
+			<platform id="p1" type="stable" x="161" y="1850" hasFlag="false"/>
 			<platform id="p2" type="stable" x="161" y="1715" hasFlag="false"/>
 			<platform id="p25" type="breakable" x="161" y="1575" hasFlag="false"/>
 			<platform id="p3" type="stable" x="323" y="1500" hasFlag="false"/>
@@ -92,7 +92,7 @@
 			<platform id="p19" type="slippery" x="300" y="320" hasFlag="false"/>
 			<platform id="p20" type="breakable" x="200" y="200" hasFlag="false"/>
 			<platform id="p28" type="slippery" x="30" y="230" hasFlag="false"/>
-			<platform id="p26" type="stable" x="51" y="108" hasFlag="false"/>
+			<platform id="p26" type="stable" x="51" y="108" hasFlag="true"/>
 		</platforms>
 		<!-- player specs -->
 		<player_sprite>
