@@ -20,7 +20,7 @@ public class Platform extends Collidable
     reset();
   }
 
-
+  
   public void reset()
   {
     size = new PVector(image.width, image.height);
@@ -31,7 +31,10 @@ public class Platform extends Collidable
     alphaValue = 255;
   }
 
-
+  public boolean isFlag() {
+    return false;
+  }
+  
   public void render(PGraphics output)
   {
     if(broken && alphaValue < 0.5)
@@ -111,3 +114,21 @@ public class Platform extends Collidable
   }
 }
 
+public class Flag extends Platform {
+  
+  public Flag(String id, PVector position, PImage image)
+  {
+    super(id, Type.Platform.STABLE, position, image)
+    this.id = id;
+    this.type = type;
+    this.position = position;
+    this.image = image;
+    
+    reset();
+  }
+  
+  public boolean isFlag() {
+    return true;
+  }
+  
+}

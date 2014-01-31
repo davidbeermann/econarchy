@@ -37,7 +37,7 @@ public class Actor extends Collidable
 
 public class Player extends Actor
 {
-  boolean alive = true;
+  boolean alive = true, collisionInProgress = false;
   float acceleration = 0.5;
   PVector currVelocity;
   PVector gravityAcc;
@@ -50,6 +50,7 @@ public class Player extends Actor
   int levelWidth;
   KeyTracker keyTracker; // keypress storage
   PImage[] run, jump, idle, die;
+  boolean flagRaised = false;
   
   
   public Player(LevelData.PlayerSpriteVO spriteVO)
@@ -66,6 +67,7 @@ public class Player extends Actor
     idle = levelData.getImageResources(spriteVO.idleIds);
     die = levelData.getImageResources(spriteVO.dieIds);
     levelWidth = levelData.levelWidth;
+    lowerBoundary = levelData.levelHeight;
 
     // setup sprite
     avatar = createGraphics(run[0].width, run[0].height);
@@ -101,6 +103,8 @@ public class Player extends Actor
     alive = true;
     doubleJumpEnabled = true;
     chuteActive = false;
+    collisionInProgress = false;
+    flagRaised = false;
   }
 
 
@@ -163,18 +167,19 @@ public class Player extends Actor
   @Override
   public BoundingBox getBounds()
   {
-    return new BoundingBox(position, new PVector(avatar.width/3.0, avatar.height));
+    return new BoundingBox(position, new PVector(avatar.width, avatar.height));
   }
 
 
   public void jump()
   {
     if ( doubleJumpEnabled && !chuteActive) {
+      //println("JUMP");
       if ( currVelocity.y <= 0.1 && currVelocity.y > -0.1 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
       { 
         currVelocity.y = -jumpHeight; //FIXME: optimize double jump here
         music.sound("jump");
-        println("CAN DOUBLEJUMP: " + doubleJumpEnabled);
+        //println("CAN DOUBLEJUMP: " + doubleJumpEnabled);
         doubleJumpEnabled = !doubleJumpEnabled;
       }
     }
@@ -185,9 +190,11 @@ public class Player extends Actor
   {
     if (alive)
     {
-      position.add(currVelocity);
-      //println("player_position.x: " + position.x + "   .y: " + position.y);
-      //println ("UPWARD FORCE: " + currVelocity.y);
+      PVector tmpPos = PVector.add(position,currVelocity);
+      if ( tmpPos.x > 0 && tmpPos.x < levelWidth-30) //only move if velocity doesn't push player out of level
+        position.x = tmpPos.x;
+      if ( tmpPos.y < lowerBoundary || tmpPos.y > 0)
+        position.y = tmpPos.y;
     }
   }
   
@@ -234,56 +241,60 @@ public class Player extends Actor
       {
         jump();
       }
-      if(keyTracker.downPressed())
-      {
-        currVelocity.y = 0;
-      }
     }
     // if neither gamepad is moved nor keypresses are detected - slow down player
     else
     {
-      currVelocity.x *= 0.8;
+      currVelocity.x *= 0;
     }
        
     //calculate gravity vector
     PVector tmpAccel = PVector.mult(gravityAcc, 1.0/30.0); //calculate gravitational Acceleration, assuming 30fps/can later be adjusted to use realtime for better simulation
        
      //apply gravity
+     if (position.y < lowerBoundary-100)
        currVelocity.add(tmpAccel);  
   
       if ( chuteActive && currVelocity.y > speedMax )
         currVelocity.y = speedMax;
-      
-      if (position.x > levelWidth || position.x < 0 )
-        currVelocity.x *= -1;
-        
-      println(currVelocity.y);
+     
+     // println(currVelocity.y);
   }
   
   
   public void handleCollision(Collision c)
   {
-    if ( (c.direction == 1 || c.direction == 8)  && !c.getCollider().isEnemy())
+    //doubleJumpEnabled = true;
+    if (collisionInProgress == false) {
+      //println("COLLISION");
+    collisionInProgress = true;
+    
+    doubleJumpEnabled = true;
+    if ( c.direction == 1 || c.direction == 5 ) //left/top-left/bottom-left
     {
-        println("Colliding with bounds");
+      if ( currVelocity.x > 0 ) ///if player moves to the right 
         currVelocity.x *= -1;
     }
     
-    if (c.direction == 2 || c.direction == 3 || c.direction == 10) 
+    if ( c.direction == 8 || c.direction == 12 ) //right/top-right/bottom-right
     {
+      if ( currVelocity.x < 0 ) // player moves to the left
+        currVelocity.x *= -1;
+    }
+    
+    if ( c.direction != 1 || c.direction != 8 ) //left-top, top, right-top
+    {
+      if ( currVelocity.y > 0 ) { //player is falling
         if ( currVelocity.y <= 20) { 
-        currVelocity.y = 0f;
-        position.y = c.getCollider().getBounds().top - avatar.height;
+          currVelocity.y = 0f;
+          position.y = c.getCollider().getBounds().top - avatar.height;
         }
         else 
           alive = false;
-        doubleJumpEnabled = true;
+      }
+      else doubleJumpEnabled = false;
     }
-    
-    if (c.direction == 12 ||c.direction == 4 || c.direction == 5) {
-     // println("COLLISION FROM BELOW");
-     }
-    
+
     // check for breakable platforms
     if (c.getCollider().isPlatform() && currVelocity.y == 0)
     {
@@ -301,10 +312,17 @@ public class Player extends Actor
       {
         alive = false;
         music.sound("dead");
-
-        println(this + " ENEMY COLLISION _ YOU'RE DEAD");
+       // println(this + " ENEMY COLLISION _ YOU'RE DEAD");
       }
     }
+    
+    if (c.getCollider().isFlag())
+      flagRaised = true;
+     
+    if (c.getCollider().isParachute())
+      chuteActive = true;
+    }
+    collisionInProgress = false;
   }
 }
 
