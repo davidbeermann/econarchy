@@ -93,7 +93,6 @@ public class Game
     if (guiStuff.sawInfoScreen)
     {
       level.reset();
-      level.flag.reset();
 
       //setting the reference in the gui class to new player if the game gets restarted
       guiStuff.player = level.hans;
