@@ -46,7 +46,7 @@ public class Player extends Actor
   boolean doubleJumpEnabled = true;
   float speedMax = 15;
   float lowerBoundary; //lower end of level
-  boolean chuteActive = true;
+  boolean chuteActive = false;
   int levelWidth;
   KeyTracker keyTracker; // keypress storage
   PImage[] run, jump, idle, die, win;
@@ -181,10 +181,13 @@ public class Player extends Actor
 
   public void jump()
   {
+    
+    println(chuteActive);
     if ( doubleJumpEnabled && !chuteActive) {
-      //println("JUMP");
+      println("JUMP" + currVelocity.y);
       if ( currVelocity.y <= 0.1 && currVelocity.y > -0.1 ) //enable jumping only if player is not moving in y direction(already jumping or falling)
       { 
+       
         currVelocity.y = -jumpHeight; //FIXME: optimize double jump here
         music.sound("jump");
         //println("CAN DOUBLEJUMP: " + doubleJumpEnabled);
@@ -203,6 +206,9 @@ public class Player extends Actor
         position.x = tmpPos.x;
       if ( tmpPos.y < lowerBoundary || tmpPos.y > 0)
         position.y = tmpPos.y;
+        
+      if (currVelocity.y > 0.6 && flagRaised)
+          chuteActive = true;
     }
   }
   
@@ -327,7 +333,6 @@ public class Player extends Actor
         music.sound("win");
 
         flagRaised = true;
-        chuteActive = true;
       }
 
       if (c.getCollider().isEnemy())

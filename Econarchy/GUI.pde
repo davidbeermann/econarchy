@@ -59,8 +59,9 @@ public class GUI
 
 			if (keyPressed && key == ' ')
 			{
+  sawInfoScreen = true;
 				game.startGame();
-				sawInfoScreen = true;
+	//sawInfoScreen = true;
 			}
 		}
 	}

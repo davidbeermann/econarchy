@@ -37,6 +37,8 @@ public class Level
     }
 
     hans.reset();
+    
+    flag.reset();
   }
 
 
