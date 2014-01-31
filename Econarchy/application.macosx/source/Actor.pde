@@ -47,7 +47,7 @@ public class Player extends Actor
   float speedMax = 15;
   float lowerBoundary; //lower end of level
   boolean chuteActive = true;
-  
+  int levelWidth;
   KeyTracker keyTracker; // keypress storage
   PImage[] run, jump, idle, die;
   
@@ -65,6 +65,8 @@ public class Player extends Actor
     jump = levelData.getImageResources(spriteVO.jumpIds);
     idle = levelData.getImageResources(spriteVO.idleIds);
     die = levelData.getImageResources(spriteVO.dieIds);
+    levelWidth = levelData.levelWidth;
+    lowerBoundary = levelData.levelHeight;
 
     // setup sprite
     avatar = createGraphics(run[0].width, run[0].height);
@@ -107,14 +109,14 @@ public class Player extends Actor
   {
     if(alive)
     {
-      if(keyTracker.upPressed() && (keyTracker.leftPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID))
+      if(keyTracker.upPressed() && (keyTracker.leftPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID || keyTracker.recentHorizontalKeyId() == null))
       {
-        sprite.setImages("jump", jump);
+        sprite.setImages("jump", jump, false);
         sprite.setFlipH(true);
       }
       else if(keyTracker.upPressed() && (keyTracker.rightPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.RIGHT_ID))
       {
-        sprite.setImages("jump", jump);
+        sprite.setImages("jump", jump, false);
         sprite.setFlipH(false);
       }
       else if(keyTracker.leftPressed() && !keyTracker.rightPressed())
@@ -140,7 +142,7 @@ public class Player extends Actor
         }
         */
         
-        sprite.setImages("idle", idle);
+        sprite.setImages("idle", idle, 15);
         //sprite.render(true);
       }
       //else
@@ -162,7 +164,7 @@ public class Player extends Actor
   @Override
   public BoundingBox getBounds()
   {
-    return new BoundingBox(position, new PVector(avatar.width/3.0, avatar.height));
+    return new BoundingBox(position, new PVector(avatar.width, avatar.height));
   }
 
 
@@ -184,7 +186,10 @@ public class Player extends Actor
   {
     if (alive)
     {
-      position.add(currVelocity);
+      PVector tmpPos = PVector.add(position,currVelocity);
+      if ( tmpPos.x > 1 && tmpPos.x < levelWidth) //only move if velocity doesn't push player out of level
+        position.add(currVelocity);
+      
       //println("player_position.x: " + position.x + "   .y: " + position.y);
       //println ("UPWARD FORCE: " + currVelocity.y);
     }
@@ -222,6 +227,7 @@ public class Player extends Actor
         if (chuteActive) 
           speedMax = 21;
       }
+      
       if(keyTracker.rightPressed())
       {
         if (currVelocity.x <= walkingSpeed)
@@ -229,13 +235,10 @@ public class Player extends Actor
         if (chuteActive) 
           speedMax = 21;
       }
+
       if(keyTracker.upPressed()) //enable double jump here, to disable set to 0
       {
         jump();
-      }
-      if(keyTracker.downPressed())
-      {
-        currVelocity.y = 0;
       }
     }
     // if neither gamepad is moved nor keypresses are detected - slow down player
@@ -248,37 +251,44 @@ public class Player extends Actor
     PVector tmpAccel = PVector.mult(gravityAcc, 1.0/30.0); //calculate gravitational Acceleration, assuming 30fps/can later be adjusted to use realtime for better simulation
        
      //apply gravity
+    // if (position.y < lowerBoundary)
        currVelocity.add(tmpAccel);  
   
       if ( chuteActive && currVelocity.y > speedMax )
         currVelocity.y = speedMax;
-      
+     
+      println(currVelocity.y);
   }
   
   
   public void handleCollision(Collision c)
   {
-    if ( (c.direction == 1 || c.direction == 8)  && !c.getCollider().isEnemy())
+    doubleJumpEnabled = true;
+    if ( c.direction == 1 || c.direction == 5 ) //left/top-left/bottom-left
     {
-        println("Colliding with bounds");
+      if ( currVelocity.x > 0 ) ///if player moves to the right 
         currVelocity.x *= -1;
     }
     
-    if (c.direction == 2 || c.direction == 3 || c.direction == 10) 
+    if ( c.direction == 8 || c.direction == 12 ) //right/top-right/bottom-right
     {
+      if ( currVelocity.x < 0 ) // player moves to the left
+        currVelocity.x *= -1;
+    }
+    
+    if ( c.direction != 1 || c.direction != 8 ) //left-top, top, right-top
+    {
+      if ( currVelocity.y > 0 ) { //player is falling
         if ( currVelocity.y <= 20) { 
-        currVelocity.y = 0f;
-        position.y = c.getCollider().getBounds().top - avatar.height;
+          currVelocity.y = 0f;
+          position.y = c.getCollider().getBounds().top - avatar.height;
         }
         else 
           alive = false;
-        doubleJumpEnabled = true;
-    }
-    
-    if (c.direction == 12 ||c.direction == 4 || c.direction == 5) {
-     // println("COLLISION FROM BELOW");
       }
-    
+      else doubleJumpEnabled = false;
+    }
+
     // check for breakable platforms
     if (c.getCollider().isPlatform() && currVelocity.y == 0)
     {
@@ -296,8 +306,7 @@ public class Player extends Actor
       {
         alive = false;
         music.sound("dead");
-
-        println(this + " ENEMY COLLISION _ YOU'RE DEAD");
+       // println(this + " ENEMY COLLISION _ YOU'RE DEAD");
       }
     }
   }
@@ -311,6 +320,7 @@ public class Enemy extends Actor
   float leftBoundary, rightBoundary;
   PImage[] sprites;
   PVector size, direction;
+  boolean playerSpotted;
   
   
   public Enemy(PImage[] sprites, PVector position, float leftBoundary, float rightBoundary, float walkingSpeed, float runningSpeed)
@@ -348,6 +358,7 @@ public class Enemy extends Actor
 
     direction.x = 1;
     speed = walkingSpeed;
+    playerSpotted = false;
   }
     
     
@@ -370,7 +381,6 @@ public class Enemy extends Actor
     {
       sprite.setFlipH(true);
     }
-
     sprite.render();
 
     return avatar;
@@ -382,12 +392,16 @@ public class Enemy extends Actor
     // does the enemy see the player
     if(spottedThePlayer(player))
     {
+      playerSpotted = true;
       speed = runningSpeed;
     }
     else
     {
+      playerSpotted = false;
+      speed = walkingSpeed;
+      
       // add random enemy movement
-      int r = int(random(100));
+      /*int r = int(random(100));
       switch(r)
       {
         // with chance of 1/100 the enemy will turn around and walk
@@ -405,7 +419,7 @@ public class Enemy extends Actor
         default:
           speed = walkingSpeed;
           break;
-      }
+      }*/
     }
 
     // turn around at the end of platform

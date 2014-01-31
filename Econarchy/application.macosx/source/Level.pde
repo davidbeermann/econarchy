@@ -71,6 +71,14 @@ public class Level
         enemies[i].patroling(hans);
         
         renderedImage.image( enemies[i].enemyRender(), enemies[i].position.x, enemies[i].position.y);
+
+        if(enemies[i].playerSpotted)
+        {
+          PImage tmp = LevelData.getInstance().getImageResource("spotted");
+          int tmpX = int(enemies[i].position.x - ((enemies[i].size.x - tmp.width) / 2));
+          int tmpY = int(enemies[i].position.y - tmp.height);
+          renderedImage.image(tmp, tmpX, tmpY);
+        }
       } 
     }
     
@@ -88,8 +96,8 @@ public class Level
     // calculate level boundaries to collision detection
     LevelBoundary top =  new LevelBoundary(-50.0, -50.0, (float) data.levelWidth + 100.0, 50.0);
     LevelBoundary bottom = new LevelBoundary(-50.0,(float) data.levelHeight,(float)data.levelWidth+100.0, 50.0);
-    LevelBoundary left = new LevelBoundary(-50.0,-50.0,50.0, (float) data.levelHeight+100);
-    LevelBoundary right = new LevelBoundary((float) data.levelWidth, -50.0, 50.0, (float) data.levelHeight+100);
+    LevelBoundary left = new LevelBoundary(-data.levelWidth/2,-50,data.levelWidth/2, (float) data.levelHeight+200);
+    LevelBoundary right = new LevelBoundary((float) data.levelWidth, -50.0, data.levelWidth/2, (float) data.levelHeight+100);
 
     LevelBoundary[] levelBounds = new LevelBoundary[]{top, bottom,left,right};
     collider.addCollidables(levelBounds);

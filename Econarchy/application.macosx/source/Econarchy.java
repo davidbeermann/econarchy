@@ -27,12 +27,12 @@ SoundEvent music;
 
 public void setup()
 {
-  size(400, 640);
+  size(400, 740);
 
   XML levelXML = loadXML("level1.xml");
   LevelData levelData = LevelData.instantiate(this, levelXML);
 
-  PVector gameSize = new PVector(400, 600);
+  PVector gameSize = new PVector(400, 700);
   PVector gamePosition = new PVector(0, height - gameSize.y);
 
   game = new Game(gameSize, gamePosition);
@@ -139,7 +139,7 @@ public class Player extends Actor
   float speedMax = 15;
   float lowerBoundary; //lower end of level
   boolean chuteActive = true;
-  
+  int levelWidth;
   KeyTracker keyTracker; // keypress storage
   PImage[] run, jump, idle, die;
   
@@ -157,6 +157,8 @@ public class Player extends Actor
     jump = levelData.getImageResources(spriteVO.jumpIds);
     idle = levelData.getImageResources(spriteVO.idleIds);
     die = levelData.getImageResources(spriteVO.dieIds);
+    levelWidth = levelData.levelWidth;
+    lowerBoundary = levelData.levelHeight;
 
     // setup sprite
     avatar = createGraphics(run[0].width, run[0].height);
@@ -199,14 +201,14 @@ public class Player extends Actor
   {
     if(alive)
     {
-      if(keyTracker.upPressed() && (keyTracker.leftPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID))
+      if(keyTracker.upPressed() && (keyTracker.leftPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID || keyTracker.recentHorizontalKeyId() == null))
       {
-        sprite.setImages("jump", jump);
+        sprite.setImages("jump", jump, false);
         sprite.setFlipH(true);
       }
       else if(keyTracker.upPressed() && (keyTracker.rightPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.RIGHT_ID))
       {
-        sprite.setImages("jump", jump);
+        sprite.setImages("jump", jump, false);
         sprite.setFlipH(false);
       }
       else if(keyTracker.leftPressed() && !keyTracker.rightPressed())
@@ -232,7 +234,7 @@ public class Player extends Actor
         }
         */
         
-        sprite.setImages("idle", idle);
+        sprite.setImages("idle", idle, 15);
         //sprite.render(true);
       }
       //else
@@ -254,7 +256,7 @@ public class Player extends Actor
   @Override
   public BoundingBox getBounds()
   {
-    return new BoundingBox(position, new PVector(avatar.width/3.0f, avatar.height));
+    return new BoundingBox(position, new PVector(avatar.width, avatar.height));
   }
 
 
@@ -276,7 +278,10 @@ public class Player extends Actor
   {
     if (alive)
     {
-      position.add(currVelocity);
+      PVector tmpPos = PVector.add(position,currVelocity);
+      if ( tmpPos.x > 1 && tmpPos.x < levelWidth) //only move if velocity doesn't push player out of level
+        position.add(currVelocity);
+      
       //println("player_position.x: " + position.x + "   .y: " + position.y);
       //println ("UPWARD FORCE: " + currVelocity.y);
     }
@@ -314,6 +319,7 @@ public class Player extends Actor
         if (chuteActive) 
           speedMax = 21;
       }
+      
       if(keyTracker.rightPressed())
       {
         if (currVelocity.x <= walkingSpeed)
@@ -321,13 +327,10 @@ public class Player extends Actor
         if (chuteActive) 
           speedMax = 21;
       }
+
       if(keyTracker.upPressed()) //enable double jump here, to disable set to 0
       {
         jump();
-      }
-      if(keyTracker.downPressed())
-      {
-        currVelocity.y = 0;
       }
     }
     // if neither gamepad is moved nor keypresses are detected - slow down player
@@ -340,37 +343,44 @@ public class Player extends Actor
     PVector tmpAccel = PVector.mult(gravityAcc, 1.0f/30.0f); //calculate gravitational Acceleration, assuming 30fps/can later be adjusted to use realtime for better simulation
        
      //apply gravity
+    // if (position.y < lowerBoundary)
        currVelocity.add(tmpAccel);  
   
       if ( chuteActive && currVelocity.y > speedMax )
         currVelocity.y = speedMax;
-      
+     
+      println(currVelocity.y);
   }
   
   
   public void handleCollision(Collision c)
   {
-    if ( (c.direction == 1 || c.direction == 8)  && !c.getCollider().isEnemy())
+    doubleJumpEnabled = true;
+    if ( c.direction == 1 || c.direction == 5 ) //left/top-left/bottom-left
     {
-        println("Colliding with bounds");
+      if ( currVelocity.x > 0 ) ///if player moves to the right 
         currVelocity.x *= -1;
     }
     
-    if (c.direction == 2 || c.direction == 3 || c.direction == 10) 
+    if ( c.direction == 8 || c.direction == 12 ) //right/top-right/bottom-right
     {
+      if ( currVelocity.x < 0 ) // player moves to the left
+        currVelocity.x *= -1;
+    }
+    
+    if ( c.direction != 1 || c.direction != 8 ) //left-top, top, right-top
+    {
+      if ( currVelocity.y > 0 ) { //player is falling
         if ( currVelocity.y <= 20) { 
-        currVelocity.y = 0f;
-        position.y = c.getCollider().getBounds().top - avatar.height;
+          currVelocity.y = 0f;
+          position.y = c.getCollider().getBounds().top - avatar.height;
         }
         else 
           alive = false;
-        doubleJumpEnabled = true;
-    }
-    
-    if (c.direction == 12 ||c.direction == 4 || c.direction == 5) {
-     // println("COLLISION FROM BELOW");
       }
-    
+      else doubleJumpEnabled = false;
+    }
+
     // check for breakable platforms
     if (c.getCollider().isPlatform() && currVelocity.y == 0)
     {
@@ -388,8 +398,7 @@ public class Player extends Actor
       {
         alive = false;
         music.sound("dead");
-
-        println(this + " ENEMY COLLISION _ YOU'RE DEAD");
+       // println(this + " ENEMY COLLISION _ YOU'RE DEAD");
       }
     }
   }
@@ -403,6 +412,7 @@ public class Enemy extends Actor
   float leftBoundary, rightBoundary;
   PImage[] sprites;
   PVector size, direction;
+  boolean playerSpotted;
   
   
   public Enemy(PImage[] sprites, PVector position, float leftBoundary, float rightBoundary, float walkingSpeed, float runningSpeed)
@@ -440,6 +450,7 @@ public class Enemy extends Actor
 
     direction.x = 1;
     speed = walkingSpeed;
+    playerSpotted = false;
   }
     
     
@@ -462,7 +473,6 @@ public class Enemy extends Actor
     {
       sprite.setFlipH(true);
     }
-
     sprite.render();
 
     return avatar;
@@ -474,12 +484,16 @@ public class Enemy extends Actor
     // does the enemy see the player
     if(spottedThePlayer(player))
     {
+      playerSpotted = true;
       speed = runningSpeed;
     }
     else
     {
+      playerSpotted = false;
+      speed = walkingSpeed;
+      
       // add random enemy movement
-      int r = PApplet.parseInt(random(100));
+      /*int r = int(random(100));
       switch(r)
       {
         // with chance of 1/100 the enemy will turn around and walk
@@ -497,7 +511,7 @@ public class Enemy extends Actor
         default:
           speed = walkingSpeed;
           break;
-      }
+      }*/
     }
 
     // turn around at the end of platform
@@ -774,12 +788,12 @@ public FancyInput(String path, Econarchy that) {
 public class GUI
 {
 	PFont pixelFont;
-	int frame;
-	int size;
-	int points, meterToGo, levelHeight;
+	int frame, size, points, meterToGo, levelHeight, overlayPosY;
 	float playerpos;
 	Player player;
 	boolean sawInfoScreen;
+	PImage gameoverOverlay;
+
 
 	public GUI (Player p)
 	{
@@ -790,10 +804,10 @@ public class GUI
 		meterToGo = 0;
 		levelHeight = PApplet.parseInt(player.position.y / player.jumpHeight); 
 		playerpos = player.position.y;
-		pixelFont = loadFont("resources/fonts/LCDDot-48.vlw");
+		pixelFont = loadFont("resources/fonts/Unibody8Pro-RegularItalic-20.vlw");
 		sawInfoScreen = false;
-		
 	}
+
 
 	public void update()
 	{
@@ -801,6 +815,7 @@ public class GUI
 		gameOver();
 		storyCounter();
 	}
+
 
 	public void storyCounter()
 	{
@@ -819,65 +834,53 @@ public class GUI
 		}
 	}
 
+
 	public void introScreen()
 	{
 		if (game.gameOver && !sawInfoScreen)
 		{
-			//println(this + " state: infoScreen");
-			
-			//fill(255);
-			PImage startscreen = loadImage("resources/startscreen.png");
+			PImage startscreen = loadImage("resources/screens/startscreen.png");
 			image(startscreen, 0, 0);
-			text(
-				"Welcome X,\nToday the consumegood inc. annouced the construction of three more oil rigs in the north sea. They will be placed in a biologically very sensible area and as we know from the past the consumegood inc. tend to build their oil rigs on low budget and not very leakproof.\nPeacufull demonstrations are no longer a sufficient measure. We have to act and set signs.\nSome might call it acts of terrorism. We understand them as acts of non-violent resistance. And tonight we will start by announcing the existence of our organization.\nWe hit them were they feel save. You will have to climb the consumegood inc. headquarter and play our banner on the very top of the building. Be cautious don't get caught by any security guards or employees and take care of the plattforms you are climbing. They might behave against expectation. Place the banner and grab you parachute to sail down. Avoid the plattforms on your way down.\nYou can move using the arrowkeys.\n\nGood luck!\n\nPRESS S TO CONTINUE"
-				, 45, 220, width-90, height - 220);
-		// maybe put this into the keytracker
-		if (keyPressed && key == 's' || key == 'S')
-		{
-			game.startGame();
-			sawInfoScreen = true;
+
+			if (keyPressed && key == ' ')
+			{
+				game.startGame();
+				sawInfoScreen = true;
+			}
 		}
 	}
-}
 
-public void gameOver()
-{
-	if (!player.alive) 
+
+	public void gameOver()
 	{
-		game.gameOver=true;
-		fill(0xffDB1444, 200);
-		if (frame*20< height) 
+		if (!player.alive) 
 		{
-			rect(0, 0, width, size);
-			if (frame%2==0) 
+			if(gameoverOverlay == null)
 			{
-				size+=20;	
+				gameoverOverlay = loadImage("resources/screens/gameoverOverlay.png");
 			}
-			frame++;
-		}
-		else 
-		{
-			//println(this + " state: GAME OVER");
-			rect(0, 0, width, height);
-			textAlign(CENTER,CENTER);
-			fill(255);
-			textFont(pixelFont, 48);
-			text("GAME\nOVER", width/2, height/2);
-			textFont(pixelFont, 20);
-			text("CONTINUE Y / N", width/2, height/2+100);
 
-				// maybe put this into the keytracker
-				if (keyPressed)
+			if(!game.gameOver)
+			{
+				game.gameOver = true;
+				overlayPosY = -gameoverOverlay.height;
+			}
+
+			PImage main = loadImage("resources/screens/gameover.png");
+			image(main, 0, 0);
+
+			if(overlayPosY < 0) overlayPosY += 6;
+			image(gameoverOverlay, 0, overlayPosY);
+
+			if (keyPressed)
+			{
+				if (key == 'y' || key == 'Y')
 				{
-					if (key == 'y' || key == 'Y')
-					{
-						game.startGame();
-					}
-					else if (key == 'n' || key == 'N')
-					{
-						exit();
-					}
-
+					game.startGame();
+				}
+				else if (key == 'n' || key == 'N')
+				{
+					exit();
 				}
 			}
 		}
@@ -1089,6 +1092,14 @@ public class Level
         enemies[i].patroling(hans);
         
         renderedImage.image( enemies[i].enemyRender(), enemies[i].position.x, enemies[i].position.y);
+
+        if(enemies[i].playerSpotted)
+        {
+          PImage tmp = LevelData.getInstance().getImageResource("spotted");
+          int tmpX = PApplet.parseInt(enemies[i].position.x - ((enemies[i].size.x - tmp.width) / 2));
+          int tmpY = PApplet.parseInt(enemies[i].position.y - tmp.height);
+          renderedImage.image(tmp, tmpX, tmpY);
+        }
       } 
     }
     
@@ -1106,8 +1117,8 @@ public class Level
     // calculate level boundaries to collision detection
     LevelBoundary top =  new LevelBoundary(-50.0f, -50.0f, (float) data.levelWidth + 100.0f, 50.0f);
     LevelBoundary bottom = new LevelBoundary(-50.0f,(float) data.levelHeight,(float)data.levelWidth+100.0f, 50.0f);
-    LevelBoundary left = new LevelBoundary(-50.0f,-50.0f,50.0f, (float) data.levelHeight+100);
-    LevelBoundary right = new LevelBoundary((float) data.levelWidth, -50.0f, 50.0f, (float) data.levelHeight+100);
+    LevelBoundary left = new LevelBoundary(-data.levelWidth/2,-50,data.levelWidth/2, (float) data.levelHeight+200);
+    LevelBoundary right = new LevelBoundary((float) data.levelWidth, -50.0f, data.levelWidth/2, (float) data.levelHeight+100);
 
     LevelBoundary[] levelBounds = new LevelBoundary[]{top, bottom,left,right};
     collider.addCollidables(levelBounds);
