@@ -51,6 +51,7 @@ public class Player extends Actor
   KeyTracker keyTracker; // keypress storage
   PImage[] run, jump, idle, die;
   boolean flagRaised = false;
+  boolean isWinner = false;
   
   
   public Player(LevelData.PlayerSpriteVO spriteVO)
@@ -105,6 +106,7 @@ public class Player extends Actor
     chuteActive = false;
     collisionInProgress = false;
     flagRaised = false;
+    isWinner = false;
   }
 
 
@@ -310,8 +312,6 @@ public class Player extends Actor
         }
       }
 
-      print(c.getCollider() + " ");
-
       // check for flag
       if (c.getCollider().isFlag())
       {
@@ -334,8 +334,7 @@ public class Player extends Actor
     
       if (position.y > lowerBoundary-100 && chuteActive && flagRaised)
       {
-        //PLAYER WINS 
-        println("LSBTTIQ MENSCHEN");
+        isWinner = true;
       }
     }
 

@@ -26,14 +26,16 @@ public class GUI
 	{
 		introScreen();
 		gameOver();
+		winner();
 		storyCounter();
 	}
 
 
 	void storyCounter()
 	{
-		if (!game.gameOver)
+		if (!game.gameOver && !player.isWinner)
 		{
+			// -8
 			meterToGo = levelHeight - int((playerpos - player.position.y)/player.jumpHeight);
 			
 			noStroke();
@@ -97,5 +99,23 @@ public class GUI
 				}
 			}
 		}
+	}
+
+
+	void winner()
+	{
+		if(player.isWinner)
+		{
+			PImage main = loadImage("resources/screens/winscreen.png");
+			image(main, 0, 0);
+
+			if (keyPressed && key == ' ')
+			{
+				sawInfoScreen = false;
+				game.gameOver = true;
+				player.isWinner = false;
+			}	
+		}
+		
 	}
 }
