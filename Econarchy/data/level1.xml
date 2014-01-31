@@ -58,18 +58,28 @@
 		</foregrounds>
 		<!-- platform types have to match the image ids above!!! -->
 		<platforms>
-			<platform id="p1" type="stable" x="20" y="1900" />	
-			<platform id="p2" type="breakable" x="140" y="1800" />	
-			<platform id="p3" type="slippery" x="260" y="1700" />	
-			<platform id="p4" type="stable" x="20" y="1600" />	
-			<platform id="p5" type="breakable" x="140" y="1500" />	
-			<platform id="p6" type="slippery" x="260" y="1400" />	
-			<platform id="p7" type="stable" x="20" y="1300" />	
-			<platform id="p8" type="breakable" x="140" y="1200" />	
-			<platform id="p9" type="slippery" x="260" y="1100" />	
-			<platform id="p10" type="stable" x="20" y="1000" />	
-			<platform id="p11" type="breakable" x="140" y="900" />	
-			<platform id="p12" type="slippery" x="260" y="800" />	
+			<platform id="p1" type="stable" x="220" y="1911"/>
+			<platform id="p2" type="stable" x="0" y="1828"/>
+			<platform id="p3" type="slippery" x="325" y="1828"/>
+			<platform id="p4" type="stable" x="75" y="1754"/>
+			<platform id="p5" type="stable" x="283" y="1611"/>
+			<platform id="p6" type="slippery" x="68" y="1538"/>
+			<platform id="p7" type="stable" x="267" y="1393"/>
+			<platform id="p8" type="stable" x="200" y="1316"/>
+			<platform id="p9" type="slippery" x="316" y="1248"/>
+			<platform id="p10" type="stable" x="8" y="1102"/>
+			<platform id="p11" type="slippery" x="262" y="959"/>
+			<platform id="p12" type="stable" x="321" y="811"/>
+			<platform id="p13" type="stable" x="48" y="670"/>
+			<platform id="p14" type="breakable" x="152" y="521"/>
+			<platform id="p15" type="stable" x="0" y="378"/>
+			<platform id="p16" type="stable" x="220" y="232"/>
+			<platform id="p17" type="breakable" x="256" y="1715"/>
+			<platform id="p18" type="breakable" x="22" y="1440"/>
+			<platform id="p19" type="breakable" x="75" y="1319"/>
+			<platform id="p20" type="breakable" x="242" y="1150"/>
+			<platform id="p20" type="breakable" x="19" y="906"/>
+			<platform id="p21" type="stable" x="172" y="838"/>
 		</platforms>
 		<!-- player specs -->
 		<player_sprite>
@@ -84,10 +94,10 @@
 			<enemy_sprite id="enemy2" imageIds="e2_f1,e2_f2,e2_f3,e2_f4,e2_f5,e2_f6" />
 		</enemy_sprites>
 		<enemies>
-			<enemy spriteId="enemy1" platformId="p1" walkingSpeed="1" runningSpeed="2" startPosition="0.5" />
-			<enemy spriteId="enemy2" platformId="p4" walkingSpeed="1" runningSpeed="3" startPosition="0.5" />
-			<enemy spriteId="enemy1" platformId="p6" walkingSpeed="1" runningSpeed="2" startPosition="0.5" />
-			<enemy spriteId="enemy2" platformId="p10" walkingSpeed="1" runningSpeed="3" startPosition="0.5" />
+			<enemy spriteId="enemy1" platformId="p4" walkingSpeed="1" runningSpeed="2" startPosition="0.5"/>
+			<enemy spriteId="enemy2" platformId="p8" walkingSpeed="1" runningSpeed="3" startPosition="0.5"/>
+			<enemy spriteId="enemy1" platformId="p12" walkingSpeed="1" runningSpeed="2" startPosition="0.5"/>
+			<enemy spriteId="enemy2" platformId="p15" walkingSpeed="1" runningSpeed="3" startPosition="0.5"/>
 		</enemies>
 	</specification>
 </econarchy_level>
