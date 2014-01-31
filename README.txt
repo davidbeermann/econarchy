@@ -95,6 +95,11 @@ David Beermann:
 - gui optimizations with new graphics, fonts and animations
 
 Peter Buczkowski:
+- sound design
+- initial idea for gameplay / based on groupwork with Jonas
+- optimizing level design (xml)
+- additional graphics (e.g. parachute)
+
 
 Sammy Jobbins Wells:
 
