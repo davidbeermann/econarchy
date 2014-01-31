@@ -1,12 +1,11 @@
 public class GUI
 {
 	PFont pixelFont;
-	int frame;
-	int size;
-	int points, meterToGo, levelHeight;
+	int frame, size, points, meterToGo, levelHeight, overlayPosY;
 	float playerpos;
 	Player player;
 	boolean sawInfoScreen;
+	PImage gameoverOverlay;
 
 
 	public GUI (Player p)
@@ -69,10 +68,22 @@ public class GUI
 	{
 		if (!player.alive) 
 		{
-			game.gameOver=true;
+			if(gameoverOverlay == null)
+			{
+				gameoverOverlay = loadImage("resources/screens/gameoverOverlay.png");
+			}
 
-			PImage startscreen = loadImage("resources/screens/gameover.png");
-			image(startscreen, 0, 0);
+			if(!game.gameOver)
+			{
+				game.gameOver = true;
+				overlayPosY = -gameoverOverlay.height;
+			}
+
+			PImage main = loadImage("resources/screens/gameover.png");
+			image(main, 0, 0);
+
+			if(overlayPosY < 0) overlayPosY += 6;
+			image(gameoverOverlay, 0, overlayPosY);
 
 			if (keyPressed)
 			{
