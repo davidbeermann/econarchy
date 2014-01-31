@@ -1,4 +1,4 @@
-﻿
+
                            .-" l                       
                           .'   /                        
            _.------------'    :                         
@@ -24,7 +24,7 @@
 
 version // 1.0  
 released // 31/01/2010
-platform // Windows, Mac OSX, Xbox 360 (?)
+platform // Windows, Mac OSX
 
 ---
 
@@ -54,6 +54,13 @@ arrow keys up, down, right, left to jump up, right and left.
 HOW TO RUN THE PROTOTYPE:
 - Start the "econarchy" executable
 - No further installations required
+
+---
+
+HOW TO COMPILE THE SOURCES:
+- Download Processing (http://processing.org)
+- Copy libraries from source folder into main Processing libraries folder
+- Click Econarchy.pde in order to open project in Processing
 
 ---
 
