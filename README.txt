@@ -24,7 +24,7 @@
 
 version // 1.0  
 released // 31/01/2010
-platform // Windows, Mac OSX
+platform // Windows (64bit), Mac OSX
 
 ---
 
@@ -52,6 +52,7 @@ arrow keys up, down, right, left to jump up, right and left.
 ---
 
 HOW TO RUN THE PROTOTYPE:
+- Java 7 needs to be installed on the computer
 - Start the "econarchy" executable
 - No further installations required
 
