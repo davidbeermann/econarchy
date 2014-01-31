@@ -324,6 +324,8 @@ public class Player extends Actor
         Flag flag = (Flag) c.getCollider();
         flag.setActive();
 
+        music.sound("win");
+
         flagRaised = true;
         chuteActive = true;
       }
@@ -428,6 +430,11 @@ public class Enemy extends Actor
     // does the enemy see the player
     if(spottedThePlayer(player))
     {
+      if(!playerSpotted)
+      {
+        music.sound("spotted");
+      }
+
       playerSpotted = true;
       speed = runningSpeed;
     }
@@ -436,7 +443,7 @@ public class Enemy extends Actor
       playerSpotted = false;
 
       // add random enemy movement
-      int r = int(random(100));
+      /*int r = int(random(100));
       switch(r)
       {
         // with chance of 1/100 the enemy will turn around and walk
@@ -454,7 +461,7 @@ public class Enemy extends Actor
         default:
           speed = walkingSpeed;
           break;
-      }
+      }*/
     }
 
     // turn around at the end of platform
