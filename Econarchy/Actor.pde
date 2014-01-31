@@ -269,7 +269,7 @@ public class Player extends Actor
     {
       //println("COLLISION");
       collisionInProgress = true;
-    
+
       doubleJumpEnabled = true;
       if ( c.direction == 1 || c.direction == 5 ) //left/top-left/bottom-left
       {
@@ -287,7 +287,7 @@ public class Player extends Actor
       {
         if ( currVelocity.y > 0 ) //player is falling
         {
-          if ( currVelocity.y <= 20)
+          if ( currVelocity.y <= 15) 
           { 
             currVelocity.y = 0f;
             position.y = c.getCollider().getBounds().top - avatar.height;
@@ -330,15 +330,15 @@ public class Player extends Actor
           music.sound("dead");
          // println(this + " ENEMY COLLISION _ YOU'RE DEAD");
         }
-      }
-       
-      /*if (c.getCollider().isParachute())
+      }       
+    
+      /*if (position.y > lowerBounds-100 && chuteActive && flagRaised)
       {
-        chuteActive = true;
+        //PLAYER WINS
       }*/
-
-      collisionInProgress = false;
     }
+
+    collisionInProgress = false;
   }
 }
 

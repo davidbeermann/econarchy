@@ -1,4 +1,4 @@
-
+﻿
                            .-" l                       
                           .'   /                        
            _.------------'    :                         
@@ -48,7 +48,7 @@ OR
 
 arrows
 
-arrow keys up, down, right, left to jump up, move down, right and left.
+arrow keys up, down, right, left to jump up, right and left.
 ---
 
 HOW TO RUN THE PROTOTYPE:
@@ -95,8 +95,19 @@ David Beermann:
 - gui optimizations with new graphics, fonts and animations
 
 Peter Buczkowski:
+- sound design
+- initial idea for gameplay / based on groupwork with Jonas
+- optimizing level design (xml)
+- additional graphics (e.g. parachute)
+
 
 Sammy Jobbins Wells:
 
 Florian Lütkebohmert:
-
+- custom CollisionDetectionSystem(Collidable, CollisionDetector, etc.) (Pita)
+- Physics
+- Input-Support Gamepad (not enabled by default because of lovely little bugs)
+ * uses and requires proControll library - http://creativecomputing.cc/p5libs/procontroll/
+- Gamepad-Configuration parsing (XML)
+- optimization of physics and collision detection (aka. bugfixing)
+- initial idea for up/down mechanic
