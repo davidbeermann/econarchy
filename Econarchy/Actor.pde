@@ -108,14 +108,14 @@ public class Player extends Actor
   {
     if(alive)
     {
-      if(keyTracker.upPressed() && (keyTracker.leftPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID))
+      if(keyTracker.upPressed() && (keyTracker.leftPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.LEFT_ID || keyTracker.recentHorizontalKeyId() == null))
       {
-        sprite.setImages("jump", jump);
+        sprite.setImages("jump", jump, false);
         sprite.setFlipH(true);
       }
       else if(keyTracker.upPressed() && (keyTracker.rightPressed() || keyTracker.recentHorizontalKeyId() == KeyTracker.RIGHT_ID))
       {
-        sprite.setImages("jump", jump);
+        sprite.setImages("jump", jump, false);
         sprite.setFlipH(false);
       }
       else if(keyTracker.leftPressed() && !keyTracker.rightPressed())
@@ -141,7 +141,7 @@ public class Player extends Actor
         }
         */
         
-        sprite.setImages("idle", idle);
+        sprite.setImages("idle", idle, 15);
         //sprite.render(true);
       }
       //else
@@ -317,6 +317,7 @@ public class Enemy extends Actor
   float leftBoundary, rightBoundary;
   PImage[] sprites;
   PVector size, direction;
+  boolean playerSpotted;
   
   
   public Enemy(PImage[] sprites, PVector position, float leftBoundary, float rightBoundary, float walkingSpeed, float runningSpeed)
@@ -354,6 +355,7 @@ public class Enemy extends Actor
 
     direction.x = 1;
     speed = walkingSpeed;
+    playerSpotted = false;
   }
     
     
@@ -376,7 +378,6 @@ public class Enemy extends Actor
     {
       sprite.setFlipH(true);
     }
-
     sprite.render();
 
     return avatar;
@@ -388,10 +389,13 @@ public class Enemy extends Actor
     // does the enemy see the player
     if(spottedThePlayer(player))
     {
+      playerSpotted = true;
       speed = runningSpeed;
     }
     else
     {
+      playerSpotted = false;
+
       // add random enemy movement
       int r = int(random(100));
       switch(r)

@@ -1,0 +1,678 @@
+total 192
+drwxr-xr-x  24 julianhespenheide  staff    816 31 Jan 18:55 .
+drwxr-xr-x  10 julianhespenheide  staff    340 31 Jan 18:12 ..
+-rw-r--r--@  1 julianhespenheide  staff  15364 31 Jan 18:51 .DS_Store
+-rw-r--r--   1 julianhespenheide  staff  11033 31 Jan 18:12 Actor.pde
+-rw-r--r--   1 julianhespenheide  staff   4687 31 Jan 18:12 CollisionDetector.pde
+-rw-r--r--   1 julianhespenheide  staff   1043 31 Jan 18:12 Econarchy.pde
+-rw-r--r--   1 julianhespenheide  staff   2012 31 Jan 18:12 FancyInput.pde
+-rw-r--r--   1 julianhespenheide  staff   2955 31 Jan 18:12 GUI.pde
+-rw-r--r--   1 julianhespenheide  staff   3232 31 Jan 18:12 Game.pde
+-rw-r--r--   1 julianhespenheide  staff   2646 31 Jan 18:12 KeyTracker.java
+-rw-r--r--   1 julianhespenheide  staff   5024 31 Jan 18:12 Level.pde
+-rw-r--r--   1 julianhespenheide  staff   7719 31 Jan 18:12 LevelData.java
+-rw-r--r--   1 julianhespenheide  staff   3192 31 Jan 18:12 Physics_test.pde
+-rw-r--r--   1 julianhespenheide  staff   1786 31 Jan 18:12 Platform.pde
+-rw-r--r--   1 julianhespenheide  staff    849 31 Jan 18:12 SoundEvent.pde
+-rw-r--r--   1 julianhespenheide  staff   2371 31 Jan 18:12 Sprite.java
+-rw-r--r--   1 julianhespenheide  staff    188 31 Jan 18:12 State.java
+-rw-r--r--   1 julianhespenheide  staff    319 31 Jan 18:12 Type.java
+drwxr-xr-x   5 julianhespenheide  staff    170 31 Jan 18:50 application.macosx
+drwxr-xr-x   9 julianhespenheide  staff    306 24 Jan 21:44 build-tmp
+drwxr-xr-x   6 julianhespenheide  staff    204 31 Jan 18:12 data
+drwxr-xr-x   8 julianhespenheide  staff    272 31 Jan 18:12 graphics
+drwxr-xr-x   3 julianhespenheide  staff    102 31 Jan 18:12 libraries
+-rw-r--r--   1 julianhespenheide  staff      0 31 Jan 18:55 output.txt
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx:
+total 16
+drwxr-xr-x   5 julianhespenheide  staff   170 31 Jan 18:50 .
+drwxr-xr-x  24 julianhespenheide  staff   816 31 Jan 18:55 ..
+-rw-r--r--@  1 julianhespenheide  staff  6148 31 Jan 18:50 .DS_Store
+drwxr-xr-x   3 julianhespenheide  staff   102 31 Jan 18:12 Econarchy.app
+drwxr-xr-x  18 julianhespenheide  staff   612 31 Jan 18:12 source
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx/Econarchy.app:
+total 0
+drwxr-xr-x  3 julianhespenheide  staff  102 31 Jan 18:12 .
+drwxr-xr-x  5 julianhespenheide  staff  170 31 Jan 18:50 ..
+drwxr-xr-x  6 julianhespenheide  staff  204 31 Jan 18:12 Contents
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx/Econarchy.app/Contents:
+total 16
+drwxr-xr-x  6 julianhespenheide  staff   204 31 Jan 18:12 .
+drwxr-xr-x  3 julianhespenheide  staff   102 31 Jan 18:12 ..
+-rw-r--r--  1 julianhespenheide  staff  2503 31 Jan 18:12 Info.plist
+drwxr-xr-x  3 julianhespenheide  staff   102 31 Jan 18:12 MacOS
+-rw-r--r--  1 julianhespenheide  staff     8 31 Jan 18:12 PkgInfo
+drwxr-xr-x  4 julianhespenheide  staff   136 31 Jan 18:12 Resources
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx/Econarchy.app/Contents/MacOS:
+total 120
+drwxr-xr-x  3 julianhespenheide  staff    102 31 Jan 18:12 .
+drwxr-xr-x  6 julianhespenheide  staff    204 31 Jan 18:12 ..
+-rwxr-xr-x  1 julianhespenheide  staff  61376 31 Jan 18:12 JavaApplicationStub
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx/Econarchy.app/Contents/Resources:
+total 344
+drwxr-xr-x   4 julianhespenheide  staff     136 31 Jan 18:12 .
+drwxr-xr-x   6 julianhespenheide  staff     204 31 Jan 18:12 ..
+drwxr-xr-x  21 julianhespenheide  staff     714 31 Jan 18:12 Java
+-rw-r--r--   1 julianhespenheide  staff  174666 31 Jan 18:12 sketch.icns
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx/Econarchy.app/Contents/Resources/Java:
+total 13616
+drwxr-xr-x  21 julianhespenheide  staff      714 31 Jan 18:12 .
+drwxr-xr-x   4 julianhespenheide  staff      136 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff    34792 31 Jan 18:12 Econarchy.jar
+-rw-r--r--   1 julianhespenheide  staff   591870 31 Jan 18:12 core.jar
+drwxr-xr-x   6 julianhespenheide  staff      204 31 Jan 18:12 data
+-rw-r--r--   1 julianhespenheide  staff     3986 31 Jan 18:12 gluegen-rt-natives-macosx-universal.jar
+-rw-r--r--   1 julianhespenheide  staff   252349 31 Jan 18:12 gluegen-rt.jar
+-rw-r--r--   1 julianhespenheide  staff    73728 31 Jan 18:12 jinput-dx8.dll
+-rw-r--r--   1 julianhespenheide  staff    69632 31 Jan 18:12 jinput-raw.dll
+-rw-r--r--   1 julianhespenheide  staff    69632 31 Jan 18:12 jinput-wintab.dll
+-rw-r--r--   1 julianhespenheide  staff   105446 31 Jan 18:12 jl1.0.jar
+-rw-r--r--   1 julianhespenheide  staff   336768 31 Jan 18:12 jogl-all-natives-macosx-universal.jar
+-rw-r--r--   1 julianhespenheide  staff  4882631 31 Jan 18:12 jogl-all.jar
+-rw-r--r--   1 julianhespenheide  staff    46865 31 Jan 18:12 jsminim.jar
+-rw-r--r--   1 julianhespenheide  staff    10204 31 Jan 18:12 libjinput-linux.so
+-rw-r--r--   1 julianhespenheide  staff    49016 31 Jan 18:12 libjinput-osx.jnilib
+-rw-r--r--   1 julianhespenheide  staff    99621 31 Jan 18:12 minim.jar
+-rw-r--r--   1 julianhespenheide  staff    24538 31 Jan 18:12 mp3spi1.9.4.jar
+-rw-r--r--   1 julianhespenheide  staff   179461 31 Jan 18:12 procontroll.jar
+-rw-r--r--   1 julianhespenheide  staff    10401 31 Jan 18:12 tritonus_aos.jar
+-rw-r--r--   1 julianhespenheide  staff   102673 31 Jan 18:12 tritonus_share.jar
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx/Econarchy.app/Contents/Resources/Java/data:
+total 32
+drwxr-xr-x   6 julianhespenheide  staff   204 31 Jan 18:12 .
+drwxr-xr-x  21 julianhespenheide  staff   714 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff   566 31 Jan 18:12 controls.xml
+-rw-r--r--   1 julianhespenheide  staff  4780 31 Jan 18:12 level1.xml
+drwxr-xr-x   8 julianhespenheide  staff   272 31 Jan 18:12 resources
+-rw-r--r--   1 julianhespenheide  staff   268 31 Jan 18:12 spotted.png
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx/Econarchy.app/Contents/Resources/Java/data/resources:
+total 720
+drwxr-xr-x   8 julianhespenheide  staff     272 31 Jan 18:12 .
+drwxr-xr-x   6 julianhespenheide  staff     204 31 Jan 18:12 ..
+drwxr-xr-x  16 julianhespenheide  staff     544 31 Jan 18:12 enemies
+drwxr-xr-x   3 julianhespenheide  staff     102 31 Jan 18:12 fonts
+drwxr-xr-x   9 julianhespenheide  staff     306 31 Jan 18:12 level1
+drwxr-xr-x  15 julianhespenheide  staff     510 31 Jan 18:12 player
+drwxr-xr-x   6 julianhespenheide  staff     204 31 Jan 18:12 sounds
+-rw-r--r--   1 julianhespenheide  staff  367219 31 Jan 18:12 startscreen.png
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx/Econarchy.app/Contents/Resources/Java/data/resources/enemies:
+total 112
+drwxr-xr-x  16 julianhespenheide  staff   544 31 Jan 18:12 .
+drwxr-xr-x   8 julianhespenheide  staff   272 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff   149 31 Jan 18:12 enemy1_state1.gif
+-rw-r--r--   1 julianhespenheide  staff   148 31 Jan 18:12 enemy1_state2.gif
+-rw-r--r--   1 julianhespenheide  staff   142 31 Jan 18:12 enemy1_state3.gif
+-rw-r--r--   1 julianhespenheide  staff   141 31 Jan 18:12 enemy1_state4.gif
+-rw-r--r--   1 julianhespenheide  staff   248 31 Jan 18:12 enemy1_state5.gif
+-rw-r--r--   1 julianhespenheide  staff   147 31 Jan 18:12 enemy1_state6.gif
+-rw-r--r--   1 julianhespenheide  staff   143 31 Jan 18:12 enemy1_state7.gif
+-rw-r--r--   1 julianhespenheide  staff   146 31 Jan 18:12 enemy1_state8.gif
+-rw-r--r--   1 julianhespenheide  staff  1275 31 Jan 18:12 enemy2_state1.gif
+-rw-r--r--   1 julianhespenheide  staff  1275 31 Jan 18:12 enemy2_state2.gif
+-rw-r--r--   1 julianhespenheide  staff  1303 31 Jan 18:12 enemy2_state3.gif
+-rw-r--r--   1 julianhespenheide  staff  1370 31 Jan 18:12 enemy2_state4.gif
+-rw-r--r--   1 julianhespenheide  staff  1274 31 Jan 18:12 enemy2_state5.gif
+-rw-r--r--   1 julianhespenheide  staff  1273 31 Jan 18:12 enemy2_state6.gif
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx/Econarchy.app/Contents/Resources/Java/data/resources/fonts:
+total 520
+drwxr-xr-x  3 julianhespenheide  staff     102 31 Jan 18:12 .
+drwxr-xr-x  8 julianhespenheide  staff     272 31 Jan 18:12 ..
+-rw-r--r--  1 julianhespenheide  staff  263742 31 Jan 18:12 LCDDot-48.vlw
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx/Econarchy.app/Contents/Resources/Java/data/resources/level1:
+total 136
+drwxr-xr-x  9 julianhespenheide  staff    306 31 Jan 18:12 .
+drwxr-xr-x  8 julianhespenheide  staff    272 31 Jan 18:12 ..
+-rw-r--r--  1 julianhespenheide  staff  17371 31 Jan 18:12 background_layer1.png
+-rw-r--r--  1 julianhespenheide  staff   8462 31 Jan 18:12 background_layer2.png
+-rw-r--r--  1 julianhespenheide  staff   7296 31 Jan 18:12 background_layer3.png
+-rw-r--r--  1 julianhespenheide  staff  12833 31 Jan 18:12 foreground_layer1.png
+-rw-r--r--  1 julianhespenheide  staff   3068 31 Jan 18:12 platform_breakable.png
+-rw-r--r--  1 julianhespenheide  staff   2982 31 Jan 18:12 platform_slippery.png
+-rw-r--r--  1 julianhespenheide  staff   2902 31 Jan 18:12 platform_stable.png
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx/Econarchy.app/Contents/Resources/Java/data/resources/player:
+total 104
+drwxr-xr-x  15 julianhespenheide  staff  510 31 Jan 18:12 .
+drwxr-xr-x   8 julianhespenheide  staff  272 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  232 31 Jan 18:12 dead.gif
+-rw-r--r--   1 julianhespenheide  staff  179 31 Jan 18:12 player_idle_frame1.gif
+-rw-r--r--   1 julianhespenheide  staff  171 31 Jan 18:12 player_idle_frame2.gif
+-rw-r--r--   1 julianhespenheide  staff  154 31 Jan 18:12 player_jump_frame1.gif
+-rw-r--r--   1 julianhespenheide  staff  153 31 Jan 18:12 player_jump_frame2.gif
+-rw-r--r--   1 julianhespenheide  staff  167 31 Jan 18:12 player_run_frame1.gif
+-rw-r--r--   1 julianhespenheide  staff  161 31 Jan 18:12 player_run_frame2.gif
+-rw-r--r--   1 julianhespenheide  staff  158 31 Jan 18:12 player_run_frame3.gif
+-rw-r--r--   1 julianhespenheide  staff  148 31 Jan 18:12 player_run_frame4.gif
+-rw-r--r--   1 julianhespenheide  staff  143 31 Jan 18:12 player_run_frame5.gif
+-rw-r--r--   1 julianhespenheide  staff  146 31 Jan 18:12 player_run_frame6.gif
+-rw-r--r--   1 julianhespenheide  staff  155 31 Jan 18:12 player_run_frame7.gif
+-rw-r--r--   1 julianhespenheide  staff  165 31 Jan 18:12 player_run_frame8.gif
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx/Econarchy.app/Contents/Resources/Java/data/resources/sounds:
+total 2136
+drwxr-xr-x  6 julianhespenheide  staff     204 31 Jan 18:12 .
+drwxr-xr-x  8 julianhespenheide  staff     272 31 Jan 18:12 ..
+-rw-r--r--  1 julianhespenheide  staff  234940 31 Jan 18:12 dead.wav
+-rw-r--r--  1 julianhespenheide  staff   55740 31 Jan 18:12 jump.wav
+-rw-r--r--  1 julianhespenheide  staff   81192 31 Jan 18:12 spotted.wav
+-rw-r--r--  1 julianhespenheide  staff  713368 31 Jan 18:12 theme.wav
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/application.macosx/source:
+total 232
+drwxr-xr-x  18 julianhespenheide  staff    612 31 Jan 18:12 .
+drwxr-xr-x   5 julianhespenheide  staff    170 31 Jan 18:50 ..
+-rw-r--r--   1 julianhespenheide  staff  10683 31 Jan 18:12 Actor.pde
+-rw-r--r--   1 julianhespenheide  staff   4687 31 Jan 18:12 CollisionDetector.pde
+-rw-r--r--   1 julianhespenheide  staff  35821 31 Jan 18:12 Econarchy.java
+-rw-r--r--   1 julianhespenheide  staff   1043 31 Jan 18:12 Econarchy.pde
+-rw-r--r--   1 julianhespenheide  staff   2012 31 Jan 18:12 FancyInput.pde
+-rw-r--r--   1 julianhespenheide  staff   2955 31 Jan 18:12 GUI.pde
+-rw-r--r--   1 julianhespenheide  staff   3232 31 Jan 18:12 Game.pde
+-rw-r--r--   1 julianhespenheide  staff   2646 31 Jan 18:12 KeyTracker.java
+-rw-r--r--   1 julianhespenheide  staff   4654 31 Jan 18:12 Level.pde
+-rw-r--r--   1 julianhespenheide  staff   7719 31 Jan 18:12 LevelData.java
+-rw-r--r--   1 julianhespenheide  staff   3192 31 Jan 18:12 Physics_test.pde
+-rw-r--r--   1 julianhespenheide  staff   1786 31 Jan 18:12 Platform.pde
+-rw-r--r--   1 julianhespenheide  staff    849 31 Jan 18:12 SoundEvent.pde
+-rw-r--r--   1 julianhespenheide  staff   1697 31 Jan 18:12 Sprite.java
+-rw-r--r--   1 julianhespenheide  staff    188 31 Jan 18:12 State.java
+-rw-r--r--   1 julianhespenheide  staff    319 31 Jan 18:12 Type.java
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/build-tmp:
+total 56
+drwxr-xr-x   9 julianhespenheide  staff   306 24 Jan 21:44 .
+drwxr-xr-x  24 julianhespenheide  staff   816 31 Jan 18:55 ..
+-rw-r--r--@  1 julianhespenheide  staff  6148 24 Jan 21:44 .DS_Store
+-rw-r--r--   1 julianhespenheide  staff   940 24 Jan 21:43 State$Enemy.class
+-rw-r--r--   1 julianhespenheide  staff  1097 24 Jan 21:43 State$Player.class
+-rw-r--r--   1 julianhespenheide  staff   275 24 Jan 21:43 State.class
+-rw-r--r--   1 julianhespenheide  staff  1197 24 Jan 21:43 Type$Platform.class
+-rw-r--r--   1 julianhespenheide  staff   243 24 Jan 21:43 Type.class
+drwxr-xr-x   3 julianhespenheide  staff   102 24 Jan 21:44 source
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/build-tmp/source:
+total 16
+drwxr-xr-x  3 julianhespenheide  staff   102 24 Jan 21:44 .
+drwxr-xr-x  9 julianhespenheide  staff   306 24 Jan 21:44 ..
+-rw-r--r--@ 1 julianhespenheide  staff  6148 24 Jan 21:44 .DS_Store
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/data:
+total 40
+drwxr-xr-x   6 julianhespenheide  staff   204 31 Jan 18:12 .
+drwxr-xr-x  24 julianhespenheide  staff   816 31 Jan 18:55 ..
+-rw-r--r--@  1 julianhespenheide  staff  6148 31 Jan 18:50 .DS_Store
+-rw-r--r--   1 julianhespenheide  staff   566 31 Jan 18:12 controls.xml
+-rw-r--r--   1 julianhespenheide  staff  5375 31 Jan 18:12 level1.xml
+drwxr-xr-x  10 julianhespenheide  staff   340 31 Jan 18:12 resources
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/data/resources:
+total 744
+drwxr-xr-x  10 julianhespenheide  staff     340 31 Jan 18:12 .
+drwxr-xr-x   6 julianhespenheide  staff     204 31 Jan 18:12 ..
+-rw-r--r--@  1 julianhespenheide  staff    6148 31 Jan 18:50 .DS_Store
+drwxr-xr-x  16 julianhespenheide  staff     544 31 Jan 18:12 enemies
+drwxr-xr-x   3 julianhespenheide  staff     102 31 Jan 18:12 fonts
+drwxr-xr-x   9 julianhespenheide  staff     306 31 Jan 18:12 level1
+drwxr-xr-x  15 julianhespenheide  staff     510 31 Jan 18:12 player
+drwxr-xr-x   6 julianhespenheide  staff     204 31 Jan 18:12 sounds
+-rw-r--r--   1 julianhespenheide  staff     216 31 Jan 18:12 spotted.png
+-rw-r--r--   1 julianhespenheide  staff  367219 31 Jan 18:12 startscreen.png
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/data/resources/enemies:
+total 112
+drwxr-xr-x  16 julianhespenheide  staff   544 31 Jan 18:12 .
+drwxr-xr-x  10 julianhespenheide  staff   340 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff   149 31 Jan 18:12 enemy1_state1.gif
+-rw-r--r--   1 julianhespenheide  staff   148 31 Jan 18:12 enemy1_state2.gif
+-rw-r--r--   1 julianhespenheide  staff   142 31 Jan 18:12 enemy1_state3.gif
+-rw-r--r--   1 julianhespenheide  staff   141 31 Jan 18:12 enemy1_state4.gif
+-rw-r--r--   1 julianhespenheide  staff   248 31 Jan 18:12 enemy1_state5.gif
+-rw-r--r--   1 julianhespenheide  staff   147 31 Jan 18:12 enemy1_state6.gif
+-rw-r--r--   1 julianhespenheide  staff   143 31 Jan 18:12 enemy1_state7.gif
+-rw-r--r--   1 julianhespenheide  staff   146 31 Jan 18:12 enemy1_state8.gif
+-rw-r--r--   1 julianhespenheide  staff  1275 31 Jan 18:12 enemy2_state1.gif
+-rw-r--r--   1 julianhespenheide  staff  1275 31 Jan 18:12 enemy2_state2.gif
+-rw-r--r--   1 julianhespenheide  staff  1303 31 Jan 18:12 enemy2_state3.gif
+-rw-r--r--   1 julianhespenheide  staff  1370 31 Jan 18:12 enemy2_state4.gif
+-rw-r--r--   1 julianhespenheide  staff  1274 31 Jan 18:12 enemy2_state5.gif
+-rw-r--r--   1 julianhespenheide  staff  1273 31 Jan 18:12 enemy2_state6.gif
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/data/resources/fonts:
+total 520
+drwxr-xr-x   3 julianhespenheide  staff     102 31 Jan 18:12 .
+drwxr-xr-x  10 julianhespenheide  staff     340 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  263742 31 Jan 18:12 LCDDot-48.vlw
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/data/resources/level1:
+total 136
+drwxr-xr-x   9 julianhespenheide  staff    306 31 Jan 18:12 .
+drwxr-xr-x  10 julianhespenheide  staff    340 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  17371 31 Jan 18:12 background_layer1.png
+-rw-r--r--   1 julianhespenheide  staff   8462 31 Jan 18:12 background_layer2.png
+-rw-r--r--   1 julianhespenheide  staff   7296 31 Jan 18:12 background_layer3.png
+-rw-r--r--   1 julianhespenheide  staff  12833 31 Jan 18:12 foreground_layer1.png
+-rw-r--r--   1 julianhespenheide  staff   3068 31 Jan 18:12 platform_breakable.png
+-rw-r--r--   1 julianhespenheide  staff   2982 31 Jan 18:12 platform_slippery.png
+-rw-r--r--   1 julianhespenheide  staff   2902 31 Jan 18:12 platform_stable.png
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/data/resources/player:
+total 104
+drwxr-xr-x  15 julianhespenheide  staff  510 31 Jan 18:12 .
+drwxr-xr-x  10 julianhespenheide  staff  340 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  232 31 Jan 18:12 dead.gif
+-rw-r--r--   1 julianhespenheide  staff  179 31 Jan 18:12 player_idle_frame1.gif
+-rw-r--r--   1 julianhespenheide  staff  171 31 Jan 18:12 player_idle_frame2.gif
+-rw-r--r--   1 julianhespenheide  staff  154 31 Jan 18:12 player_jump_frame1.gif
+-rw-r--r--   1 julianhespenheide  staff  153 31 Jan 18:12 player_jump_frame2.gif
+-rw-r--r--   1 julianhespenheide  staff  167 31 Jan 18:12 player_run_frame1.gif
+-rw-r--r--   1 julianhespenheide  staff  161 31 Jan 18:12 player_run_frame2.gif
+-rw-r--r--   1 julianhespenheide  staff  158 31 Jan 18:12 player_run_frame3.gif
+-rw-r--r--   1 julianhespenheide  staff  148 31 Jan 18:12 player_run_frame4.gif
+-rw-r--r--   1 julianhespenheide  staff  143 31 Jan 18:12 player_run_frame5.gif
+-rw-r--r--   1 julianhespenheide  staff  146 31 Jan 18:12 player_run_frame6.gif
+-rw-r--r--   1 julianhespenheide  staff  155 31 Jan 18:12 player_run_frame7.gif
+-rw-r--r--   1 julianhespenheide  staff  165 31 Jan 18:12 player_run_frame8.gif
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/data/resources/sounds:
+total 2136
+drwxr-xr-x   6 julianhespenheide  staff     204 31 Jan 18:12 .
+drwxr-xr-x  10 julianhespenheide  staff     340 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  234940 31 Jan 18:12 dead.wav
+-rw-r--r--   1 julianhespenheide  staff   55740 31 Jan 18:12 jump.wav
+-rw-r--r--   1 julianhespenheide  staff   81192 31 Jan 18:12 spotted.wav
+-rw-r--r--   1 julianhespenheide  staff  713368 31 Jan 18:12 theme.wav
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/graphics:
+total 32
+drwxr-xr-x   8 julianhespenheide  staff    272 31 Jan 18:12 .
+drwxr-xr-x  24 julianhespenheide  staff    816 31 Jan 18:55 ..
+-rw-r--r--@  1 julianhespenheide  staff  15364 31 Jan 17:54 .DS_Store
+drwxr-xr-x   4 julianhespenheide  staff    136 31 Jan 18:12 backgrounds
+drwxr-xr-x   3 julianhespenheide  staff    102 31 Jan 18:11 enemies
+drwxr-xr-x   3 julianhespenheide  staff    102 31 Jan 18:11 gameover
+drwxr-xr-x   2 julianhespenheide  staff     68 25 Jan 15:42 gui
+drwxr-xr-x   3 julianhespenheide  staff    102 31 Jan 18:12 player
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/graphics/backgrounds:
+total 16
+drwxr-xr-x  4 julianhespenheide  staff   136 31 Jan 18:12 .
+drwxr-xr-x  8 julianhespenheide  staff   272 31 Jan 18:12 ..
+-rw-r--r--@ 1 julianhespenheide  staff  6148 31 Jan 15:30 .DS_Store
+drwxr-xr-x  3 julianhespenheide  staff   102 31 Jan 18:11 pngs
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/graphics/backgrounds/pngs:
+total 16
+drwxr-xr-x  3 julianhespenheide  staff   102 31 Jan 18:11 .
+drwxr-xr-x  4 julianhespenheide  staff   136 31 Jan 18:12 ..
+-rw-r--r--@ 1 julianhespenheide  staff  6148 28 Jan 16:43 .DS_Store
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/graphics/enemies:
+total 16
+drwxr-xr-x  3 julianhespenheide  staff   102 31 Jan 18:11 .
+drwxr-xr-x  8 julianhespenheide  staff   272 31 Jan 18:12 ..
+-rw-r--r--@ 1 julianhespenheide  staff  6148 31 Jan 15:45 .DS_Store
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/graphics/gameover:
+total 16
+drwxr-xr-x  3 julianhespenheide  staff   102 31 Jan 18:11 .
+drwxr-xr-x  8 julianhespenheide  staff   272 31 Jan 18:12 ..
+-rw-r--r--@ 1 julianhespenheide  staff  6148 31 Jan 17:53 .DS_Store
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/graphics/gui:
+total 0
+drwxr-xr-x  2 julianhespenheide  staff   68 25 Jan 15:42 .
+drwxr-xr-x  8 julianhespenheide  staff  272 31 Jan 18:12 ..
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/graphics/player:
+total 16
+drwxr-xr-x  3 julianhespenheide  staff   102 31 Jan 18:12 .
+drwxr-xr-x  8 julianhespenheide  staff   272 31 Jan 18:12 ..
+-rw-r--r--@ 1 julianhespenheide  staff  6148 29 Jan 13:02 .DS_Store
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries:
+total 0
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 .
+drwxr-xr-x  24 julianhespenheide  staff  816 31 Jan 18:55 ..
+drwxr-xr-x   7 julianhespenheide  staff  238 31 Jan 18:12 procontroll
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll:
+total 0
+drwxr-xr-x   7 julianhespenheide  staff   238 31 Jan 18:12 .
+drwxr-xr-x   3 julianhespenheide  staff   102 31 Jan 18:12 ..
+drwxr-xr-x  65 julianhespenheide  staff  2210 31 Jan 18:12 documentation
+drwxr-xr-x  10 julianhespenheide  staff   340 31 Jan 18:12 examples
+drwxr-xr-x   8 julianhespenheide  staff   272 31 Jan 18:12 library
+drwxr-xr-x   5 julianhespenheide  staff   170 31 Jan 18:12 src
+drwxr-xr-x  13 julianhespenheide  staff   442 31 Jan 18:12 templates
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/documentation:
+total 536
+drwxr-xr-x  65 julianhespenheide  staff  2210 31 Jan 18:12 .
+drwxr-xr-x   7 julianhespenheide  staff   238 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  1409 31 Jan 18:12 .htm
+-rw-r--r--   1 julianhespenheide  staff  3685 31 Jan 18:12 controllbutton_class_controllbutton.htm
+-rw-r--r--   1 julianhespenheide  staff  1669 31 Jan 18:12 controllbutton_method_getname.htm
+-rw-r--r--   1 julianhespenheide  staff  2913 31 Jan 18:12 controllbutton_method_getvalue.htm
+-rw-r--r--   1 julianhespenheide  staff  2479 31 Jan 18:12 controllbutton_method_plug.htm
+-rw-r--r--   1 julianhespenheide  staff  1759 31 Jan 18:12 controllbutton_method_pressed.htm
+-rw-r--r--   1 julianhespenheide  staff  3936 31 Jan 18:12 controllcooliehat_class_controllcooliehat.htm
+-rw-r--r--   1 julianhespenheide  staff  2709 31 Jan 18:12 controllcooliehat_method_getmultiplier.htm
+-rw-r--r--   1 julianhespenheide  staff  1672 31 Jan 18:12 controllcooliehat_method_getname.htm
+-rw-r--r--   1 julianhespenheide  staff  2916 31 Jan 18:12 controllcooliehat_method_getvalue.htm
+-rw-r--r--   1 julianhespenheide  staff  2480 31 Jan 18:12 controllcooliehat_method_getx.htm
+-rw-r--r--   1 julianhespenheide  staff  2480 31 Jan 18:12 controllcooliehat_method_gety.htm
+-rw-r--r--   1 julianhespenheide  staff  2482 31 Jan 18:12 controllcooliehat_method_plug.htm
+-rw-r--r--   1 julianhespenheide  staff  1762 31 Jan 18:12 controllcooliehat_method_pressed.htm
+-rw-r--r--   1 julianhespenheide  staff  2893 31 Jan 18:12 controllcooliehat_method_setmultiplier.htm
+-rw-r--r--   1 julianhespenheide  staff  5758 31 Jan 18:12 controlldevice_class_controlldevice.htm
+-rw-r--r--   1 julianhespenheide  staff  1762 31 Jan 18:12 controlldevice_method_close.htm
+-rw-r--r--   1 julianhespenheide  staff  3621 31 Jan 18:12 controlldevice_method_getbutton.htm
+-rw-r--r--   1 julianhespenheide  staff  3233 31 Jan 18:12 controlldevice_method_getcooliehat.htm
+-rw-r--r--   1 julianhespenheide  staff  2318 31 Jan 18:12 controlldevice_method_getname.htm
+-rw-r--r--   1 julianhespenheide  staff  2696 31 Jan 18:12 controlldevice_method_getnumberofbuttons.htm
+-rw-r--r--   1 julianhespenheide  staff  2696 31 Jan 18:12 controlldevice_method_getnumberofsliders.htm
+-rw-r--r--   1 julianhespenheide  staff  2688 31 Jan 18:12 controlldevice_method_getnumberofsticks.htm
+-rw-r--r--   1 julianhespenheide  staff  3635 31 Jan 18:12 controlldevice_method_getslider.htm
+-rw-r--r--   1 julianhespenheide  staff  3439 31 Jan 18:12 controlldevice_method_getstick.htm
+-rw-r--r--   1 julianhespenheide  staff  1827 31 Jan 18:12 controlldevice_method_open.htm
+-rw-r--r--   1 julianhespenheide  staff  2630 31 Jan 18:12 controlldevice_method_plug.htm
+-rw-r--r--   1 julianhespenheide  staff  2635 31 Jan 18:12 controlldevice_method_printbuttons.htm
+-rw-r--r--   1 julianhespenheide  staff  2635 31 Jan 18:12 controlldevice_method_printsliders.htm
+-rw-r--r--   1 julianhespenheide  staff  2903 31 Jan 18:12 controlldevice_method_printsticks.htm
+-rw-r--r--   1 julianhespenheide  staff  1647 31 Jan 18:12 controlldevice_method_rumble.htm
+-rw-r--r--   1 julianhespenheide  staff  3203 31 Jan 18:12 controlldevice_method_settolerance.htm
+-rw-r--r--   1 julianhespenheide  staff  4063 31 Jan 18:12 controllio_class_controllio.htm
+-rw-r--r--   1 julianhespenheide  staff  3543 31 Jan 18:12 controllio_method_getdevice.htm
+-rw-r--r--   1 julianhespenheide  staff  3061 31 Jan 18:12 controllio_method_getinstance.htm
+-rw-r--r--   1 julianhespenheide  staff  2482 31 Jan 18:12 controllio_method_getnumberofdevices.htm
+-rw-r--r--   1 julianhespenheide  staff  4426 31 Jan 18:12 controllio_method_plug.htm
+-rw-r--r--   1 julianhespenheide  staff  2646 31 Jan 18:12 controllio_method_printdevices.htm
+-rw-r--r--   1 julianhespenheide  staff  4956 31 Jan 18:12 controllslider_class_controllslider.htm
+-rw-r--r--   1 julianhespenheide  staff  3096 31 Jan 18:12 controllslider_method_getmultiplier.htm
+-rw-r--r--   1 julianhespenheide  staff  1669 31 Jan 18:12 controllslider_method_getname.htm
+-rw-r--r--   1 julianhespenheide  staff  3047 31 Jan 18:12 controllslider_method_gettolerance.htm
+-rw-r--r--   1 julianhespenheide  staff  2775 31 Jan 18:12 controllslider_method_gettotalvalue.htm
+-rw-r--r--   1 julianhespenheide  staff  2913 31 Jan 18:12 controllslider_method_getvalue.htm
+-rw-r--r--   1 julianhespenheide  staff  1804 31 Jan 18:12 controllslider_method_isrelative.htm
+-rw-r--r--   1 julianhespenheide  staff  2670 31 Jan 18:12 controllslider_method_reset.htm
+-rw-r--r--   1 julianhespenheide  staff  3279 31 Jan 18:12 controllslider_method_setmultiplier.htm
+-rw-r--r--   1 julianhespenheide  staff  3232 31 Jan 18:12 controllslider_method_settolerance.htm
+-rw-r--r--   1 julianhespenheide  staff  5179 31 Jan 18:12 controllstick_class_controllstick.htm
+-rw-r--r--   1 julianhespenheide  staff  2991 31 Jan 18:12 controllstick_method_getmultiplier.htm
+-rw-r--r--   1 julianhespenheide  staff  1789 31 Jan 18:12 controllstick_method_getname.htm
+-rw-r--r--   1 julianhespenheide  staff  2953 31 Jan 18:12 controllstick_method_gettolerance.htm
+-rw-r--r--   1 julianhespenheide  staff  2694 31 Jan 18:12 controllstick_method_gettotalx.htm
+-rw-r--r--   1 julianhespenheide  staff  2694 31 Jan 18:12 controllstick_method_gettotaly.htm
+-rw-r--r--   1 julianhespenheide  staff  2634 31 Jan 18:12 controllstick_method_getx.htm
+-rw-r--r--   1 julianhespenheide  staff  2634 31 Jan 18:12 controllstick_method_gety.htm
+-rw-r--r--   1 julianhespenheide  staff  2645 31 Jan 18:12 controllstick_method_reset.htm
+-rw-r--r--   1 julianhespenheide  staff  2971 31 Jan 18:12 controllstick_method_setmultiplier.htm
+-rw-r--r--   1 julianhespenheide  staff  2780 31 Jan 18:12 controllstick_method_settolerance.htm
+drwxr-xr-x   5 julianhespenheide  staff   170 31 Jan 18:12 images
+-rw-r--r--   1 julianhespenheide  staff  5596 31 Jan 18:12 index.htm
+-rw-r--r--   1 julianhespenheide  staff  1114 31 Jan 18:12 script.js
+-rw-r--r--   1 julianhespenheide  staff  2008 31 Jan 18:12 stylesheet.css
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/documentation/images:
+total 24
+drwxr-xr-x   5 julianhespenheide  staff   170 31 Jan 18:12 .
+drwxr-xr-x  65 julianhespenheide  staff  2210 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff   309 31 Jan 18:12 index.gif
+-rw-r--r--   1 julianhespenheide  staff    45 31 Jan 18:12 point.gif
+-rw-r--r--   1 julianhespenheide  staff  1525 31 Jan 18:12 procontroll.gif
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/examples:
+total 0
+drwxr-xr-x  10 julianhespenheide  staff  340 31 Jan 18:12 .
+drwxr-xr-x   7 julianhespenheide  staff  238 31 Jan 18:12 ..
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 procontroll
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 procontroll_cooliehat
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 procontroll_getTotalValue
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 procontroll_getTotalValue_stick
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 procontroll_multiplier
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 procontroll_multiplier_stick
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 procontroll_printDevices
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 procontroll_stick
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/examples/procontroll:
+total 8
+drwxr-xr-x   3 julianhespenheide  staff   102 31 Jan 18:12 .
+drwxr-xr-x  10 julianhespenheide  staff   340 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  1102 31 Jan 18:12 procontroll.pde
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/examples/procontroll_cooliehat:
+total 8
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 .
+drwxr-xr-x  10 julianhespenheide  staff  340 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  689 31 Jan 18:12 procontroll_cooliehat.pde
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/examples/procontroll_getTotalValue:
+total 8
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 .
+drwxr-xr-x  10 julianhespenheide  staff  340 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  829 31 Jan 18:12 procontroll_getTotalValue.pde
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/examples/procontroll_getTotalValue_stick:
+total 8
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 .
+drwxr-xr-x  10 julianhespenheide  staff  340 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  757 31 Jan 18:12 procontroll_getTotalValue_stick.pde
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/examples/procontroll_multiplier:
+total 8
+drwxr-xr-x   3 julianhespenheide  staff   102 31 Jan 18:12 .
+drwxr-xr-x  10 julianhespenheide  staff   340 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  1099 31 Jan 18:12 procontroll_multiplier.pde
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/examples/procontroll_multiplier_stick:
+total 8
+drwxr-xr-x   3 julianhespenheide  staff   102 31 Jan 18:12 .
+drwxr-xr-x  10 julianhespenheide  staff   340 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  1007 31 Jan 18:12 procontroll_multiplier_stick.pde
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/examples/procontroll_printDevices:
+total 8
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 .
+drwxr-xr-x  10 julianhespenheide  staff  340 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  595 31 Jan 18:12 procontroll_printDevices.pde
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/examples/procontroll_stick:
+total 8
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 .
+drwxr-xr-x  10 julianhespenheide  staff  340 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  871 31 Jan 18:12 procontroll_stick.pde
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/library:
+total 888
+drwxr-xr-x  8 julianhespenheide  staff     272 31 Jan 18:12 .
+drwxr-xr-x  7 julianhespenheide  staff     238 31 Jan 18:12 ..
+-rw-r--r--  1 julianhespenheide  staff   73728 31 Jan 18:12 jinput-dx8.dll
+-rw-r--r--  1 julianhespenheide  staff   69632 31 Jan 18:12 jinput-raw.dll
+-rw-r--r--  1 julianhespenheide  staff   69632 31 Jan 18:12 jinput-wintab.dll
+-rw-r--r--  1 julianhespenheide  staff   10204 31 Jan 18:12 libjinput-linux.so
+-rw-r--r--  1 julianhespenheide  staff   49016 31 Jan 18:12 libjinput-osx.jnilib
+-rw-r--r--  1 julianhespenheide  staff  179461 31 Jan 18:12 procontroll.jar
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/src:
+total 0
+drwxr-xr-x   5 julianhespenheide  staff  170 31 Jan 18:12 .
+drwxr-xr-x   7 julianhespenheide  staff  238 31 Jan 18:12 ..
+drwxr-xr-x   3 julianhespenheide  staff  102 31 Jan 18:12 net
+drwxr-xr-x  14 julianhespenheide  staff  476 31 Jan 18:12 procontroll
+drwxr-xr-x   6 julianhespenheide  staff  204 31 Jan 18:12 test
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/src/net:
+total 0
+drwxr-xr-x  3 julianhespenheide  staff  102 31 Jan 18:12 .
+drwxr-xr-x  5 julianhespenheide  staff  170 31 Jan 18:12 ..
+drwxr-xr-x  3 julianhespenheide  staff  102 31 Jan 18:12 java
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/src/net/java:
+total 0
+drwxr-xr-x  3 julianhespenheide  staff  102 31 Jan 18:12 .
+drwxr-xr-x  3 julianhespenheide  staff  102 31 Jan 18:12 ..
+drwxr-xr-x  3 julianhespenheide  staff  102 31 Jan 18:12 games
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/src/net/java/games:
+total 0
+drwxr-xr-x   3 julianhespenheide  staff   102 31 Jan 18:12 .
+drwxr-xr-x   3 julianhespenheide  staff   102 31 Jan 18:12 ..
+drwxr-xr-x  87 julianhespenheide  staff  2958 31 Jan 18:12 input
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/src/net/java/games/input:
+total 1264
+drwxr-xr-x  87 julianhespenheide  staff   2958 31 Jan 18:12 .
+drwxr-xr-x   3 julianhespenheide  staff    102 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff   4369 31 Jan 18:12 AbstractComponent.java
+-rw-r--r--   1 julianhespenheide  staff   7926 31 Jan 18:12 AbstractController.java
+-rw-r--r--   1 julianhespenheide  staff   4678 31 Jan 18:12 ButtonUsage.java
+-rw-r--r--   1 julianhespenheide  staff  33907 31 Jan 18:12 Component.java
+-rw-r--r--   1 julianhespenheide  staff   8162 31 Jan 18:12 Controller.java
+-rw-r--r--   1 julianhespenheide  staff   6650 31 Jan 18:12 ControllerEnvironment.java
+-rw-r--r--   1 julianhespenheide  staff   2543 31 Jan 18:12 ControllerEvent.java
+-rw-r--r--   1 julianhespenheide  staff   2493 31 Jan 18:12 ControllerListener.java
+-rw-r--r--   1 julianhespenheide  staff   2941 31 Jan 18:12 DIAbstractController.java
+-rw-r--r--   1 julianhespenheide  staff   2758 31 Jan 18:12 DIComponent.java
+-rw-r--r--   1 julianhespenheide  staff   3233 31 Jan 18:12 DIControllers.java
+-rw-r--r--   1 julianhespenheide  staff   6518 31 Jan 18:12 DIDeviceObject.java
+-rw-r--r--   1 julianhespenheide  staff   2807 31 Jan 18:12 DIDeviceObjectData.java
+-rw-r--r--   1 julianhespenheide  staff   3074 31 Jan 18:12 DIEffectInfo.java
+-rw-r--r--   1 julianhespenheide  staff  20774 31 Jan 18:12 DIIdentifierMap.java
+-rw-r--r--   1 julianhespenheide  staff   2770 31 Jan 18:12 DIKeyboard.java
+-rw-r--r--   1 julianhespenheide  staff   2763 31 Jan 18:12 DIMouse.java
+-rw-r--r--   1 julianhespenheide  staff   3658 31 Jan 18:12 DataQueue.java
+-rw-r--r--   1 julianhespenheide  staff   7453 31 Jan 18:12 DirectInputEnvironmentPlugin.java
+-rw-r--r--   1 julianhespenheide  staff   2666 31 Jan 18:12 DummyWindow.java
+-rw-r--r--   1 julianhespenheide  staff   3136 31 Jan 18:12 ElementType.java
+-rw-r--r--   1 julianhespenheide  staff   2926 31 Jan 18:12 Event.java
+-rw-r--r--   1 julianhespenheide  staff   2763 31 Jan 18:12 EventQueue.java
+-rw-r--r--   1 julianhespenheide  staff   9886 31 Jan 18:12 GenericDesktopUsage.java
+-rw-r--r--   1 julianhespenheide  staff   3905 31 Jan 18:12 IDirectInput.java
+-rw-r--r--   1 julianhespenheide  staff  22115 31 Jan 18:12 IDirectInputDevice.java
+-rw-r--r--   1 julianhespenheide  staff   4401 31 Jan 18:12 IDirectInputEffect.java
+-rw-r--r--   1 julianhespenheide  staff   3008 31 Jan 18:12 Keyboard.java
+-rw-r--r--   1 julianhespenheide  staff  21177 31 Jan 18:12 KeyboardUsage.java
+-rw-r--r--   1 julianhespenheide  staff   2231 31 Jan 18:12 LinuxAbsInfo.java
+-rw-r--r--   1 julianhespenheide  staff   2967 31 Jan 18:12 LinuxAbstractController.java
+-rw-r--r--   1 julianhespenheide  staff   2222 31 Jan 18:12 LinuxAxisDescriptor.java
+-rw-r--r--   1 julianhespenheide  staff   2970 31 Jan 18:12 LinuxComponent.java
+-rw-r--r--   1 julianhespenheide  staff   1936 31 Jan 18:12 LinuxConstantFF.java
+-rw-r--r--   1 julianhespenheide  staff   3543 31 Jan 18:12 LinuxControllers.java
+-rw-r--r--   1 julianhespenheide  staff   1709 31 Jan 18:12 LinuxDevice.java
+-rw-r--r--   1 julianhespenheide  staff   2162 31 Jan 18:12 LinuxDeviceTask.java
+-rw-r--r--   1 julianhespenheide  staff   3014 31 Jan 18:12 LinuxDeviceThread.java
+-rw-r--r--   1 julianhespenheide  staff  13478 31 Jan 18:12 LinuxEnvironmentPlugin.java
+-rw-r--r--   1 julianhespenheide  staff   2051 31 Jan 18:12 LinuxEvent.java
+-rw-r--r--   1 julianhespenheide  staff   3878 31 Jan 18:12 LinuxEventComponent.java
+-rw-r--r--   1 julianhespenheide  staff  15441 31 Jan 18:12 LinuxEventDevice.java
+-rw-r--r--   1 julianhespenheide  staff   3498 31 Jan 18:12 LinuxForceFeedbackEffect.java
+-rw-r--r--   1 julianhespenheide  staff   2214 31 Jan 18:12 LinuxInputID.java
+-rw-r--r--   1 julianhespenheide  staff   2863 31 Jan 18:12 LinuxJoystickAbstractController.java
+-rw-r--r--   1 julianhespenheide  staff   2592 31 Jan 18:12 LinuxJoystickAxis.java
+-rw-r--r--   1 julianhespenheide  staff   2585 31 Jan 18:12 LinuxJoystickButton.java
+-rw-r--r--   1 julianhespenheide  staff   5939 31 Jan 18:12 LinuxJoystickDevice.java
+-rw-r--r--   1 julianhespenheide  staff   2017 31 Jan 18:12 LinuxJoystickEvent.java
+-rw-r--r--   1 julianhespenheide  staff   2833 31 Jan 18:12 LinuxKeyboard.java
+-rw-r--r--   1 julianhespenheide  staff   2821 31 Jan 18:12 LinuxMouse.java
+-rw-r--r--   1 julianhespenheide  staff  40125 31 Jan 18:12 LinuxNativeTypesMap.java
+-rw-r--r--   1 julianhespenheide  staff   3702 31 Jan 18:12 LinuxPOV.java
+-rw-r--r--   1 julianhespenheide  staff   2272 31 Jan 18:12 LinuxRumbleFF.java
+-rw-r--r--   1 julianhespenheide  staff   4467 31 Jan 18:12 Mouse.java
+-rw-r--r--   1 julianhespenheide  staff  21610 31 Jan 18:12 NativeDefinitions.java
+-rw-r--r--   1 julianhespenheide  staff   2989 31 Jan 18:12 OSXAbstractController.java
+-rw-r--r--   1 julianhespenheide  staff   2674 31 Jan 18:12 OSXComponent.java
+-rw-r--r--   1 julianhespenheide  staff   2862 31 Jan 18:12 OSXControllers.java
+-rw-r--r--   1 julianhespenheide  staff   8597 31 Jan 18:12 OSXEnvironmentPlugin.java
+-rw-r--r--   1 julianhespenheide  staff   2611 31 Jan 18:12 OSXEvent.java
+-rw-r--r--   1 julianhespenheide  staff  14594 31 Jan 18:12 OSXHIDDevice.java
+-rw-r--r--   1 julianhespenheide  staff   2756 31 Jan 18:12 OSXHIDDeviceIterator.java
+-rw-r--r--   1 julianhespenheide  staff   4880 31 Jan 18:12 OSXHIDElement.java
+-rw-r--r--   1 julianhespenheide  staff   4907 31 Jan 18:12 OSXHIDQueue.java
+-rw-r--r--   1 julianhespenheide  staff   2849 31 Jan 18:12 OSXKeyboard.java
+-rw-r--r--   1 julianhespenheide  staff   2836 31 Jan 18:12 OSXMouse.java
+-rw-r--r--   1 julianhespenheide  staff  11588 31 Jan 18:12 RawDevice.java
+-rw-r--r--   1 julianhespenheide  staff   2803 31 Jan 18:12 RawDeviceInfo.java
+-rw-r--r--   1 julianhespenheide  staff   3006 31 Jan 18:12 RawHIDInfo.java
+-rw-r--r--   1 julianhespenheide  staff  19940 31 Jan 18:12 RawIdentifierMap.java
+-rw-r--r--   1 julianhespenheide  staff   6315 31 Jan 18:12 RawInputEnvironmentPlugin.java
+-rw-r--r--   1 julianhespenheide  staff   5398 31 Jan 18:12 RawInputEventQueue.java
+-rw-r--r--   1 julianhespenheide  staff   4790 31 Jan 18:12 RawKeyboard.java
+-rw-r--r--   1 julianhespenheide  staff   2984 31 Jan 18:12 RawKeyboardEvent.java
+-rw-r--r--   1 julianhespenheide  staff   3275 31 Jan 18:12 RawKeyboardInfo.java
+-rw-r--r--   1 julianhespenheide  staff   7417 31 Jan 18:12 RawMouse.java
+-rw-r--r--   1 julianhespenheide  staff   3642 31 Jan 18:12 RawMouseEvent.java
+-rw-r--r--   1 julianhespenheide  staff   3648 31 Jan 18:12 RawMouseInfo.java
+-rw-r--r--   1 julianhespenheide  staff   2717 31 Jan 18:12 Rumbler.java
+-rw-r--r--   1 julianhespenheide  staff   2609 31 Jan 18:12 SetupAPIDevice.java
+-rw-r--r--   1 julianhespenheide  staff   2164 31 Jan 18:12 Usage.java
+-rw-r--r--   1 julianhespenheide  staff   5626 31 Jan 18:12 UsagePage.java
+-rw-r--r--   1 julianhespenheide  staff   2876 31 Jan 18:12 UsagePair.java
+-rw-r--r--   1 julianhespenheide  staff   3777 31 Jan 18:12 Version.java
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/src/procontroll:
+total 192
+drwxr-xr-x  14 julianhespenheide  staff    476 31 Jan 18:12 .
+drwxr-xr-x   5 julianhespenheide  staff    170 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff   3918 31 Jan 18:12 ControllButton.java
+-rw-r--r--   1 julianhespenheide  staff   6905 31 Jan 18:12 ControllCoolieHat.java
+-rw-r--r--   1 julianhespenheide  staff  15217 31 Jan 18:12 ControllDevice.java
+-rw-r--r--   1 julianhespenheide  staff   8653 31 Jan 18:12 ControllIO.java
+-rw-r--r--   1 julianhespenheide  staff   1914 31 Jan 18:12 ControllInput.java
+-rw-r--r--   1 julianhespenheide  staff    597 31 Jan 18:12 ControllRelativeSlider.java
+-rw-r--r--   1 julianhespenheide  staff   5584 31 Jan 18:12 ControllSlider.java
+-rw-r--r--   1 julianhespenheide  staff   6223 31 Jan 18:12 ControllStick.java
+-rw-r--r--   1 julianhespenheide  staff   4009 31 Jan 18:12 Plug.java
+-rw-r--r--   1 julianhespenheide  staff  24424 31 Jan 18:12 license.txt
+-rw-r--r--   1 julianhespenheide  staff   1126 31 Jan 18:12 package.html
+drwxr-xr-x   4 julianhespenheide  staff    136 31 Jan 18:12 test
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/src/procontroll/test:
+total 16
+drwxr-xr-x   4 julianhespenheide  staff   136 31 Jan 18:12 .
+drwxr-xr-x  14 julianhespenheide  staff   476 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  1580 31 Jan 18:12 MultipleMouse.java
+-rw-r--r--   1 julianhespenheide  staff  1231 31 Jan 18:12 ProControll.java
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/src/test:
+total 32
+drwxr-xr-x  6 julianhespenheide  staff   204 31 Jan 18:12 .
+drwxr-xr-x  5 julianhespenheide  staff   170 31 Jan 18:12 ..
+-rw-r--r--  1 julianhespenheide  staff  1606 31 Jan 18:12 Foo.java
+-rw-r--r--  1 julianhespenheide  staff  1405 31 Jan 18:12 ProcontrollPlugTest.java
+-rw-r--r--  1 julianhespenheide  staff  1649 31 Jan 18:12 ProcontrollTest.java
+-rw-r--r--  1 julianhespenheide  staff   102 31 Jan 18:12 package.html
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/templates:
+total 80
+drwxr-xr-x  13 julianhespenheide  staff   442 31 Jan 18:12 .
+drwxr-xr-x   7 julianhespenheide  staff   238 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff  1488 31 Jan 18:12 class.htm
+-rw-r--r--   1 julianhespenheide  staff   384 31 Jan 18:12 classmember.htm
+-rw-r--r--   1 julianhespenheide  staff   387 31 Jan 18:12 classmembers.htm
+drwxr-xr-x   5 julianhespenheide  staff   170 31 Jan 18:12 images
+-rw-r--r--   1 julianhespenheide  staff   540 31 Jan 18:12 index.htm
+-rw-r--r--   1 julianhespenheide  staff  1473 31 Jan 18:12 member.htm
+-rw-r--r--   1 julianhespenheide  staff   428 31 Jan 18:12 memberparameter.htm
+-rw-r--r--   1 julianhespenheide  staff   395 31 Jan 18:12 memberparameters.htm
+-rw-r--r--   1 julianhespenheide  staff   394 31 Jan 18:12 memberreturn.htm
+-rw-r--r--   1 julianhespenheide  staff  1114 31 Jan 18:12 script.js
+-rw-r--r--   1 julianhespenheide  staff  2008 31 Jan 18:12 stylesheet.css
+
+/Users/julianhespenheide/Documents/Studium/3. Semester/EntertainmentComputing/econarchy/Econarchy/libraries/procontroll/templates/images:
+total 24
+drwxr-xr-x   5 julianhespenheide  staff   170 31 Jan 18:12 .
+drwxr-xr-x  13 julianhespenheide  staff   442 31 Jan 18:12 ..
+-rw-r--r--   1 julianhespenheide  staff   309 31 Jan 18:12 index.gif
+-rw-r--r--   1 julianhespenheide  staff    45 31 Jan 18:12 point.gif
+-rw-r--r--   1 julianhespenheide  staff  1525 31 Jan 18:12 procontroll.gif
