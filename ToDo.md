@@ -7,11 +7,11 @@
 
 ### class Player
 + handle controls
-	+ faster movement left right
+	+ faster movement left right [DONE]
 + moving position
-	+ falling down and maybe die
+	+ falling down and maybe die [DONE]
 + ~~states : moving, jumping, alive dead etc.~~
-+ collision detection: walls obstacles
++ collision detection: walls obstacles [DONE?]
 	+ bounce from the bottom of the plattforms
 
 ### class BasePlattform
