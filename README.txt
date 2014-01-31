@@ -100,8 +100,12 @@ Peter Buczkowski:
 - optimizing level design (xml)
 - additional graphics (e.g. parachute)
 
-
 Sammy Jobbins Wells:
+- enemy concept, design and animation
+- flag design and animation
+- general design support
+- project management
+- text (description, in-game, ...)
 
 Florian Lütkebohmert:
 - custom CollisionDetectionSystem(Collidable, CollisionDetector, etc.) (Pita)
