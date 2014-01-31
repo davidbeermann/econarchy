@@ -83,6 +83,16 @@ Julian Hespenheide:
 - startscreen design
 
 David Beermann:
+- xml data structure and parsing
+- overall game viewport setup and rendering "pipeline"
+- key tracking for player control
+- level setup incl. platform and enemy positioning based on xml data
+- background parallax effect
+- player and enemy sprite behavior
+- added collision logic for breakable platforms incl. animation
+- optimization of enemy ai incl. graphical player spotted display
+- game reset logic
+- gui optimizations with new graphics, fonts and animations
 
 Peter Buczkowski:
 
