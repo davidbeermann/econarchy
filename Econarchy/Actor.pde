@@ -301,7 +301,7 @@ public class Player extends Actor
       {
         if ( currVelocity.y > 0 ) //player is falling
         {
-          if ( currVelocity.y <= 10) 
+          if ( currVelocity.y <= 13) 
           { 
             currVelocity.y = 0f;
             position.y = c.getCollider().getBounds().top - avatar.height;
@@ -447,7 +447,7 @@ public class Enemy extends Actor
     {
       playerSpotted = false;
       speed = walkingSpeed;
-      
+
       // add random enemy movement
       /*int r = int(random(100));
       switch(r)
